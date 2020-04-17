@@ -12,6 +12,9 @@ const router = require('./routes')
 //Creacion de las tablas
 const db = require('./config/db');
     require('./models/Usuarios');
+    require('./models/Categorias');
+    require('./models/Estrategias');
+
     db.sync().then(() => console.log('DB CONECTADA')).catch((error) => console.log(error))
 
 //variables de entorno

@@ -5,6 +5,7 @@ const homeController = require('../controllers/homeController');
 const usuariosController = require('../controllers/usuariosController');
 const authController = require('../controllers/authController');
 const adminController = require('../controllers/adminController');
+const estrategiasController = require('../controllers/estrategiasController');
 
 
 
@@ -24,6 +25,13 @@ module.exports = function() {
 
     //Admin Panel
     router.get('/administracion', authController.usuarioAutenticado, adminController.panelAdministracion);
+
+    router.get('/nueva-estrategia', authController.usuarioAutenticado, estrategiasController.formNuevaEstrategia);
+
+    router.post('/nueva-estrategia', authController.usuarioAutenticado, estrategiasController.subirImagen, estrategiasController.nuevaEstrategia);
+
+
+
 
 
     return router;
