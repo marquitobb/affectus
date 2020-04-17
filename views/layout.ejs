@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700,900|Staatliches&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/app.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/734bb397fc.js"></script><!-- Latest compiled and minified CSS -->
+
+    <title>Affectus - <%=nombrePagina%></title>
+
+</head>
+<body>
+    <header class="site-header contenedor">
+        <a href="/">
+            <img src="/img/logo.png" alt="Logo Meeti" width="150" width="150">
+        </a>
+
+        <nav class="nav">
+                <a href="/nueva-estrategia">Nueva Estrategia</a>
+                <a href="/iniciar-sesion">Iniciar Sesion</a>
+                <a href="/crear-cuenta">Registrarse</a>
+        </nav>
+
+    </header>
+
+    <% if(locals.mensajes) { %>
+        <% const categoria = Object.keys(locals.mensajes) %>
+        <% if(categoria.length) { %>
+            <% locals.mensajes[categoria].forEach(alerta => { %>
+                <div class="alertas">
+                   <p class="alerta <%= categoria %>"><%= alerta %></p> 
+                </div>
+            <% }) %>
+        <% } %>
+    <% } %>
+    <%- body %>
+
+    <footer class="site-footer contenedor">
+        <!--<nav class="nav" site-footer contenedor>
+            <a href="/nueva-estrategia">Nueva Estrategia</a>
+            <a href="/iniciar-sesion">Iniciar Sesion</a>
+            <a href="/crear-cuenta">Registrarse</a>
+        </nav>-->
+
+        <p class="copyright">Todos los derechos reservados Affectus &copy;<%=year %></p>
+    </footer>
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/app.js"></script>
+
+</body>
+</html>
