@@ -139,7 +139,7 @@
           <div class="col-12 my-2">
             <div class="tab-content" id="pills-tabContent">
               <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                  <div class="">
+                  <div class="listado-estrategias">
                     <% if(estrategias.length) { %>
                         <h2>Estrategias</h2>
                         <ul class="list-group">
@@ -149,10 +149,11 @@
                                         <h3><%=estrategia.nombre %></h3>
                                     </div>
                                     <div class="float-right">
-                                        <a href="/editar-estrategia/<%=estrategia.id%>" class="btn btn-primary">Editar</a>
+                                        <a href="" data-id="<%=estrategia.id %>" data-toggle="modal" data-target=".bd-example-modal-lg" class="btn btn-primary">Editar</a>
                                         <a href="/imagen-estrategia/<%=estrategia.id%>" class="btn btn-warning">Imagen</a>
                                         <a href="" data-id="<%=estrategia.id%>" class="btn btn-danger">Eliminar</a>
                                     </div>
+                                   
                                 </li>
                             <% }) %>
                         </ul>
@@ -174,3 +175,8 @@
   <!-- page-content" -->
 </div>
 <!-- page-wrapper -->
+
+    <%- include('../views/editar-estrategia') %>
+
+
+

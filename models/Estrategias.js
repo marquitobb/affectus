@@ -18,6 +18,15 @@ const Estrategias = db.define('estrategias', {
             }
         }
     },
+    fecha_creacion: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        validate: {
+            notEmpty: {
+                msg: 'Debe agregar una fecha'
+            }
+        } 
+    },
     archivos: { 
         type: Sequelize.STRING,
         allowNull: false,

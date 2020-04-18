@@ -26,13 +26,13 @@ module.exports = function() {
     //Admin Panel
     router.get('/administracion', authController.usuarioAutenticado, adminController.panelAdministracion);
 
+    //Nueva Estrategia Estrategias
     router.get('/nueva-estrategia', authController.usuarioAutenticado, estrategiasController.formNuevaEstrategia);
-
     router.post('/nueva-estrategia', authController.usuarioAutenticado, estrategiasController.subirImagen, estrategiasController.nuevaEstrategia);
 
-
-
-
+    //Editar estrategia
+    router.get('/editar-estrategia/:idEstrategia', authController.usuarioAutenticado, estrategiasController.formEditarEstrategia);
+    router.post('/editar-estrategia/:idEstrategia', authController.usuarioAutenticado, estrategiasController.EditarEstrategia);
 
     return router;
 }

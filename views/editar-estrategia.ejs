@@ -1,0 +1,49 @@
+<!-- Large modal -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modal">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="container mt-5">
+          <form action="/editar-estrategia" action="POST">
+              <input type="hidden" id="id">
+              <input type="hidden" id="usuarioId">
+
+              <div class="form-group">
+                  <label for="nombre">Nombre Ejercicio</label>
+                  <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre" >
+              </div>
+              <div class="row">
+                  <div class="form-group col-md-6">
+                        <label for="categoriaId">Categoria</label>
+                        <select id="categoriaId" class="form-control" name="categoriaId">
+                        <option value="" selected disabled>--Elige una categoria--</option>
+                        <% categorias.forEach(categoria => { %>
+                            <option value="<%=categoria.id %>"><%=categoria.nombre %></option>
+                        <% }) %>
+                        </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                      <label for="Fecha Creacion">Fecha Creación</label>
+                      <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" >
+                  </div>
+              </div>
+              <div></div>
+              
+              <div class="form-group">
+                  <label for="pais">City</label>
+                  <input type="text" class="form-control" id="pais" name="pais" >
+              </div>
+              <div class="form-group">
+                  <label for="descripcion">Descripcion</label>
+                  <textarea class="form-control" name="descripcion" id="descripcion" selectionDirecition="forward" placeholder="ingrese descripcion">
+                  </textarea>
+              </div>
+              
+              <div class="form-group py-4">
+                  <input type="submit" onclick="EditarEstrategia" class="editar-estrategia btn btn-primary float-right" value="Guardar Cambios"></input>
+              </div>
+        </form>
+      </div>
+      </div>
+    </div>
+  </div>
+
