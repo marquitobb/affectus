@@ -145,6 +145,9 @@ a {
   background-color: transparent;
 }
 
+.cursor{
+  cursor: pointer;
+}
 
 
 @keyframes swing {

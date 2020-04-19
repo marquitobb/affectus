@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   const listadoEstrategias = document.querySelector(".listado-estrategias");
   const editarEst = document.querySelector(".editar-estrategia");
+  const eliminarImagenEstrategia = document.querySelector(".eliminar-estrategia");
+
   if (listadoEstrategias) {
     listadoEstrategias.addEventListener("click", ObtenerEstrategia);
   }
@@ -8,6 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (editarEst) {
     editarEst.addEventListener("click", EditarEstrategia);
   }
+
+  if (eliminarImagenEstrategia) {
+    eliminarImagenEstrategia.addEventListener("click", EliminarArchivoEstrategia);
+  }
+
 });
 
 
@@ -69,6 +76,8 @@ if (e.target.dataset.id) {
           console.log(error)
         });
     
+  }else if (e.target.tagName === "A") {
+    window.location.href = e.target.href;
   };
 }
 
@@ -106,3 +115,40 @@ const EditarEstrategia = (e) => {
   console.log('se ejecuto')  
 }
 
+
+
+const EliminarArchivoEstrategia = (e) => {
+  e.preventDefault();
+  const idEstrategia = $("#idEstrategia").val();
+  //console.log("id",idEstrategia)
+
+  //console.log(e.target)
+  //console.log(e.target.dataset.id);
+  if (e.target.dataset.id) {      
+        const url = `${location.origin}/imagen-estrategia/${idEstrategia}/${e.target.dataset.id}`;
+        //console.log(url);
+        //enviar peticion a axios
+        
+        axios
+          .delete(url, { 
+            params: { url },
+          })
+          .then(function (respuesta) {
+            if (respuesta.data.msg) {
+              Swal.fire({
+                type: "error",
+                title: "Lo sentimos",
+                text: respuesta.data.msg,
+              });
+              return
+            }
+            $("#divArchivos").remove();
+          })
+          .catch((error) => {
+            console.log(error)
+          });
+      
+    }else if (e.target.tagName === "A") {
+      window.location.href = e.target.href;
+    };
+  }

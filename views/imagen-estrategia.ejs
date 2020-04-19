@@ -1,0 +1,28 @@
+<h2 class="mt-5"><%=nombrePagina %></h2>
+<div class="container mt-5">
+    <form method="POST" enctype="multipart/form-data">
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="file">Subir Archivos de Estrategia</label>
+                <input type="file" multiple class="form-control" id="archivos" name="archivos">
+            </div>
+        </div>
+        <div class="form-group eliminar-estrategia" >
+                <input type="hidden" id="idEstrategia" value="<%=estrategia.id%>">
+                <% for (let i = 0; i < estrategia.archivos.length; i++) { %>
+                    <% const element = estrategia.archivos[i] %>
+                    <div id="divArchivos" class="d-inline pr-4" >
+                        <i  class="cursor fas fa-times-circle " onclick="EliminarArchivoEstrategia" data-id="<%=element%>">
+                            <div class="">
+                                <img src="/uploads/estrategias/<%=element%>" width="100">
+                            </div>
+                        </i>
+                    </div>
+                <% } %>
+        </div>
+        
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary float-right" value="Subir Imagen"></input>
+        </div>
+  </form>
+</div>

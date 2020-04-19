@@ -34,5 +34,12 @@ module.exports = function() {
     router.get('/editar-estrategia/:idEstrategia', authController.usuarioAutenticado, estrategiasController.formEditarEstrategia);
     router.post('/editar-estrategia/:idEstrategia', authController.usuarioAutenticado, estrategiasController.EditarEstrategia);
 
+    //editar la imagen de la estrategia
+    router.get('/imagen-estrategia/:idEstrategia', authController.usuarioAutenticado, estrategiasController.formEditarImagen);
+
+    router.post('/imagen-estrategia/:idEstrategia', authController.usuarioAutenticado, estrategiasController.subirImagen, estrategiasController.EditarImagen);
+
+    router.delete('/imagen-estrategia/:idEstrategia/:idArchivos', authController.usuarioAutenticado, estrategiasController.eliminarArchivo);
+
     return router;
 }

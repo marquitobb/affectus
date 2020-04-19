@@ -2,6 +2,7 @@ const Categorias = require('../models/Categorias');
 const Estrategias = require('../models/Estrategias');
 const multer = require('multer');
 const shortid = require('shortid');
+const fs = require('fs');
 
 
 const configuracionMulter = {
@@ -131,4 +132,90 @@ exports.EditarEstrategia = async (req, res) => {
 
     }
      
+}
+
+exports.formEditarImagen = async(req, res, next) => {
+    const estrategia = await Estrategias.findOne({where: {id: req.params.idEstrategia, usuarioId: req.user.id}});
+    //console.log(estrategia.archivos);
+    /*
+    const archivos = estrategia.archivos;
+    for (let i = 0; i < archivos.length; i++) {
+        const element = archivos[i];
+        console.log(element);
+    }*/
+    res.render('imagen-estrategia', {
+        nombrePagina: `Editar Archivos de estrategia`,
+        estrategia
+    })
+}
+
+//Modifica la imagen y elimina la anterior
+exports.EditarImagen = async(req, res, next) => {
+    const estrategia = await Estrategias.findOne({where: {id: req.params.idEstrategia, usuarioId: req.user.id}});
+
+    //el grupo existe y es valido;
+    if (!estrategia) {
+        req.flash('error', 'Operación no valida')
+        res.redirect('/administracion');
+    }
+
+    //revisar archivo valido y nuevo
+    if (req.files) {
+        const files = req.files;
+        const nombres = files.map(file => file.filename);
+        //console.log('Nuevas imagenes', nombres);
+        //console.log("archivos anteriores", estrategia.archivos);
+        const nuevosArchivos = [...estrategia.archivos, ...nombres];
+        estrategia.archivos = nuevosArchivos;
+    }
+
+    //guardar en la bd
+    await estrategia.save();
+    req.flash('exito', 'Cambios almacenados correctamente');
+    res.redirect('/administracion');
+   
+    /*
+    if (estrategia.archivos) {
+        console.log("archivos anteriores", estrategia.archivos);
+    }*/
+
+   
+}
+
+exports.eliminarArchivo = async(req, res, next) => {
+    const estrategia = await Estrategias.findOne({where: {id: req.params.idEstrategia, usuarioId: req.user.id}});
+
+    console.log(req.params.idArchivos)
+    const nuevosArchivos = [];
+    if (estrategia.archivos) {
+        console.log("tamaño", estrategia.archivos.length);
+        if (estrategia.archivos.length === 1) {
+            res.json({msg: 'No se puede eliminar, debe existir al menos un archivo'})
+            return
+        }
+        for (let i = 0; i < estrategia.archivos.length; i++) {
+            const element = estrategia.archivos[i];
+            if (req.params.idArchivos === element) {
+                const imagenAnteriorPath = __dirname+`/../public/uploads/estrategias/${element}`;
+                console.log(imagenAnteriorPath)
+                //Eliminar archivo con filesystem
+                fs.unlink(imagenAnteriorPath, (error) => {
+                    if (error) {
+                        console.log(error)
+                    }
+                    return;
+                });
+            }else{
+                nuevosArchivos.push(element);
+            }
+        }
+        
+        //guardar en la bd
+        console.log(nuevosArchivos);
+        estrategia.archivos = nuevosArchivos;
+        //todo bien elimina el grupo
+        await estrategia.save();
+        res.status(200).send('Proyecto Eliminado Correctamente')
+    }
+ 
 }
