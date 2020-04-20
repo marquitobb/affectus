@@ -96,17 +96,14 @@ exports.nuevaEstrategia = async (req, res, next) => {
 //form para editar estrategia
 exports.formEditarEstrategia = async (req, res) => {
     const estrategia = await Estrategias.findByPk(req.params.idEstrategia);
-    //console.log(estrategia);
     res.json(estrategia);
 }
 
 //form para editar estrategia
 exports.EditarEstrategia = async (req, res) => {
     console.log("este es el id: ", req.params.idEstrategia);
-    console.log(req.body.params);
 
     const estrategia = await Estrategias.findOne({where: {id: req.params.idEstrategia, usuarioId: req.user.id}});
-    console.log(estrategia)
 
     const {nombre, fecha_creacion, pais, descripcion, categoriaId} = req.body.params
     
@@ -136,13 +133,7 @@ exports.EditarEstrategia = async (req, res) => {
 
 exports.formEditarImagen = async(req, res, next) => {
     const estrategia = await Estrategias.findOne({where: {id: req.params.idEstrategia, usuarioId: req.user.id}});
-    //console.log(estrategia.archivos);
-    /*
-    const archivos = estrategia.archivos;
-    for (let i = 0; i < archivos.length; i++) {
-        const element = archivos[i];
-        console.log(element);
-    }*/
+    
     res.render('imagen-estrategia', {
         nombrePagina: `Editar Archivos de estrategia`,
         estrategia
@@ -163,8 +154,7 @@ exports.EditarImagen = async(req, res, next) => {
     if (req.files) {
         const files = req.files;
         const nombres = files.map(file => file.filename);
-        //console.log('Nuevas imagenes', nombres);
-        //console.log("archivos anteriores", estrategia.archivos);
+        
         const nuevosArchivos = [...estrategia.archivos, ...nombres];
         estrategia.archivos = nuevosArchivos;
     }
@@ -174,21 +164,14 @@ exports.EditarImagen = async(req, res, next) => {
     req.flash('exito', 'Cambios almacenados correctamente');
     res.redirect('/administracion');
    
-    /*
-    if (estrategia.archivos) {
-        console.log("archivos anteriores", estrategia.archivos);
-    }*/
-
-   
 }
 
 exports.eliminarArchivo = async(req, res, next) => {
     const estrategia = await Estrategias.findOne({where: {id: req.params.idEstrategia, usuarioId: req.user.id}});
 
-    console.log(req.params.idArchivos)
     const nuevosArchivos = [];
     if (estrategia.archivos) {
-        console.log("tamaño", estrategia.archivos.length);
+        //console.log("tamaño", estrategia.archivos.length);
         if (estrategia.archivos.length === 1) {
             res.json({msg: 'No se puede eliminar, debe existir al menos un archivo'})
             return
@@ -197,7 +180,6 @@ exports.eliminarArchivo = async(req, res, next) => {
             const element = estrategia.archivos[i];
             if (req.params.idArchivos === element) {
                 const imagenAnteriorPath = __dirname+`/../public/uploads/estrategias/${element}`;
-                console.log(imagenAnteriorPath)
                 //Eliminar archivo con filesystem
                 fs.unlink(imagenAnteriorPath, (error) => {
                     if (error) {
@@ -211,11 +193,42 @@ exports.eliminarArchivo = async(req, res, next) => {
         }
         
         //guardar en la bd
-        console.log(nuevosArchivos);
         estrategia.archivos = nuevosArchivos;
         //todo bien elimina el grupo
         await estrategia.save();
         res.status(200).send('Proyecto Eliminado Correctamente')
     }
- 
+}
+
+exports.eliminarEstrategia = async (req, res, next) => {
+    const estrategia = await Estrategias.findOne({where: {id: req.params.idEstrategia, usuarioId: req.user.id}});
+
+    if (!estrategia) {
+        res.status(403).send('Hubo un error');
+        return next();
+    }
+
+    //Eliminar imagenes de la estrategia
+    if (estrategia.archivos) {
+        for (let i = 0; i < estrategia.archivos.length; i++) {
+            const element = estrategia.archivos[i];
+            const imagenAnteriorPath = __dirname+`/../public/uploads/estrategias/${element}`;
+            //Eliminar archivo con filesystem
+            fs.unlink(imagenAnteriorPath, (error) => {
+                if (error) {
+                    console.log(error)
+                }
+                return;
+            });
+        }
+        
+    }
+
+    //todo bien elimina el grupo
+    await Estrategias.destroy({
+        where: {
+            id: req.params.idEstrategia
+        }
+    });
+    res.status(200).send('Estrategia Eliminado Correctamente')
 }

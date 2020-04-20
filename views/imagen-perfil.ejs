@@ -1,0 +1,23 @@
+<h2 class="mt-5"><%=nombrePagina %></h2>
+<div class="container mt-5 ">
+    <legend>Esta imagen se mostrará en miniatura en todas las estrategias que agregues</legend>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="form-row">
+            <div class="form-group col-md-8">
+                <label for="file">Subir Imagen de Perfil</label>
+                <input type="file" class="form-control" id="archivos" name="imagen">
+            </div>
+        </div>
+        <% if(usuario.imagen) { %>
+            <div class="campo">
+                <img src="/uploads/usuarios/<%=usuario.imagen %>" width="150">
+            </div>
+        <% }else { %>
+            <p>No hay imagen actual</p>
+        <% } %>
+        
+        <div class="form-group col-md-8">
+            <input type="submit" class="btn btn-primary float-right" value="Subir Imagen"></input>
+        </div>
+  </form>
+</div>

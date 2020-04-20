@@ -58,6 +58,7 @@ app.use(flash());
 
 //Middleware para usarlos en cualquier parte de la app
 app.use((req, res, next) => {
+    res.locals.usuario = {...req.user} || null;
     res.locals.mensajes = req.flash();
     const fecha = new Date();
     res.locals.year = fecha.getFullYear();

@@ -15,7 +15,8 @@ exports.panelAdministracion = async (req, res) => {
         nombrePagina: 'Panel de Administracion',
         nombre: usuario.nombre,
         estrategias,
-        categorias
+        categorias,
+        usuario
     })
 }
 

@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const listadoEstrategias = document.querySelector(".listado-estrategias");
   const editarEst = document.querySelector(".editar-estrategia");
   const eliminarImagenEstrategia = document.querySelector(".eliminar-estrategia");
+  const eliminarEstrategia = document.querySelector(".eliminar-estrategia-completa");
+
+  
 
   if (listadoEstrategias) {
     listadoEstrategias.addEventListener("click", ObtenerEstrategia);
@@ -13,6 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (eliminarImagenEstrategia) {
     eliminarImagenEstrategia.addEventListener("click", EliminarArchivoEstrategia);
+  }
+
+  if (eliminarEstrategia) {
+    eliminarEstrategia.addEventListener("click", eliminarEstrategiaCompleta);
   }
 
 });
@@ -152,3 +159,55 @@ const EliminarArchivoEstrategia = (e) => {
       window.location.href = e.target.href;
     };
   }
+
+
+  //Eliminar estrategia
+  const eliminarEstrategiaCompleta = (e) => {
+    e.preventDefault();
+    //console.log(e.target)
+    console.log(e.target.dataset.id);
+    if (e.target.dataset.id) {
+      //eliminar por medio de axios
+      Swal.fire({
+        title: "Confirmar Eliminación?",
+        text: "Una vez eliminado no se recupera!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, eliminar!",
+        cancelButtonText: "No, cancelar",
+      }).then((result) => {
+        if (result.value) {
+          const url = `${location.origin}/eliminar-estrategia/${e.target.dataset.id}`;
+          console.log(url);
+          //enviar peticion a axios
+          axios
+            .delete(url, { params: { url } })
+            .then(function (respuesta) {
+              console.log(respuesta);
+              if (respuesta.status === 200) {
+                Swal.fire("Eliminado!", respuesta.data, "success");
+                //TODO ELIMINAR DEL DOM
+                console.log(
+                  e.target.parentElement.parentElement
+                );
+                e.target.parentElement.parentElement.parentElement.removeChild(
+                  e.target.parentElement.parentElement
+                );
+                $(".listado-estrategias").load(" .listado-estrategias");
+              }
+            })
+            .catch(() => {
+              Swal.fire({
+                type: "error",
+                title: "Hubo un error",
+                text: "No se pudo eliminar",
+              });
+            });
+        }
+      });
+    } else if (e.target.tagName === "A") {
+      window.location.href = e.target.href;
+    }
+  }; 

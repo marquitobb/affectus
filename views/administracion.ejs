@@ -47,30 +47,57 @@
             <span>General</span>
           </li>
           <li class="sidebar-dropdown">
-            <a href="/editar-perfil">
+            <a href="#">
               <i class="fas fa-user"></i>
               <span>Editar Perfil</span>
-              <span class="badge badge-pill badge-warning">New</span>
+              <!--<span class="badge badge-pill badge-warning">New</span>-->
             </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a href="/editar-perfil">Editar Perfil</a>
+                </li>
+                <li>
+                  <a href="/cambiar-password">Cambiar Password</a>
+                </li> 
+                <li>
+                  <% if(usuario.imagen) { %>
+                    <a href="/imagen-perfil">Añadir Imagen<span class="badge badge-pill badge-success">Si</span>
+                  <% }else { %>
+                    <a href="/imagen-perfil">Añadir Imagen<span class="badge badge-pill badge-danger">No</span>
+                  <% } %>
+                  </a>
+                </li>                
+              </ul>
+            </div>
           </li>
           <li class="sidebar-dropdown">
             <a href="/imagen-perfil">
               <i class="far fa-image"></i>
               <span>Imagen Perfil</span>
-              <span class="badge badge-pill badge-warning">New</span>
+                <% if(usuario.imagen) { %>
+                  <span class="badge badge-pill badge-success">Si</span>
+                <% } else { %>
+                  <span class="badge badge-pill badge-danger">No</span>
+                <% } %>
             </a>
           </li>
           <li class="sidebar-dropdown">
             <a href="/cv-perfil">
               <i class="fas fa-file-pdf"></i>
               <span>CV</span>
-              <span class="badge badge-pill badge-danger">1</span>
+              <% if(usuario.cv) { %>
+                <span class="badge badge-pill badge-success">Si</span>
+              <% } else { %>
+                <span class="badge badge-pill badge-danger">Si</span>
+              <% } %>
             </a>
           </li>
           <li class="sidebar-dropdown">
             <a href="#">
               <i class="far fa-gem"></i>
               <span>Nueva Estrategia</span>
+                <span class="badge badge-pill badge-warning"><%=estrategias.length%></span>
             </a>
             <div class="sidebar-submenu">
               <ul>
@@ -78,7 +105,10 @@
                   <a href="/nueva-estrategia">Nueva estrategia</a>
                 </li>
                 <li>
-                  <a href="/ver-estrategias">Ver Estrategias</a>
+                  <a href="/ver-estrategias">
+                    <span class="badge badge-pill badge-warning"><%=estrategias.length%></span>
+                    Ver Estrategias
+                  </a>
                 </li>                
               </ul>
             </div>
@@ -113,7 +143,7 @@
         <i class="fa fa-cog"></i>
         <span class="badge-sonar"></span>
       </a>
-      <a href="#">
+      <a href="/cerrar-sesion">
         <i class="fa fa-power-off"></i>
       </a>
     </div>
@@ -151,7 +181,7 @@
                                     <div class="float-right">
                                         <a href="" data-id="<%=estrategia.id %>" data-toggle="modal" data-target=".bd-example-modal-lg" class="btn btn-primary">Editar</a>
                                         <a href="/imagen-estrategia/<%=estrategia.id%>" class="btn btn-warning">Imagen</a>
-                                        <a href="" data-id="<%=estrategia.id%>" class="btn btn-danger">Eliminar</a>
+                                        <a href="" data-id="<%=estrategia.id%>" class="eliminar-estrategia-completa btn btn-danger">Eliminar</a>
                                     </div>
                                    
                                 </li>

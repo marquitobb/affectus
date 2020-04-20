@@ -149,6 +149,19 @@ a {
   cursor: pointer;
 }
 
+.tamano{
+  cursor: pointer;
+  font-size: 100px;
+  color: #FE3D3D;
+}
+
+.nada{
+  text-decoration: none;
+}
+
+.cerrar-sesion{
+  color: green;
+}
 
 @keyframes swing {
     0% {

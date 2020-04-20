@@ -1,0 +1,22 @@
+<h2 class="mt-5"><%=nombrePagina %></h2>
+<div class="container mt-5">
+    <form method="POST" action="/editar-perfil">
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre" value="<%=usuario.nombre%>" >
+        </div>
+        <div class="form-group">
+            <label for="descripcion">Mi descripción</label>
+            <textarea class="form-control" name="descripcion" placeholder="ingrese descripcion">
+                <%=usuario.descripcion%>
+            </textarea>
+        </div>
+        <div class="form-group">
+            <label for="nombre">Email</label>
+            <input type="text" class="form-control" id="email" placeholder="email" name="email" value="<%=usuario.email%>">
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary float-right" value="Guardar Cambios"></input>
+        </div>
+  </form>
+</div>
