@@ -17,7 +17,7 @@ const configuracionMulter = {
         }
     }),
     fileFilter(req, file, next){
-        if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+        if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'application/pdf') {
             //Format Valid
             next(null, true);
         }else{
