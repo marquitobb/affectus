@@ -4,7 +4,8 @@
   "description": "Proyecto de affectus con mysql y ejs ",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./index.js"
+    "dev": "nodemon ./index.js",
+    "start": "node ./index.js"
   },
   "author": "Diego Cortez y Mario del Toro",
   "license": "ISC",

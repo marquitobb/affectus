@@ -68,7 +68,12 @@ app.use((req, res, next) => {
 //Routing
 app.use('/', router());
 
+//Leer host y puerto
+const host = process.env.HOST || '0.0.0.0';
+const port = process.env.PORT || 5000;
+
+
 //Servidor por donde se escucha
-app.listen(process.env.PORT, () => {
+app.listen(port, host, () => {
     console.log('Servidor funcionando');
 })
