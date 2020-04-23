@@ -15,8 +15,12 @@ module.exports = function() {
     //Abre el form de crear cuenta
     router.get('/crear-cuenta', usuariosController.formCrearCuenta);
 
-    //Crear la cuenta del usuari
+    //Crear la cuenta del usuario
     router.post('/crear-cuenta', usuariosController.crearCuenta);
+
+    //Ruta para verificar correo
+    router.get('/verificar/:token', usuariosController.verificarCorreo);
+    
 
     //Iniciar sesion
     router.get('/iniciar-sesion', usuariosController.formIniciarSesion);

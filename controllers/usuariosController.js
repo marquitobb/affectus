@@ -1,4 +1,7 @@
 const Usuarios = require('../models/Usuarios');
+const randomstring = require ('randomstring');
+require('dotenv').config({path: 'variables.env'});
+const mailer = require ('../misc/mailer');
 
 const multer = require('multer');
 const shortid = require('shortid');
@@ -108,6 +111,29 @@ exports.formCrearCuenta = (req, res) => {
     })
 }
 
+//Método para activar la cuenta del usuario
+exports.verificarCorreo = async (req, res, next) => {
+    try {
+        const secretToken = req.params.token;
+        const usuario = await Usuarios.findOne({ where: { secretToken } });
+        if (!usuario) {
+            req.flash('error', 'Algo salió mal, inténtelo de nuevo');
+            res.redirect('/iniciar-sesion');
+            return next();
+        }
+        usuario.secretToken = '';
+        usuario.activo = true;
+
+        usuario.save();
+
+        req.flash('exito', 'Se ha verificado tu correo, ya puedes iniciar sesión.');
+        res.redirect('/iniciar-sesion');
+    } catch (e) {
+        req.flash('error', 'Ha ocurrido un error en la verificación del correo');
+        res.redirect('/iniciar-sesion');
+    }
+}
+
 //crea la cuentad el usaurio
 exports.crearCuenta = async (req, res, next) => {
     //console.log(req.body)
@@ -127,11 +153,31 @@ exports.crearCuenta = async (req, res, next) => {
     }
     
     try {
+        //token Generado Aleatoriamente.
+        const secretToken = randomstring.generate();
+        usuario.secretToken = secretToken;
+
+        //Bandera la cuenta como inactivo
+        usuario.activo = false;
+
         await Usuarios.create(usuario);
-        req.flash('exito', 'Se creo la cuenta correctamente');
-        res.redirect('iniciar-sesion');
+
+        //Se crea el correo electrónico
+        const html = `Hi ${usuario.nombre},
+        <br/>
+        Thank you for registering!
+        <br/> <br/>
+        Please verify your email on the following page:
+        <a href="${process.env.HOST}:${process.env.PORT}/verificar/${secretToken}">${process.env.HOST}:${process.env.PORT}/verificar/${secretToken}</a>
+        <br/> <br/>
+        Have a pleasant day!`; 
+
+        //Envío de correo
+        await mailer.sendEmail('Affectus', usuario.email, 'Affectus: Please verify your Email!', html);
+
+        req.flash('exito', 'Se creo la cuenta correctamente, favor de confirmarla en su correo');
+        res.redirect('/iniciar-sesion');
     } catch (error) {
-       
        //extraer unicamente el message de los errores
        const erroresSequelize = error.errors.map(err => err.message);
     
