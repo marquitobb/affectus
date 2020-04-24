@@ -9,7 +9,7 @@ const configuracionMulter = {
     limits: { fileSize: 1000000},
     storage: fileStorage = multer.diskStorage({
         destination: (req, file, next) => {
-            next(null, __dirname+'/../public/uploads/estrategias')
+            next(null, __dirname+'/../public/uploads/estrategias');
         },
         filename: (req, file, next) => {
             const extension = file.mimetype.split('/')[1];
@@ -22,10 +22,10 @@ const configuracionMulter = {
             next(null, true);
         }else{
             //Format not valid
-            next(new Error('Formato De Imagen No Valido'), false)
+            next(new Error('Formato De Imagen No Valido'), false);
         }
     }
-}
+};
 
 const upload = multer(configuracionMulter).array('archivos', 10);
 
@@ -36,11 +36,11 @@ exports.subirImagen = (req, res, next) => {
             //TODO MANEJAR ERRORES
             if (error instanceof multer.MulterError) {
                 if (error.code === 'LIMIT_FILE_SIZE') {
-                    req.flash('error', 'El archivo es muy grande')
+                    req.flash('error', 'El archivo es muy grande');
                 }else{
                     console.log(error);
 
-                    req.flash('error', error.message)
+                    req.flash('error', error.message);
                 } 
             }else if(error.hasOwnProperty('message')){
                 console.log(error);
@@ -50,11 +50,10 @@ exports.subirImagen = (req, res, next) => {
             res.redirect('back');
             return;
         }else{
-            next()
-        }     
-    })
-
-}
+            next();
+        }
+    });
+};
 
 //Form nueva estrategia
 exports.formNuevaEstrategia = async (req, res) => {
@@ -62,17 +61,17 @@ exports.formNuevaEstrategia = async (req, res) => {
     res.render('nueva-estrategia', {
         nombrePagina: 'Nueva Estrategia',
         categorias
-    })
-}
+    });
+};
 
 //Creando nueva estrategia
 exports.nuevaEstrategia = async (req, res, next) => {
     req.sanitizeBody('nombre');
-    req.sanitizeBody('descripcion')
-    req.sanitizeBody('pais')
+    req.sanitizeBody('descripcion');
+    req.sanitizeBody('pais');
 
     const estrategia = req.body;
-    console.log(estrategia)
+    console.log(estrategia);
 
     estrategia.usuarioId = req.user.id;
     //leer imagen
@@ -84,20 +83,20 @@ exports.nuevaEstrategia = async (req, res, next) => {
     try {
         await Estrategias.create(estrategia);
         req.flash('exito', 'Se creo el grupo correctamente');
-        res.redirect('/administracion')
+        res.redirect('/administracion');
     } catch (error) {
         console.log(error);
         const erroresSequelize = error.errors.map(err=>err.message);
         req.flash('error', erroresSequelize);
-        res.redirect('/nueva-estrategia')
+        res.redirect('/nueva-estrategia');
     }
-}
+};
 
 //form para editar estrategia
 exports.formEditarEstrategia = async (req, res) => {
     const estrategia = await Estrategias.findByPk(req.params.idEstrategia);
     res.json(estrategia);
-}
+};
 
 //form para editar estrategia
 exports.EditarEstrategia = async (req, res) => {
@@ -105,7 +104,7 @@ exports.EditarEstrategia = async (req, res) => {
 
     const estrategia = await Estrategias.findOne({where: {id: req.params.idEstrategia, usuarioId: req.user.id}});
 
-    const {nombre, fecha_creacion, pais, descripcion, categoriaId} = req.body.params
+    const {nombre, fecha_creacion, pais, descripcion, categoriaId} = req.body.params;
     
     //valida si el grupo existe o no o no es el dueño
     if (!estrategia) {
@@ -122,14 +121,12 @@ exports.EditarEstrategia = async (req, res) => {
 
     try {
         await estrategia.save();
-        res.status(200).send('Estrategia Actualizada Correctamente')
+        res.status(200).send('Estrategia Actualizada Correctamente');
 
     } catch (error) {
-        res.status(403).send('Hubo un error')
-
-    }
-     
-}
+        res.status(403).send('Hubo un error');
+    }     
+};
 
 exports.formEditarImagen = async(req, res, next) => {
     const estrategia = await Estrategias.findOne({where: {id: req.params.idEstrategia, usuarioId: req.user.id}});
@@ -137,8 +134,8 @@ exports.formEditarImagen = async(req, res, next) => {
     res.render('imagen-estrategia', {
         nombrePagina: `Editar Archivos de estrategia`,
         estrategia
-    })
-}
+    });
+};
 
 //Modifica la imagen y elimina la anterior
 exports.EditarImagen = async(req, res, next) => {
@@ -146,7 +143,7 @@ exports.EditarImagen = async(req, res, next) => {
 
     //el grupo existe y es valido;
     if (!estrategia) {
-        req.flash('error', 'Operación no valida')
+        req.flash('error', 'Operación no valida');
         res.redirect('/administracion');
     }
 
@@ -162,9 +159,8 @@ exports.EditarImagen = async(req, res, next) => {
     //guardar en la bd
     await estrategia.save();
     req.flash('exito', 'Cambios almacenados correctamente');
-    res.redirect('/administracion');
-   
-}
+    res.redirect('/administracion');   
+};
 
 exports.eliminarArchivo = async(req, res, next) => {
     const estrategia = await Estrategias.findOne({where: {id: req.params.idEstrategia, usuarioId: req.user.id}});
@@ -173,8 +169,8 @@ exports.eliminarArchivo = async(req, res, next) => {
     if (estrategia.archivos) {
         //console.log("tamaño", estrategia.archivos.length);
         if (estrategia.archivos.length === 1) {
-            res.json({msg: 'No se puede eliminar, debe existir al menos un archivo'})
-            return
+            res.json({msg: 'No se puede eliminar, debe existir al menos un archivo'});
+            return;
         }
         for (let i = 0; i < estrategia.archivos.length; i++) {
             const element = estrategia.archivos[i];
@@ -183,7 +179,7 @@ exports.eliminarArchivo = async(req, res, next) => {
                 //Eliminar archivo con filesystem
                 fs.unlink(imagenAnteriorPath, (error) => {
                     if (error) {
-                        console.log(error)
+                        console.log(error);
                     }
                     return;
                 });
@@ -196,9 +192,9 @@ exports.eliminarArchivo = async(req, res, next) => {
         estrategia.archivos = nuevosArchivos;
         //todo bien elimina el grupo
         await estrategia.save();
-        res.status(200).send('Proyecto Eliminado Correctamente')
+        res.status(200).send('Proyecto Eliminado Correctamente');
     }
-}
+};
 
 exports.eliminarEstrategia = async (req, res, next) => {
     const estrategia = await Estrategias.findOne({where: {id: req.params.idEstrategia, usuarioId: req.user.id}});
@@ -216,12 +212,11 @@ exports.eliminarEstrategia = async (req, res, next) => {
             //Eliminar archivo con filesystem
             fs.unlink(imagenAnteriorPath, (error) => {
                 if (error) {
-                    console.log(error)
+                    console.log(error);
                 }
                 return;
             });
-        }
-        
+        }        
     }
 
     //todo bien elimina el grupo
@@ -230,5 +225,5 @@ exports.eliminarEstrategia = async (req, res, next) => {
             id: req.params.idEstrategia
         }
     });
-    res.status(200).send('Estrategia Eliminado Correctamente')
-}
+    res.status(200).send('Estrategia Eliminado Correctamente');
+};

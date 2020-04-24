@@ -5,9 +5,9 @@ const bodyParser = require('body-parser');
 const flash = require('connect-flash');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const expressValidator = require('express-validator')
-const passport = require('./config/passport')
-const router = require('./routes')
+const expressValidator = require('express-validator');
+const passport = require('./config/passport');
+const router = require('./routes');
 
 //Creacion de las tablas
 const db = require('./config/db');
@@ -15,7 +15,7 @@ const db = require('./config/db');
     require('./models/Categorias');
     require('./models/Estrategias');
 
-    db.sync().then(() => console.log('DB CONECTADA')).catch((error) => console.log(error))
+    db.sync().then(() => console.log('DB CONECTADA')).catch((error) => console.log(error));
 
 //variables de entorno
 require('dotenv').config({path: 'variables.env'});
@@ -25,13 +25,13 @@ const app = express();
 
 //Body parser para leer formularios
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({extended: true}));
 
 //Express validator 
-app.use(expressValidator())
+app.use(expressValidator());
 
 //Habilitar ejs como template
-app.use(expressLayouts)
+app.use(expressLayouts);
 app.set('view engine', 'ejs');
 
 //Habilita la direccion de las vistas
@@ -63,7 +63,7 @@ app.use((req, res, next) => {
     const fecha = new Date();
     res.locals.year = fecha.getFullYear();
     next();
-})
+});
 
 //Routing
 app.use('/', router());
@@ -72,8 +72,7 @@ app.use('/', router());
 const host = process.env.HOST || '0.0.0.0';
 const port = process.env.PORT || 5000;
 
-
 //Servidor por donde se escucha
 app.listen(port, host, () => {
     console.log('Servidor funcionando');
-})
+});
