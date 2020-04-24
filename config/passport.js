@@ -3,16 +3,16 @@ const LocalStrategy = require('passport-local').Strategy;
 const Usuarios = require('../models/Usuarios');
 
 passport.use(new LocalStrategy({
-        usernameField : 'email',
-        passwordFile : 'password',
-    },
+    usernameField: 'email',
+    passwordFile: 'password',
+},
     //esta funcion se ejcuta cuando llenas los campos
     async (email, password, next) => {
         //codigo se ejecuta al llenar el fom de iniciar sesion
-        const usuario = await Usuarios.findOne({where: {email, activo : 0}});
+        const usuario = await Usuarios.findOne({ where: { email } });
 
         //Revisar si existe o no
-        if(!usuario) return next(null, false, {
+        if (!usuario) return next(null, false, {
             message: 'Ese usuario no existe'
         });
 
@@ -20,8 +20,13 @@ passport.use(new LocalStrategy({
         const verificarPass = usuario.validarPassword(password);
 
         //si el password es incorrecto
-        if(!verificarPass) return next(null, false, {
+        if (!verificarPass) return next(null, false, {
             message: 'Password Incorrecto'
+        });
+
+        //cHECAR SI LA CUENTA HA SIDO VERIFICADA
+        if (usuario.activo == 0) return next(null, false, {
+            message: 'Usuario no verificado, favor de revisar su correo'
         });
 
         //todo bien
@@ -29,11 +34,11 @@ passport.use(new LocalStrategy({
     }
 ))
 
-passport.serializeUser(function(usuario, cb){
+passport.serializeUser(function (usuario, cb) {
     cb(null, usuario);
 });
 
-passport.deserializeUser(function(usuario, cb){
+passport.deserializeUser(function (usuario, cb) {
     cb(null, usuario);
 });
 

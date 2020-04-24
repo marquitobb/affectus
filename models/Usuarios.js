@@ -10,9 +10,11 @@ const Usuarios = db.define('usuarios', {
     },
     nombre: Sequelize.STRING(60),
     imagen: Sequelize.STRING(60),
+    secretToken: Sequelize.STRING(60),
     email:{
         type: Sequelize.STRING(60),
         allowNull: false,
+        lowerCase: true,
         validate: {
             isEmail: {msg: 'Agrega un correo válido'}
         },
@@ -31,8 +33,8 @@ const Usuarios = db.define('usuarios', {
         }
     },
     activo: {
-        type: Sequelize.INTEGER(1),
-        defaultValue: 0
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
     },
     descripcion: {
         type: Sequelize.TEXT
