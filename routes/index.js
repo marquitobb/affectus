@@ -6,7 +6,7 @@ const usuariosController = require('../controllers/usuariosController');
 const authController = require('../controllers/authController');
 const adminController = require('../controllers/adminController');
 const estrategiasController = require('../controllers/estrategiasController');
-
+const socketsController = require('../controllers/socketsController');
 
 
 module.exports = function() {
@@ -24,6 +24,11 @@ module.exports = function() {
 
     //Cerrar sesión
     router.get('/cerrar-sesion', authController.usuarioAutenticado,  authController.CS);
+
+    router.get('/index', authController.usuarioAutenticado, socketsController.index);
+    router.get('/chat', authController.usuarioAutenticado, socketsController.chat);
+
+    router.get('/chatIndividual/:emailRecibe', authController.usuarioAutenticado, socketsController.chatIndividual);
 
     //Admin Panel
     router.get('/administracion', authController.usuarioAutenticado, adminController.panelAdministracion);

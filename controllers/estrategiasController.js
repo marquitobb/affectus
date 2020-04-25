@@ -95,7 +95,9 @@ exports.nuevaEstrategia = async (req, res, next) => {
 
 //form para editar estrategia
 exports.formEditarEstrategia = async (req, res) => {
-    const estrategia = await Estrategias.findByPk(req.params.idEstrategia);
+    //const estrategia = await Estrategias.findByPk(req.params.idEstrategia);
+    const estrategia = await Estrategias.findOne({where: {id: req.params.idEstrategia, usuarioId: req.user.id}});
+
     res.json(estrategia);
 }
 
