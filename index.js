@@ -42,7 +42,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(expressValidator())
 
 //Habilitar ejs como template
-app.use(expressLayouts)
+app.use(expressLayouts) 
 app.set('view engine', 'ejs');
 
 //Habilita la direccion de las vistas

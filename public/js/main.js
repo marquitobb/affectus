@@ -1,9 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
-    
-    ejecutarFunciones();
-  
-  
-  });
+
 
   function ejecutarFunciones(){
     const socket = io();
@@ -18,8 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
         usuarioEnvia : $usuarioEnvia.val(),
     }
 
-    console.log($usuarioRecibe.val());
-    console.log($usuarioEnvia.val());
+    //console.log($usuarioRecibe.val());
+    //console.log($usuarioEnvia.val());
 
 
     socket.emit('joinRoom', usuarios, data => {
@@ -36,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
        });
        $msgsingle.val('')
     })
+
     const datosRoom = {
         nick: $usuarioEnvia.val(),
         recibe: $usuarioRecibe.val()
