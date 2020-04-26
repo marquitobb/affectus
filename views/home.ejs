@@ -38,7 +38,11 @@
         <div class="grid columnas-md-3 ">
             <% estrategias.forEach(estrategia => { %>
                 <div class="card">
-                    <img src="/img/leer.jpg">
+                    <% if(estrategia.imagen) { %>   
+                        <img src="/uploads/estrategias/<%=estrategia.imagen %>">
+                    <% } else { %>
+                        <img src="/img/leer.jpg">
+                    <% } %>
                     <div class="card-texto">
                         <p class="fecha"><%=estrategia.fecha %></p>
                         <a href="#">

@@ -72,14 +72,25 @@ exports.nuevaEstrategia = async (req, res, next) => {
     req.sanitizeBody('pais')
 
     const estrategia = req.body;
-    console.log(estrategia)
+    //console.log(estrategia)
 
     estrategia.usuarioId = req.user.id;
     //leer imagen
 
     const files = req.files;
     const nombres = files.map(file => file.filename);
-    estrategia.archivos = nombres;   
+    //console.log(nombres);
+
+    let setArchivos = [];
+    nombres.forEach(nombre => {
+        if (nombre.includes('.png') || nombre.includes('.jpg')) {
+            setArchivos.push(nombre);
+        }
+    })
+    //console.log(setArchivos);
+    
+    estrategia.archivos = nombres;
+    estrategia.imagen = setArchivos[0];   
 
     try {
         await Estrategias.create(estrategia);
@@ -159,6 +170,17 @@ exports.EditarImagen = async(req, res, next) => {
         
         const nuevosArchivos = [...estrategia.archivos, ...nombres];
         estrategia.archivos = nuevosArchivos;
+
+        if (!estrategia.imagen) {
+            let setArchivos = [];
+            nombres.forEach(nombre => {
+                if (nombre.includes('.png') || nombre.includes('.jpg')) {
+                    setArchivos.push(nombre);
+                }
+            })
+
+            estrategia.imagen = setArchivos[0];
+        }
     }
 
     //guardar en la bd

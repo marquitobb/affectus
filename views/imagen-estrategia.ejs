@@ -11,13 +11,25 @@
                 <input type="hidden" id="idEstrategia" value="<%=estrategia.id%>">
                 <% for (let i = 0; i < estrategia.archivos.length; i++) { %>
                     <% const element = estrategia.archivos[i] %>
-                    <div id="divArchivos" class="d-inline pr-4" >
-                        <i  class="cursor fas fa-times-circle " onclick="EliminarArchivoEstrategia" data-id="<%=element%>">
-                            <div class="">
-                                <img src="/uploads/estrategias/<%=element%>" width="100">
-                            </div>
-                        </i>
-                    </div>
+                    <% if(element.includes('.pdf')) { %>
+                        <div id="divArchivos" class="d-inline pr-4" >
+                            <i  class="cursor fas fa-times-circle " onclick="EliminarArchivoEstrategia" data-id="<%=element%>">
+                                <div class="">
+                                    <i class="tamano far fa-file-pdf">
+                                    </i> 
+                                </div>
+                            </i>
+                        </div>
+                    <% } else { %>
+                        <div id="divArchivos" class="d-inline pr-4" >
+                            <i  class="cursor fas fa-times-circle " onclick="EliminarArchivoEstrategia" data-id="<%=element%>">
+                                <div class="">
+                                    <img src="/uploads/estrategias/<%=element%>" width="100">
+                                </div>
+                            </i>
+                        </div>
+                    <% } %>
+                    
                 <% } %>
         </div>
         
