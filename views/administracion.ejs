@@ -12,8 +12,14 @@
       </div>
       <div class="sidebar-header">
         <div class="user-pic">
-          <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+          <% if(usuario.imagen) { %>
+            <img class="img-responsive img-rounded" src="/uploads/usuarios/<%=usuario.imagen %>"
             alt="User picture">
+          <% }else { %>
+            <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+            alt="User picture">
+          <% } %>
+          
         </div>
         <div class="user-info">
           <span class="user-name">
@@ -89,7 +95,7 @@
               <% if(usuario.cv) { %>
                 <span class="badge badge-pill badge-success">Si</span>
               <% } else { %>
-                <span class="badge badge-pill badge-danger">Si</span>
+                <span class="badge badge-pill badge-danger">No</span>
               <% } %>
             </a>
           </li>

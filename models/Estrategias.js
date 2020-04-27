@@ -47,6 +47,9 @@ const Estrategias = db.define('estrategias', {
             }
         } 
     },
+    imagen: {
+        type: Sequelize.STRING
+    },
     pais: {
         type: Sequelize.STRING(50),
         allowNull: false,

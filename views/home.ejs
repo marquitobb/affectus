@@ -1,1 +1,113 @@
-<h1><%=nombrePagina%></h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Affectus</title>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700,900|Staatliches" rel="stylesheet">
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+    
+    <div class="hero">
+        <h1>Encuentra ayuda para tu bienestar</h1>
+        <a href="/crear-cuenta" class="btn btn-amarillo">Obtener Cuenta</a>
+    </div>
+    
+    <div class="buscador-inicio">
+        <div class="contenedor">
+            <h2>Busca ayuda en tu pais</h2>
+            <form action="#">
+                <select name="categoria">
+                        <option value="" disabled selected>-- Selecciona Categoría --</option>
+                        <option value="programacion">Psicologia</option>
+                        <option value="diseno">Coaching</option>
+                        <option value="libros">Motivacion</option>
+                </select>
+                <input type="text" name="nombre" placeholder="Nombre Grupo">
+                <input type="text" name="pais" placeholder="País">
+                <input type="submit" value="Buscar" class="btn btn-rosa">
+            </form>
+        </div>
+    </div>
+    
+    <div class="contenedor">
+        <h2>Actividades Importantes Para tu salud</h2>
+        <div class="grid columnas-md-3 ">
+            <% estrategias.forEach(estrategia => { %>
+                <div class="card">
+                    <% if(estrategia.imagen) { %>   
+                        <img src="/uploads/estrategias/<%=estrategia.imagen %>">
+                    <% } else { %>
+                        <img src="/img/leer.jpg">
+                    <% } %>
+                    <div class="card-texto">
+                        <p class="fecha"><%=estrategia.fecha %></p>
+                        <a href="#">
+                            <h3><%=estrategia.nombre %></h3>
+                        </a>
+                        <div class="info-autor">
+                            <div class="imagen">
+                                <img src="/uploads/usuarios/<%=estrategia.usuario.imagen %>" alt="">
+                            </div>
+                            <div class="informacion">
+                                <p>Organizado por:</p>
+                                <p class="autor"><%=estrategia.usuario.email %></p>
+                            </div>
+                        </div>
+                            <a href="/index" class="m-4">Chat Grupal</a>
+                            <a href="/chatIndividual/<%=estrategia.usuario.email%>" class="m-4">Chat Individual</a>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+    
+    
+    <main class="bg-gris categorias">
+        <h2>Encuentra Ayuda por Categoría</h2>
+    
+        <div class="contenedor">
+            <ul class="listado-categorias  grid columnas-2 columnas-md-3">
+                <% categorias.forEach(categoria => { %>
+                    <li>
+                        <a href="#">
+                            <img src="/img/categoria_1.jpg">
+                            <p><%=categoria.nombre%></p>
+                        </a>
+                    </li>
+                <% }) %>
+            </ul>
+        </div>
+    </main>
+    
+    <div class="meeti-bg">
+        <div class="contenedor meeti grid columnas-md-2">
+            <section>
+                <h3>Crea una actividad</h3>
+                <p>Comparte lo que te gusta o tu pasión con los demás, crea tu propio grupo hoy mismo sin costos</p>
+            </section>
+            <section>
+                <h3>Únete a una actividad</h3>
+                <p>Conoce actividades que favoreceran a tu salud en tiempos dificles</p>
+            </section>
+        </div>
+    </div>
+   
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

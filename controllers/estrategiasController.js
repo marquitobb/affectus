@@ -71,14 +71,22 @@ exports.nuevaEstrategia = async (req, res, next) => {
     req.sanitizeBody('pais');
 
     const estrategia = req.body;
-    console.log(estrategia);
 
     estrategia.usuarioId = req.user.id;
     //leer imagen
 
     const files = req.files;
     const nombres = files.map(file => file.filename);
-    estrategia.archivos = nombres;   
+
+    let setArchivos = [];
+    nombres.forEach(nombre => {
+        if (nombre.includes('.png') || nombre.includes('.jpg')) {
+            setArchivos.push(nombre);
+        }
+    })
+    
+    estrategia.archivos = nombres;
+    estrategia.imagen = setArchivos[0];   
 
     try {
         await Estrategias.create(estrategia);
@@ -94,7 +102,9 @@ exports.nuevaEstrategia = async (req, res, next) => {
 
 //form para editar estrategia
 exports.formEditarEstrategia = async (req, res) => {
-    const estrategia = await Estrategias.findByPk(req.params.idEstrategia);
+    //const estrategia = await Estrategias.findByPk(req.params.idEstrategia);
+    const estrategia = await Estrategias.findOne({where: {id: req.params.idEstrategia, usuarioId: req.user.id}});
+
     res.json(estrategia);
 };
 
@@ -154,6 +164,17 @@ exports.EditarImagen = async(req, res, next) => {
         
         const nuevosArchivos = [...estrategia.archivos, ...nombres];
         estrategia.archivos = nuevosArchivos;
+
+        if (!estrategia.imagen) {
+            let setArchivos = [];
+            nombres.forEach(nombre => {
+                if (nombre.includes('.png') || nombre.includes('.jpg')) {
+                    setArchivos.push(nombre);
+                }
+            })
+
+            estrategia.imagen = setArchivos[0];
+        }
     }
 
     //guardar en la bd
