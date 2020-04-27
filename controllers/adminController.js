@@ -11,6 +11,8 @@ exports.panelAdministracion = async (req, res) => {
 
     const [usuario, estrategias, categorias] = await Promise.all(consultas);
     //console.log(estrategias);
+    //console.log(usuario);
+
     res.render('administracion', {
         nombrePagina: 'Panel de Administracion',
         nombre: usuario.nombre,
