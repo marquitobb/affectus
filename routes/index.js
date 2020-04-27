@@ -8,7 +8,6 @@ const adminController = require('../controllers/adminController');
 const estrategiasController = require('../controllers/estrategiasController');
 const socketsController = require('../controllers/socketsController');
 
-
 module.exports = function() {
     router.get('/', homeController.home);
 
@@ -20,7 +19,14 @@ module.exports = function() {
 
     //Ruta para verificar correo
     router.get('/verificar/:token', usuariosController.verificarCorreo);
+
+    //Ruta para recuperar contraseña
+    router.get('/recuperar-pass/:token', usuariosController.recuperarContrasena);
+    router.post('/recover-pass', usuariosController.recoverPass);
     
+    //Olvidar contraseña
+    router.get('/forgot-pass', usuariosController.formOlvidarPassword);
+    router.post('/forgot-pass', usuariosController.olvidarContrasena);
 
     //Iniciar sesion
     router.get('/iniciar-sesion', usuariosController.formIniciarSesion);
@@ -42,16 +48,16 @@ module.exports = function() {
     router.post('/cv-perfil', authController.usuarioAutenticado, usuariosController.subirCurriculum, usuariosController.SubirCV);
 
     //Perfil de usuario
-    router.get('/editar-perfil', authController.usuarioAutenticado, usuariosController.formEditarPerfil)
-    router.post('/editar-perfil', authController.usuarioAutenticado, usuariosController.EditarPerfil)
+    router.get('/editar-perfil', authController.usuarioAutenticado, usuariosController.formEditarPerfil);
+    router.post('/editar-perfil', authController.usuarioAutenticado, usuariosController.EditarPerfil);
 
     //Cambiar password de usuario
-    router.get('/cambiar-password', authController.usuarioAutenticado, usuariosController.formCambiarPassword)
-    router.post('/cambiar-password', authController.usuarioAutenticado, usuariosController.CambiarPassword)
+    router.get('/cambiar-password', authController.usuarioAutenticado, usuariosController.formCambiarPassword);
+    router.post('/cambiar-password', authController.usuarioAutenticado, usuariosController.CambiarPassword);
 
     //Imagen de perfil de usuario
-    router.get('/imagen-perfil', authController.usuarioAutenticado, usuariosController.formAgregarImagenPerfil)
-    router.post('/imagen-perfil', authController.usuarioAutenticado, usuariosController.subirImagen, usuariosController.AgregarImagenPerfil)
+    router.get('/imagen-perfil', authController.usuarioAutenticado, usuariosController.formAgregarImagenPerfil);
+    router.post('/imagen-perfil', authController.usuarioAutenticado, usuariosController.subirImagen, usuariosController.AgregarImagenPerfil);
 
 
     //Nueva Estrategia Estrategias
@@ -72,7 +78,5 @@ module.exports = function() {
     //Eliminar estrategia
     router.delete('/eliminar-estrategia/:idEstrategia', authController.usuarioAutenticado, estrategiasController.eliminarEstrategia);
 
-
-
     return router;
-}
+};

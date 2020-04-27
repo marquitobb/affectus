@@ -5,7 +5,7 @@ const Categorias = require('../models/Categorias');
 exports.panelAdministracion = async (req, res) => {
 
     const consultas = [];
-    consultas.push(Usuarios.findByPk(req.user.id))
+    consultas.push(Usuarios.findByPk(req.user.id));
     consultas.push(Estrategias.findAll({where: {usuarioId: req.user.id}}));
     consultas.push(Categorias.findAll());
 
@@ -19,6 +19,6 @@ exports.panelAdministracion = async (req, res) => {
         estrategias,
         categorias,
         usuario
-    })
-}
+    });
+};
 

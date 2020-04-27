@@ -1,0 +1,38 @@
+<main class="login-form mt-5">
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header text-center"><%=nombrePagina%></div>
+                        <div class="card-body">
+                            <form action="/recover-pass" method="POST">
+                                <div class="d-flex">
+                                    <label class="col-form-label mx-auto">Enter your new password
+                                        </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="password" class="col-md-4 col-form-label text-md-right">New password</label>
+                                    <div class="col-md-6">
+                                        <input type="password" id="password" class="form-control" name="password" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="confirmar" class="col-md-4 col-form-label text-md-right">Confirm password</label>
+                                    <div class="col-md-6">
+                                        <input type="password" id="confirmar" class="form-control" name="confirmar" required>
+                                    </div>
+                                </div>   
+                                <input type="text" value='<%=token%>' id="token" name="token" style="display: none;">                      
+
+                                <div class="col-md-6 offset-md-4">
+                                    <input type="submit" class="btn btn-primary float-right" value="Recuperar">                                        
+                                    </input>                                    
+                                </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -18,5 +18,5 @@ exports.home = async (req, res) => {
         nombrePagina: 'Home',
         estrategias,
         categorias
-    })
-}
+    });
+};

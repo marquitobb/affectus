@@ -1,4 +1,4 @@
-const passport = require('passport')
+const passport = require('passport');
 
 exports.autenticarUsuario = passport.authenticate('local', {
     successRedirect: '/administracion',
@@ -16,11 +16,11 @@ exports.usuarioAutenticado = (req, res, next) => {
 
     //si no esta autenticado
     return res.redirect('/iniciar-sesion');
-}
+};
 
 exports.CS = (req, res, next) => {
     req.logout();
     req.flash('exito', 'Cierre de sesión correcto');
     res.redirect('/iniciar-sesion');
     next();
-}
+};
