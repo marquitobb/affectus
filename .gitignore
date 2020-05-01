@@ -1,4 +1,7 @@
 node_modules
 variables.env
 config/mailer.js
+public/uploads/cv/*
+public/uploads/estrategias/*
+public/uploads/usuarios/*
 .jshintrc

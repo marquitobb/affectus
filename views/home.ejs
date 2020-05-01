@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,22 +10,22 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700,900|Staatliches" rel="stylesheet">
     <link rel="stylesheet" href="/css/home.css">
 </head>
+
 <body>
-    
     <div class="hero">
         <h1>Encuentra ayuda para tu bienestar</h1>
         <a href="/crear-cuenta" class="btn btn-amarillo">Obtener Cuenta</a>
     </div>
-    
-    <div class="buscador-inicio">
+
+    <div class="buscador-inicio" id="buscadorAyudaPais">
         <div class="contenedor">
             <h2>Busca ayuda en tu pais</h2>
             <form action="#">
                 <select name="categoria">
-                        <option value="" disabled selected>-- Selecciona Categoría --</option>
-                        <option value="programacion">Psicologia</option>
-                        <option value="diseno">Coaching</option>
-                        <option value="libros">Motivacion</option>
+                    <option value="" disabled selected>-- Selecciona Categoría --</option>
+                    <option value="programacion">Psicologia</option>
+                    <option value="diseno">Coaching</option>
+                    <option value="libros">Motivacion</option>
                 </select>
                 <input type="text" name="nombre" placeholder="Nombre Grupo">
                 <input type="text" name="pais" placeholder="País">
@@ -32,82 +33,174 @@
             </form>
         </div>
     </div>
-    
-    <div class="contenedor">
+
+    <div class="contenedor mt-4" id="estrategiasSalud">
         <h2>Actividades Importantes Para tu salud</h2>
         <div class="grid columnas-md-3 ">
             <% estrategias.forEach(estrategia => { %>
-                <div class="card">
-                    <% if(estrategia.imagen) { %>   
-                        <img src="/uploads/estrategias/<%=estrategia.imagen %>">
-                    <% } else { %>
-                        <img src="/img/leer.jpg">
-                    <% } %>
-                    <div class="card-texto">
-                        <p class="fecha"><%=estrategia.fecha %></p>
-                        <a href="#">
-                            <h3><%=estrategia.nombre %></h3>
-                        </a>
-                        <div class="info-autor">
-                            <div class="imagen">
-                                <img src="/uploads/usuarios/<%=estrategia.usuario.imagen %>" alt="">
-                            </div>
-                            <div class="informacion">
-                                <p>Organizado por:</p>
-                                <p class="autor"><%=estrategia.usuario.email %></p>
-                            </div>
-                        </div>
-                            <a href="/index" class="m-4">Chat Grupal</a>
-                            <a href="/chatIndividual/<%=estrategia.usuario.email%>" class="m-4">Chat Individual</a>
-                    </div>
+            <div class="card">
+                <% if(estrategia.imagen) { %>
+                <img class="lazy" src="/uploads/estrategias/<%=estrategia.imagen %>">
+                <% } else { %>
+                <img class="lazy" src="/img/leer.png">
+                <% } %>
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold"><%=estrategia.nombre %></h5>
+                    <p class="card-text text-center font-italic"><%=estrategia.descripcion %></p>
+                    <p class="card-text"><small class="text-muted"><%=categorias.nombre %></small></p>
+                    <p class="card-text text-right"><small class="text-muted"><%=estrategia.fecha_creacion %></small></p>
+                    <hr />
+                    <p class="card-text text-right"><small class="">Responsable: <%=estrategia.usuario.nombre %></small></p>
+                    <p class="card-text text-right"><small class="font-italic"><%=estrategia.usuario.email %></small></p>
                 </div>
+                <div class="card-footer d-flex">
+                    <small class="text-muted mr-auto"><a href="/index" class="m-4">Chat Grupal</a></small>                    
+                    <small class="text-muted ,l-auto"><a href="/chatIndividual/<%=estrategia.usuario.email%>" class="m-4">Chat Individual</a></small>
+                  </div>
+            </div>
+
+
+            <!--<div class="card">
+                <% if(estrategia.imagen) { %>
+                <img src="/uploads/estrategias/<%=estrategia.imagen %>">
+                <% } else { %>
+                <img src="/img/leer.jpg">
+                <% } %>
+                <div class="card-texto">
+                    <p class="fecha"><%=estrategia.fecha %></p>
+                    <a href="#">
+                        <h3><%=estrategia.nombre %></h3>
+                    </a>
+                    <div class="info-autor">
+                        <div class="imagen">
+                            <img src="/uploads/usuarios/<%=estrategia.usuario.imagen %>" alt="">
+                        </div>
+                        <div class="informacion">
+                            <p>Organizado por:</p>
+                            <p class="autor"><%=estrategia.usuario.email %></p>
+                        </div>
+                    </div>
+                    <a href="/index" class="m-4">Chat Grupal</a>
+                    <a href="/chatIndividual/<%=estrategia.usuario.email%>" class="m-4">Chat Individual</a>
+                </div>
+            </div>-->
             <% }) %>
         </div>
     </div>
-    
-    
-    <main class="bg-gris categorias">
+
+
+    <main class="bg-gris categorias" id="visualizadoCategorias">
         <h2>Encuentra Ayuda por Categoría</h2>
-    
-        <div class="contenedor">
-            <ul class="listado-categorias  grid columnas-2 columnas-md-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img class="lazy" style="height: 225px;" src="/img/psiquiatria.jpg">
+                        <div class="card-body">
+                            <h5 class="card-title font-weight-bold">Psicología</h5>
+                            <hr />
+                            <p class="card-text text-center font-italic">"Ciencia que estudia la conducta y los procesos mentales. Trata de describir y explicar
+                                todos los aspectos del pensamiento, de los sentimientos, de las percepciones y de las acciones humanas."</p>
+                            <hr />
+                            <p class="card-text text-right"><small class="text-muted">Laura Anton. (s.f.). Psicología como ciencia. Instituo La Sernas</small></p>                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img class="lazy" style="height: 225px;" src="/img/coaching.jpg">
+                        <div class="card-body">
+                            <h5 class="card-title font-weight-bold">Coaching</h5>
+                            <hr />
+                            <p class="card-text text-center font-italic">"“El estudio científico de las experiencias positivas, de los
+                                rasgos individuales positivos de las instituciones que facilitan el desarrollo y de los
+                                programas que ayudan a mejorar la calidad de vida de los individuos y previenen o
+                                reducen la incidencia de la psicopatología"</p>
+                            <hr />
+                            <p class="card-text text-right"><small class="text-muted">Sans Zapata, M.. (2012). ¿Qué es el coaching? sus orígenes, definición, distintas metodologías y principios básicoas de actuación de un coach
+                                .  Área de Innovación y Desarrollo, S.L. </small></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img class="lazy" style="height: 225px;" src="/img/motivacion.jpg">
+                        <div class="card-body">
+                            <h5 class="card-title font-weight-bold">Motivación</h5>
+                            <hr />
+                            <p class="card-text text-center font-italic">"Impulso que conduce a una
+                                persona a elegir y realizar una acción entre aquellas alternativas que se presentan en una
+                                determinada situación"</p>
+                            <hr />
+                            <p class="card-text text-right"><small class="text-muted">Laura Anton. (s.f.). Psicología como ciencia. Instituo La Sernas</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--<ul class="listado-categorias  grid columnas-2 columnas-md-3">
                 <% categorias.forEach(categoria => { %>
-                    <li>
-                        <a href="#">
-                            <img src="/img/categoria_1.jpg">
-                            <p><%=categoria.nombre%></p>
-                        </a>
-                    </li>
+                <li>
+                    <a href="#">
+                        <img src="/img/categoria_1.jpg">
+                        <p><%=categoria.nombre%></p>
+                    </a>
+                </li>
                 <% }) %>
-            </ul>
+            </ul>-->
         </div>
     </main>
-    
-    <div class="meeti-bg">
+
+    <div class="meeti-bg" id="nosotrosMain">
         <div class="contenedor meeti grid columnas-md-2">
             <section>
                 <h3>Crea una actividad</h3>
                 <p>Comparte lo que te gusta o tu pasión con los demás, crea tu propio grupo hoy mismo sin costos</p>
             </section>
-            <section>
-                <h3>Únete a una actividad</h3>
+            <section class="text-right">
+                <h3 class="text-right">Únete a una actividad</h3>
                 <p>Conoce actividades que favoreceran a tu salud en tiempos dificles</p>
             </section>
         </div>
     </div>
-   
+
+    <div class="container my-3" id="institucionesMain">
+        <div class="row text-center d-flex">
+            <div class="col-md-3 d-flex my-3">
+                <img class="mx-auto my-auto lazy instituciones" src="/img/conacyt.png" alt="CONACYT">
+            </div>
+            <div class="col-md-3 d-flex my-3">
+                <img class="mx-auto my-auto lazy instituciones" src="/img/gobierno colima.png"
+                    alt="Gobierno del estado de Colima">
+            </div>
+            <div class="col-md-3 d-flex my-3">
+                <img class="mx-auto my-auto lazy instituciones" src="/img/salud federal.png"
+                    alt="Secretaría de Salud del gobierno federal">
+            </div>
+            <div class="col-md-3 d-flex my-3">
+                <img class="mx-auto my-auto lazy instituciones" src="/img/tecnm.png"
+                    alt="Tecnológico Nacional de México">
+            </div>
+            <div class="col-md-3 d-flex my-3">
+                <img class="mx-auto my-auto lazy instituciones" src="/img/cecytcol.png" alt="CECYTCOL">
+            </div>
+            <div class="col-md-3 d-flex my-3">
+                <img class="mx-auto my-auto lazy instituciones" src="/img/bisite.png" alt="BISITE">
+            </div>
+            <div class="col-md-3 d-flex my-3">
+                <img class="mx-auto my-auto lazy instituciones" src="/img/salud colima.png"
+                    alt="Secretaría de Salud del gobierno del estado de Colima">
+            </div>
+            <div class="col-md-3 d-flex my-3">
+                <img class="mx-auto my-auto lazy instituciones" src="/img/ateneo.png" alt="Grupo ATENEO">
+            </div>
+            <div class="col-md-3 mx-auto">
+                <img class="mx-auto my-auto lazy instituciones" src="/img/tec Colima.png"
+                    alt="Tecnológico Nacional de México - Campus Colima">
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-

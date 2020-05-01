@@ -178,6 +178,16 @@ nav.nav a:first-child {
     border-right: 1px solid #E6E6E6;
 }
 
+nav.nav a.navegadores {
+    color: #B8336A;
+    font-weight: 700;
+    border-right: 1px;
+}
+
+nav.nav a.ultimo-nav {
+    border-right: 1px solid #E6E6E6;
+}
+
 /** hero **/
 .hero {
     height: 38rem;
@@ -323,10 +333,8 @@ main.categorias {
     }
 }
 
+.instituciones {
+    width: 200px;
+}
 
-
-
-
-
-
-
+/**CARDS**/
