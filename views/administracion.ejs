@@ -5,7 +5,7 @@
   <nav id="sidebar" class="sidebar-wrapper">
     <div class="sidebar-content">
       <div class="sidebar-brand">
-        <a href="/administracion"><%=nombrePagina %></a>
+        <a href="/administracion">Panel de perfil</a>
         <div id="close-sidebar">
           <i class="fas fa-times"></i>
         </div>
@@ -13,20 +13,25 @@
       <div class="sidebar-header">
         <div class="user-pic">
           <% if(usuario.imagen) { %>
-            <img class="img-responsive img-rounded" src="/uploads/usuarios/<%=usuario.imagen %>"
-            alt="User picture">
+          <img class="img-responsive img-rounded" src="/uploads/usuarios/<%=usuario.imagen %>" alt="User picture">
           <% }else { %>
-            <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+          <img class="img-responsive img-rounded"
+            src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
             alt="User picture">
           <% } %>
-          
+
         </div>
         <div class="user-info">
-          <span class="user-name">
-            <%=nombre %>
-            <!--<strong>Smith</strong>-->
-          </span>
-          <span class="user-role">Administrator</span>
+          <span class="user-name text-center"><%=nombre %></span>
+          <% if(usuario.rol == 0) { %>
+            <span class="user-role">Administrador</span>
+          <% }else { %>
+              <% if (usuario.rol == 1){ %>
+                <span class="user-role">Usuario</span>
+              <% }else { %>
+                <span class="user-role">Profesional</span>
+              <% } %>
+          <% } %>
           <span class="user-status">
             <i class="fa fa-circle"></i>
             <span>Online</span>
@@ -53,7 +58,7 @@
             <span>General</span>
           </li>
           <li class="sidebar-dropdown">
-            <a href="#">
+            <a>
               <i class="fas fa-user"></i>
               <span>Editar Perfil</span>
               <!--<span class="badge badge-pill badge-warning">New</span>-->
@@ -65,70 +70,59 @@
                 </li>
                 <li>
                   <a href="/cambiar-password">Cambiar Password</a>
-                </li> 
+                </li>
                 <li>
                   <% if(usuario.imagen) { %>
-                    <a href="/imagen-perfil">Añadir Imagen<span class="badge badge-pill badge-success">Si</span>
-                  <% }else { %>
+                  <a href="/imagen-perfil">Cambiar Imagen<span class="badge badge-pill badge-success">Si</span>
+                    <% }else { %>
                     <a href="/imagen-perfil">Añadir Imagen<span class="badge badge-pill badge-danger">No</span>
-                  <% } %>
-                  </a>
-                </li>                
+                      <% } %>
+                    </a>
+                </li>
               </ul>
             </div>
-          </li>
+          </li>          
           <li class="sidebar-dropdown">
-            <a href="/imagen-perfil">
-              <i class="far fa-image"></i>
-              <span>Imagen Perfil</span>
-                <% if(usuario.imagen) { %>
-                  <span class="badge badge-pill badge-success">Si</span>
-                <% } else { %>
-                  <span class="badge badge-pill badge-danger">No</span>
-                <% } %>
-            </a>
-          </li>
-          <li class="sidebar-dropdown">
-            <a href="/cv-perfil">
+            <a> <!--href="/cv-perfil"-->
               <i class="fas fa-file-pdf"></i>
-              <span>CV</span>
+              <span>Ver mi agenda</span>
               <% if(usuario.cv) { %>
-                <span class="badge badge-pill badge-success">Si</span>
+              <span class="badge badge-pill badge-success">Si</span>
               <% } else { %>
-                <span class="badge badge-pill badge-danger">No</span>
+              <span class="badge badge-pill badge-danger">No</span>
               <% } %>
             </a>
           </li>
           <li class="sidebar-dropdown">
-            <a href="#">
+            <a >
               <i class="far fa-gem"></i>
-              <span>Nueva Estrategia</span>
-                <span class="badge badge-pill badge-warning"><%=estrategias.length%></span>
+              <span>Recursos</span>
+              <span class="badge badge-pill badge-warning"><%=estrategias.length%></span>
             </a>
             <div class="sidebar-submenu">
               <ul>
                 <li>
-                  <a href="/nueva-estrategia">Nueva estrategia</a>
+                  <a href="/nueva-estrategia">Nuevo recurso</a>
                 </li>
                 <li>
                   <a href="/ver-estrategias">
                     <span class="badge badge-pill badge-warning"><%=estrategias.length%></span>
-                    Ver Estrategias
+                    Ver mis recursos
                   </a>
-                </li>                
+                </li>
               </ul>
             </div>
           </li>
           <li class="sidebar-dropdown">
             <a href="#">
               <i class="fa fa-chart-line"></i>
-              <span>Charts</span>
+              <span>Mis estadísticas</span>
             </a>
           </li>
           <li class="sidebar-dropdown">
             <a href="#">
               <i class="fa fa-globe"></i>
-              <span>Maps</span>
+              <span>Mapas</span>
             </a>
           </li>
         </ul>
@@ -162,47 +156,51 @@
 
       <ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Estrategias</a>
+          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+            aria-controls="pills-home" aria-selected="true">Estrategias</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Otro</a>
+          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+            aria-controls="pills-profile" aria-selected="false">Otro</a>
         </li>
       </ul>
- 
+
       <hr>
       <div class="container">
         <div class="row">
           <div class="col-12 my-2">
             <div class="tab-content" id="pills-tabContent">
               <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                  <div class="listado-estrategias">
-                    <% if(estrategias.length) { %>
-                        <h2>Estrategias</h2>
-                        <ul class="list-group">
-                            <% estrategias.forEach(estrategia => { %>
-                                <li class="list-group-item">
-                                    <div class="">
-                                        <h3><%=estrategia.nombre %></h3>
-                                    </div>
-                                    <div class="float-right">
-                                        <a href="" data-id="<%=estrategia.id %>" data-toggle="modal" data-target=".bd-example-modal-lg" class="btn btn-primary">Editar</a>
-                                        <a href="/imagen-estrategia/<%=estrategia.id%>" class="btn btn-warning">Imagen</a>
-                                        <a href="" data-id="<%=estrategia.id%>" class="eliminar-estrategia-completa btn btn-danger">Eliminar</a>
-                                    </div>
-                                   
-                                </li>
-                            <% }) %>
-                        </ul>
-                    <% }else { %>
-                        <h3 class="center">No hay ningun estrategia</h3>
-                    <% } %>
+                <div class="listado-estrategias">
+                  <% if(estrategias.length) { %>
+                  <h2>Estrategias</h2>
+                  <ul class="list-group">
+                    <% estrategias.forEach(estrategia => { %>
+                    <li class="list-group-item">
+                      <div class="">
+                        <h3><%=estrategia.nombre %></h3>
+                      </div>
+                      <div class="float-right">
+                        <a href="" data-id="<%=estrategia.id %>" data-toggle="modal" data-target=".bd-example-modal-lg"
+                          class="btn btn-primary">Editar</a>
+                        <a href="/imagen-estrategia/<%=estrategia.id%>" class="btn btn-warning">Imagen</a>
+                        <a href="" data-id="<%=estrategia.id%>"
+                          class="eliminar-estrategia-completa btn btn-danger">Eliminar</a>
+                      </div>
+
+                    </li>
+                    <% }) %>
+                  </ul>
+                  <% }else { %>
+                  <h3 class="center">No hay ningun estrategia</h3>
+                  <% } %>
                 </div>
               </div>
               <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                 Otros
               </div>
             </div>
-        </div>
+          </div>
         </div>
       </div>
     </div>
@@ -212,7 +210,4 @@
 </div>
 <!-- page-wrapper -->
 
-    <%- include('../views/editar-estrategia') %>
-
-
-
+<%- include('../views/editar-estrategia') %>

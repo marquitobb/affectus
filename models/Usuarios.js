@@ -41,6 +41,10 @@ const Usuarios = db.define('usuarios', {
     },
     cv: {
         type: Sequelize.STRING(60)
+    },
+    rol: {
+        type: Sequelize.STRING(1),
+        allowNull: false
     }
 }, {
     hooks: {

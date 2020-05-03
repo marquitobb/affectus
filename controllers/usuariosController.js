@@ -159,6 +159,7 @@ exports.crearCuenta = async (req, res, next) => {
 
         //Bandera la cuenta como inactivo
         usuario.activo = false;
+        usuario.rol = 0;
 
         await Usuarios.create(usuario);
 
