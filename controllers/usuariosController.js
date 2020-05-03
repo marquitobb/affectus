@@ -255,16 +255,28 @@ exports.EditarPerfil = async (req, res, next) => {
     req.sanitizeBody('nombre');
     req.sanitizeBody('descripcion');
     req.sanitizeBody('email');
+    req.sanitizeBody('genero');
+    req.sanitizeBody('fechanacimiento');
+    req.sanitizeBody('direccion');
+    req.sanitizeBody('ocupacion');
+    req.sanitizeBody('discapacidad');
+
 
     const usuario = await Usuarios.findByPk(req.user.id);
-
+    console.log(req.body);
     //leer valores
-    const { nombre, descripcion, email } = req.body;
+    const { nombre, descripcion, email, genero, fechanacimiento, ocupacion, direccion, discapacidad, telefono } = req.body;
 
     //Asignar valores
     usuario.nombre = nombre;
     usuario.descripcion = descripcion;
     usuario.email = email;
+    usuario.genero = genero;
+    usuario.fechanacimiento = fechanacimiento;
+    usuario.ocupacion = ocupacion;
+    usuario.direccion = direccion;
+    usuario.discapacidad = discapacidad;
+    usuario.telefono = telefono;
 
     //guardar en db
     await usuario.save();

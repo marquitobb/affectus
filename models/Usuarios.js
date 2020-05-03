@@ -39,6 +39,24 @@ const Usuarios = db.define('usuarios', {
     descripcion: {
         type: Sequelize.TEXT
     },
+    genero: {
+        type: Sequelize.TEXT
+    },
+    fechanacimiento: {
+        type: Sequelize.DATEONLY
+    },
+    ocupacion: {
+        type: Sequelize.TEXT
+    },
+    direccion: {
+        type: Sequelize.TEXT
+    },
+    discapacidad: {
+        type: Sequelize.TEXT
+    },
+    discapacidad: {
+        type: Sequelize.TEXT 
+    },
     cv: {
         type: Sequelize.STRING(60)
     },

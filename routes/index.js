@@ -7,6 +7,7 @@ const authController = require('../controllers/authController');
 const adminController = require('../controllers/adminController');
 const estrategiasController = require('../controllers/estrategiasController');
 const socketsController = require('../controllers/socketsController');
+const sentimientosController = require('../controllers/sentimientosController');
 
 module.exports = function() {
     router.get('/', homeController.home);
@@ -77,6 +78,9 @@ module.exports = function() {
 
     //Eliminar estrategia
     router.delete('/eliminar-estrategia/:idEstrategia', authController.usuarioAutenticado, estrategiasController.eliminarEstrategia);
+
+    //Agregar sentimiento
+    router.get('/agregar-sentimiento', authController.usuarioAutenticado, sentimientosController.formAgregarSentimiento)
 
     return router;
 };
