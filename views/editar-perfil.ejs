@@ -1,27 +1,4 @@
 <h2><%=nombrePagina %></h2>
-<!-- <div class="container mt-5">
-    <form method="POST" action="/editar-perfil">
-        <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre" value="<%=usuario.nombre%>" >
-        </div>
-        <div class="form-group">
-            <label for="descripcion">Mi descripción</label>
-            <textarea class="form-control" name="descripcion" placeholder="ingrese descripcion">
-                <%=usuario.descripcion%>
-            </textarea>
-        </div>
-        <div class="form-group">
-            <label for="nombre">Email</label>
-            <input type="text" class="form-control" id="email" placeholder="email" name="email" value="<%=usuario.email%>">
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary float-right" value="Guardar Cambios"></input>
-        </div>
-  </form>
-</div> -->
-
-
 <!-- sidebar-wrapper  -->
 <main class="page-content">
     <div class="container">
@@ -53,9 +30,7 @@
                         </div>
                         <div class="form-group">
                             <label for="descripcion">Mi descripción</label>
-                            <textarea class="form-control" name="descripcion" placeholder="ingrese descripcion">
-                                <%=usuario.descripcion%>
-                            </textarea>
+                            <textarea class="form-control" name="descripcion" placeholder="ingrese descripcion"><%=usuario.descripcion%></textarea>
                         </div>
                         <div class="form-group">
                             <label for="nombre">Email</label>
@@ -73,10 +48,30 @@
                             <div class="form-group col-md-4">
                               <label for="genero">Genero</label>
                               <select id="genero" class="form-control" name="genero">
-                                <option selected>--Selecciona una opcion--</option>
+                                <% if(usuario.genero == '') {%>
+                                <option value="">--Selecciona una opcion--</option>
                                 <option value="1">Masculino</option>
                                 <option value="2">Femenino</option>
                                 <option value="3">No quiero especificarlo</option>
+                                <% } else {
+                                  if (usuario.genero == 1){
+                                  %> <option value="">--Selecciona una opcion--</option>
+                                    <option value="1" selected>Masculino</option>
+                                      <option value="2">Femenino</option>
+                                      <option value="3">No quiero especificarlo</option><%
+                                  } else {
+                                    if (usuario.genero == 2){
+                                    %><option value="1">Masculino</option>
+                                      <option value="2" selected>Femenino</option>
+                                      <option value="3">No quiero especificarlo</option><%
+                                    } else {
+                                    %><option value="1">Masculino</option>
+                                      <option value="2">Femenino</option>
+                                      <option value="3" selected>No quiero especificarlo</option><%
+                                    }
+                                  }
+                                }
+                                %>
                               </select>
                             </div>
                             <div class="form-group col-md-4">
@@ -95,10 +90,20 @@
                             </div>
                             <div class="form-group col-md-3">
                               <label for="discapacidad">Discapacidad</label>
-                              <select id="discapacidad" class="form-control" name="discapacidad">
-                                <option selected>--Selecciona una opción--</option>
+                              <select id="discapacidad" class="form-control" name="discapacidad" >
+                                <% if(usuario.discapacidad == '') {%>
+                                <option value="">--Selecciona una opción--</option>
                                 <option value="1">Si</option>
                                 <option value="2">No</option>
+                                <% } else {
+                                  if (usuario.discapacidad == '1') {
+                                    %><option value="1" selected>Si</option>
+                                    <option value="2">No</option><%
+                                  } else {
+                                    %><option value="1">Si</option>
+                                    <option value="2" selected>No</option><%
+                                  }
+                                } %>
                               </select>
                             </div>
 
@@ -116,7 +121,7 @@
         </div>
       </div>
     </div>
-
   </main>
-
-
+  <div class="page-wrapper chiller-theme toggled">
+    <%- include('partials/barra-lateral.ejs', {nombre:usuario.nombre ,estrategias: estrategias}) %>
+</div>

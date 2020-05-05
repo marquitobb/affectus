@@ -21,7 +21,6 @@ const db = require('./config/db');
     require('./models/Sentimientos');
     require('./models/datosSalud');
 
-
     db.sync().then(() => console.log('DB CONECTADA')).catch((error) => console.log(error));
 
 //variables de entorno

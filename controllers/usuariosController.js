@@ -1,5 +1,8 @@
 const Usuarios = require('../models/Usuarios');
 const Saluds = require('../models/datosSalud');
+const Estrategias = require('../models/Estrategias');
+const Categorias = require('../models/Categorias');
+const Sentimientos = require('../models/Sentimientos');
 const randomstring = require('randomstring');
 require('dotenv').config({ path: 'variables.env' });
 const mailer = require('../misc/mailer');
@@ -244,10 +247,27 @@ exports.SubirCV = async (req, res, next) => {
 
 //form para editar el perfil
 exports.formEditarPerfil = async (req, res, next) => {
+    const consultas = [];
+    consultas.push(Estrategias.findAll({
+        include: [
+            {
+                model: Usuarios,
+                attributes: ['email', 'imagen', 'nombre'],
+                required: true
+            },
+            {
+                model: Categorias,
+                attributes: ['nombre'],
+                required: true
+            }
+        ]
+    }));
+    const [estrategias] = await Promise.all(consultas);
     const usuario = await Usuarios.findByPk(req.user.id);
     res.render('editar-perfil', {
         nombrePagina: 'Editar Perfil',
-        usuario
+        usuario,
+        estrategias
     });
 };
 
@@ -474,8 +494,8 @@ exports.saveDatos = async (req, res, next) => {
     req.sanitizeBody('presion');
 
     const datos = req.body;
-    datos.usuarioid = req.user.id;
-
+    datos.usuarioId = req.user.id;
+    
     const usuario = await Usuarios.findByPk(req.user.id);
 
     usuario.familiarEnfermedad = req.body.problemasfamiliares;
@@ -489,7 +509,10 @@ exports.saveDatos = async (req, res, next) => {
         if (req.body.peso != '' || req.body.estatura != '' || req.body.azucar != '' || req.body.presion != '' || req.body.temperatura != '') {
             await Saluds.create(datos);
             req.flash('exito', 'Se insertaron los campos correctamente');
-            res.redirect('/administracion');
+        }
+
+        if(req.body.sentimiento != ''){
+            await Sentimientos.create(datos);
         }
 
         if (req.body.tipovivienda == '--Selecciona una opcion--'){

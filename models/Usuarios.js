@@ -54,6 +54,9 @@ const Usuarios = db.define('usuarios', {
     discapacidad: {
         type: Sequelize.TEXT
     },
+    telefono: {
+        type: Sequelize.STRING(10)
+    },
     cv: {
         type: Sequelize.STRING(60)
     },

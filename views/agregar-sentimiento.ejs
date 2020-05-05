@@ -1,183 +1,244 @@
  <!-- sidebar-wrapper  -->
  <main class="page-content">
-    <div class="container">
-      <!-- <h1><%=nombrePagina %></h1> -->
-      <hr>
+     <div class="container">
+         <!-- <h1><%=nombrePagina %></h1> -->
+         <hr>
 
-      <ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
-            aria-controls="pills-home" aria-selected="true">Datos Personales</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
-            aria-controls="pills-profile" aria-selected="false">Datos de Familiares Cercanos</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="pills-feel-tab" data-toggle="pill" href="#pills-feel" role="tab"
-              aria-controls="pills-feel" aria-selected="false">¿Cómo te sientes hoy?</a>
-          </li>
-      </ul>
+         <ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
+             <li class="nav-item">
+                 <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                     aria-controls="pills-home" aria-selected="true">Datos Personales</a>
+             </li>
+             <li class="nav-item">
+                 <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+                     aria-controls="pills-profile" aria-selected="false">Datos de Familiares Cercanos</a>
+             </li>
+             <li class="nav-item">
+                 <a class="nav-link" id="pills-feel-tab" data-toggle="pill" href="#pills-feel" role="tab"
+                     aria-controls="pills-feel" aria-selected="false">¿Cómo te sientes hoy?</a>
+             </li>
+         </ul>
 
-      <hr>
-      <div class="container">
-        <div class="row">
-          <div class="col-12 my-2">
-            <form action="/datos-personales" method="POST">
-                <div class="tab-content" id="pills-tabContent">
-                    <!-- DATOS SALUD -->
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                              <label for="peso">Peso</label>
-                              <input type="text" class="form-control" name="peso" id="peso" placeholder="Ej. 55.5">
-                            </div>
-                            <div class="form-group col-md-6">
-                              <label for="estatura">Estatura</label>
-                              <input type="text" class="form-control" name="estatura" id="estatura" placeholder="Ej. 1.70">
-                            </div>
-                        </div>
-                        <div class="form row">
-                            <div class="form-group col-md-6">
-                                <label for="nivelesazucar">Niveles de Azucar</label>
-                                <input type="text" class="form-control" id="nivelesazucar" name="azucar" placeholder="Ej. 190">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="presion">Presión Arterial</label>
-                                <input type="text" class="form-control" id="presion" name="presion" placeholder="Ej. 110">
-                            </div>
-                        </div>                        
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                              <label for="temperatura">Temperatura</label>
-                              <input type="text" class="form-control" id="temperatura" name="temperatura" placeholder="Ej. 36.5">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- FIN DATOS SALUD -->
+         <hr>
+         <div class="container">
+             <div class="row">
+                 <div class="col-12 my-2">
+                     <form action="/datos-personales" method="POST">
+                         <div class="tab-content" id="pills-tabContent">
+                             <!-- DATOS SALUD -->
+                             <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                                 aria-labelledby="pills-home-tab">
+                                 <div class="form-row">
+                                     <div class="form-group col-md-6">
+                                         <label for="peso">Peso</label>
+                                         <input type="text" class="form-control" name="peso" id="peso"
+                                             placeholder="Ej. 55.5">
+                                     </div>
+                                     <div class="form-group col-md-6">
+                                         <label for="estatura">Estatura</label>
+                                         <input type="text" class="form-control" name="estatura" id="estatura"
+                                             placeholder="Ej. 1.70">
+                                     </div>
+                                 </div>
+                                 <div class="form row">
+                                     <div class="form-group col-md-6">
+                                         <label for="nivelesazucar">Niveles de Azucar</label>
+                                         <input type="text" class="form-control" id="nivelesazucar" name="azucar"
+                                             placeholder="Ej. 190">
+                                     </div>
+                                     <div class="form-group col-md-6">
+                                         <label for="presion">Presión Arterial</label>
+                                         <input type="text" class="form-control" id="presion" name="presion"
+                                             placeholder="Ej. 110">
+                                     </div>
+                                 </div>
+                                 <div class="form-row">
+                                     <div class="form-group col-md-6">
+                                         <label for="temperatura">Temperatura</label>
+                                         <input type="text" class="form-control" id="temperatura" name="temperatura"
+                                             placeholder="Ej. 36.5">
+                                     </div>
+                                 </div>
+                             </div>
+                             <!-- FIN DATOS SALUD -->
 
-                    <!-- INICIO DATOS FAMILIARES -->
-                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="familiaressalud">¿Alguno de tus familiares tiene problemas de salud?</label>
-                                <textarea class="form-control" id="familiaressalud" name="problemasfamiliares" rows="3"><%=usuario.familiarEnfermedad %></textarea>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="saludpersonal">¿Presentas alguna enfermedad por la que tomes medicamento diario?</label>
-                                <textarea class="form-control" id="saludpersonal" name="saludpersonal" rows="3"><%=usuario.enfermedadPersonal %></textarea>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                              <label for="tipoviviendo">Tipo Vivienda</label>
-                              <select id="tipoviviendo" class="form-control" name="tipovivienda">
-                                <option selected>--Selecciona una opcion--</option>
-                                <option>Casa</option>
-                                <option>Departamento</option>
-                              </select>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="habitantes">¿Con quién vives? </label>
-                                <select id="habitantes" class="form-control" name="habitantes">
-                                  <option selected>--Selecciona una opcion--</option>
-                                  <option>Solo</option>
-                                  <option>Familiares</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="mascotas">¿Tienes Mascotas? </label>
-                                <select id="mascotas" class="form-control" name="mascotas">
-                                  <option selected>--Selecciona una opcion--</option>
-                                  <option>Si</option>
-                                  <option>No</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="alimentacion">¿Cómo consideras tu alimentación? </label>
-                                <select id="alimentacion" class="form-control" name="alimentacion">
-                                  <option selected>--Selecciona una opcion--</option>
-                                  <option>Buena</option>
-                                  <option>Mala</option>
-                                  <option>Regular</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- FIN DATOS FAMILIARES -->
+                             <!-- INICIO DATOS FAMILIARES -->
+                             <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                                 aria-labelledby="pills-profile-tab">
+                                 <div class="form-row">
+                                     <div class="form-group col-md-6">
+                                         <label for="familiaressalud">¿Alguno de tus familiares tiene problemas de
+                                             salud?</label>
+                                         <textarea class="form-control" id="familiaressalud" name="problemasfamiliares"
+                                             rows="3"><%=usuario.familiarEnfermedad %></textarea>
+                                     </div>
+                                     <div class="form-group col-md-6">
+                                         <label for="saludpersonal">¿Presentas alguna enfermedad por la que tomes
+                                             medicamento diario?</label>
+                                         <textarea class="form-control" id="saludpersonal" name="saludpersonal"
+                                             rows="3"><%=usuario.enfermedadPersonal %></textarea>
+                                     </div>
+                                 </div>
+                                 <div class="form-row">
+                                     <div class="form-group col-md-3">
+                                         <label for="tipoviviendo">Tipo Vivienda</label>
+                                         <select id="tipoviviendo" class="form-control" name="tipovivienda">
+                                             <% if (usuario.vivienda == '') {
+                                                 %><option selected>--Selecciona una opcion--</option>
+                                             <option value="1">Casa</option>
+                                             <option value="2">Departamento</option><%
+                                             } else {
+                                                 if (usuario.vivienda == '1') {
+                                                    %><option value="1" selected>Casa</option>
+                                             <option value="2">Departamento</option><%
+                                                 } else {
+                                                    %><option value="1">Casa</option>
+                                             <option value="2" selected>Departamento</option><%
+                                                 }
+                                             } %>
+                                         </select>
+                                     </div>
+                                     <div class="form-group col-md-3">
+                                         <label for="habitantes">¿Con quién vives? </label>
+                                         <select id="habitantes" class="form-control" name="habitantes">
+                                             <% if(usuario.viviendo == '') {
+                                                %><option selected>--Selecciona una opcion--</option>
+                                             <option value="1">Solo</option>
+                                             <option value="2">Familiares</option><%
+                                            } else {
+                                                if (usuario.viviendo == '1') {
+                                                    %><option value="1" selected>Solo</option>
+                                             <option value="2">Familiares</option><%
+                                                } else {
+                                                    %><option value="1">Solo</option>
+                                             <option value="2" selected>Familiares</option><%
+                                                }
+                                            } %>
+                                         </select>
+                                     </div>
+                                     <div class="form-group col-md-3">
+                                         <label for="mascotas">¿Tienes Mascotas? </label>
+                                         <select id="mascotas" class="form-control" name="mascotas">
+                                             <% if (usuario.mascota == '') {
+                                        %><option selected>--Selecciona una opcion--</option>
+                                             <option value="1">Si</option>
+                                             <option value="2">No</option><%
+                                    } else {
+                                        if (usuario.mascota == '1') {
+                                            %><option value="1" selected>Si</option>
+                                             <option value="2">No</option><%
+                                        } else {
+                                            %><option value="1">Si</option>
+                                             <option value="2" selected>No</option><%
+                                        }
+                                    } %>
 
-                    <!-- INICIO DATOS COMO TE SIENTES -->
+                                         </select>
+                                     </div>
+                                     <div class="form-group col-md-3">
+                                         <label for="alimentacion">¿Cómo consideras tu alimentación? </label>
+                                         <select id="alimentacion" class="form-control" name="alimentacion">
+                                             <% if (usuario.alimentacion == '') {
+                                                %><option selected>--Selecciona una opcion--</option>
+                                             <option value="1">Mala</option>
+                                             <option value="2">Regular</option>
+                                             <option value="3">Buena</option><%
+                                            } else {
+                                                if (usuario.alimentacion == '1') {
+                                                    %><option value="1" selected>Mala</option>
+                                             <option value="2">Regular</option>
+                                             <option value="3">Buena</option><%
+                                                } else {
+                                                    if (usuario.alimentacion == '2') {
+                                                        %><option value="1">Mala</option>
+                                             <option value="2" selected>Regular</option>
+                                             <option value="3">Buena</option><%
+                                                    } else {
+                                                        %><option value="1">Mala</option>
+                                             <option value="2">Regular</option>
+                                             <option value="3" selected>Buena</option><%
+                                                    }
+                                                }
+                                            } %>
+                                         </select>
+                                     </div>
+                                 </div>
+                             </div>
+                             <!-- FIN DATOS FAMILIARES -->
 
-                    <div class="tab-pane fade" id="pills-feel" role="tabpanel" aria-labelledby="pills-feel-tab">
-                        <div class="contenedor">
-                            <!-- <form action=""> -->
-                                <div class="selectbox">
-                                    <div class="select" id="select">
-                                        <div class="contenido-select">
-                                            <h1 class="titulo">¿Cómo te sientes hoy?</h1>
-                                            <p class="descripcion">Dinos tu estado de animo.</p>
-                                        </div>
-                                        <i class="fas fa-angle-down"></i>
-                                    </div>
-                        
-                                    <div class="opciones" id="opciones">
-                                        <a href="sentimiento/feliz" class="opcion sin-liga" >
-                                            <div class="contenido-opcion">
-                                                <img src="/img/feliz.png" alt="">
-                                                <div class="textos">
-                                                    <h1 class="titulo">Feliz</h1>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="opcion sin-liga">
-                                            <div class="contenido-opcion">
-                                                <img src="/img/triste.png" alt="">
-                                                <div class="textos">
-                                                    <h1 class="titulo">Triste</h1>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="opcion sin-liga">
-                                            <div class="contenido-opcion">
-                                                <img src="/img/enojada.png" alt="">
-                                                <div class="textos">
-                                                    <h1 class="titulo">Enojado/a</h1>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="opcion sin-liga">
-                                            <div class="contenido-opcion">
-                                                <img src="/img/preocupada.png" alt="">
-                                                <div class="textos">
-                                                    <h1 class="titulo">Preocupado/a</h1>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="opcion sin-liga">
-                                            <div class="contenido-opcion">
-                                                <img src="/img/sorprendida.png" alt="">
-                                                <div class="textos">
-                                                    <h1 class="titulo">Sorprendido/a</h1>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                        
-                                <input type="hidden" name="pais" id="inputSelect" value="">                
-                            <!-- </form> -->
-                        </div>
-                    </div>
-                    <!-- FIN DATOS COMO TE SIENTES -->
-                </div>
+                             <!-- INICIO DATOS COMO TE SIENTES -->
 
-                <input type="submit" value="Guardar Información" class="btn btn-primary float-right">
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+                             <div class="tab-pane fade" id="pills-feel" role="tabpanel"
+                                 aria-labelledby="pills-feel-tab">
+                                 <div class="contenedor">
+                                     <!-- <form action=""> -->
+                                     <div class="selectbox">
+                                         <div class="select" id="select">
+                                             <div class="contenido-select">
+                                                 <h1 class="titulo">¿Cómo te sientes hoy?</h1>
+                                                 <p class="descripcion">Dinos tu estado de animo.</p>
+                                             </div>
+                                             <i class="fas fa-angle-down"></i>
+                                         </div>
 
-  </main>
+                                         <div class="opciones" id="opciones">
+                                             <a href="sentimiento/feliz" class="opcion sin-liga">
+                                                 <div class="contenido-opcion">
+                                                     <img src="/img/feliz.png" alt="">
+                                                     <div class="textos">
+                                                         <h1 class="titulo">Feliz</h1>
+                                                     </div>
+                                                 </div>
+                                             </a>
+                                             <a href="#" class="opcion sin-liga">
+                                                 <div class="contenido-opcion">
+                                                     <img src="/img/triste.png" alt="">
+                                                     <div class="textos">
+                                                         <h1 class="titulo">Triste</h1>
+                                                     </div>
+                                                 </div>
+                                             </a>
+                                             <a href="#" class="opcion sin-liga">
+                                                 <div class="contenido-opcion">
+                                                     <img src="/img/enojada.png" alt="">
+                                                     <div class="textos">
+                                                         <h1 class="titulo">Enojado/a</h1>
+                                                     </div>
+                                                 </div>
+                                             </a>
+                                             <a href="#" class="opcion sin-liga">
+                                                 <div class="contenido-opcion">
+                                                     <img src="/img/preocupada.png" alt="">
+                                                     <div class="textos">
+                                                         <h1 class="titulo">Preocupado/a</h1>
+                                                     </div>
+                                                 </div>
+                                             </a>
+                                             <a href="#" class="opcion sin-liga">
+                                                 <div class="contenido-opcion">
+                                                     <img src="/img/sorprendida.png" alt="">
+                                                     <div class="textos">
+                                                         <h1 class="titulo">Sorprendido/a</h1>
+                                                     </div>
+                                                 </div>
+                                             </a>
+                                         </div>
+                                     </div>
 
+                                     <input type="hidden" name="sentimiento" id="inputSelect" value="">
+                                     <!-- </form> -->
+                                 </div>
+                             </div>
+                             <!-- FIN DATOS COMO TE SIENTES -->
+                         </div>
 
+                         <input type="submit" value="Guardar Información" class="btn btn-primary float-right">
+                     </form>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </main>
+ <div class="page-wrapper chiller-theme toggled">
+    <%- include('partials/barra-lateral.ejs', {nombre:usuario.nombre ,estrategias: estrategias}) %>
+</div>

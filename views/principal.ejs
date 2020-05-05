@@ -2,11 +2,16 @@
     <h1><%=nombre %>, <%=nombrePagina %></h1>
     <hr>
     <div id="sentimientosPrincipal">
-        <h4 class="text-center">¿Cómo te sientes hoy?</h4>
+        <div class="d-flex">
+            <h4 class="mx-auto">¿Cómo te sientes hoy?</h4>
+            <div id="cerrarSentimientosPrincipal">
+                <button class="btn btn-light"><i class="fas fa-times"></i></button>                
+            </div>
+        </div>
         <div class="row mx-auto">
             <div class="col-md-1">Aún no sirve</div>
             <div class="col-md-2">
-                <a href="sentimiento/feliz">
+                <a href="/sentimiento/feliz">
                     <div class="d-flex">
                         <img width="60" class="mx-auto" src="/img/feliz.png" alt="Feliz">
                     </div>
