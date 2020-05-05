@@ -2,16 +2,16 @@
 
   function ejecutarFunciones(){
     const socket = io();
-    const $messageForm = $('#chat-form-single')
-    const $msgsingle = $('#msg-single')
+    const $messageForm = $('#chat-form-single');
+    const $msgsingle = $('#msg-single');
     const $text = $('.text');
-    const $usuarioRecibe = $('#name-recibe')
+    const $usuarioRecibe = $('#name-recibe');
     const $usuarioEnvia = $('#name-envia');
 
     const usuarios = {
         usuarioRecibe: $usuarioRecibe.val(),
         usuarioEnvia : $usuarioEnvia.val(),
-    }
+    };
 
     //console.log($usuarioRecibe.val());
     //console.log($usuarioEnvia.val());
@@ -26,16 +26,16 @@
         e.preventDefault();
         //console.log('enviando datos')
        socket.emit('send-message', `/w ${$usuarioRecibe.val()} ${$msgsingle.val()}`, data => {
-            console.log("ERRORES DE CB", data)
+            console.log("ERRORES DE CB", data);
             
        });
-       $msgsingle.val('')
-    })
+       $msgsingle.val('');
+    });
 
     const datosRoom = {
         nick: $usuarioEnvia.val(),
         recibe: $usuarioRecibe.val()
-    }
+    };
 
     console.log(datosRoom);
     socket.emit('show mess', datosRoom); 
@@ -52,7 +52,7 @@
             </p>
         `;
         document.querySelector('.chat-messages1').appendChild(div);
-    })
+    });
 
     socket.on('whisper', function(data) {
         const div = document.createElement('div');
@@ -64,7 +64,7 @@
             </p>
         `;
         document.querySelector('.chat-messages1').appendChild(div);
-    })
+    });
 
     socket.on('load old msgs', (msgs, msgs1) => {
         for(let i = msgs.length -1; i >=0 ; i--) {
@@ -86,9 +86,4 @@
         `;
         document.querySelector('.chat-messages1').appendChild(div);
       }
-
   }
-
-    
-
-  

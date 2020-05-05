@@ -8,12 +8,17 @@ exports.home = async (req, res) => {
         include: [
             {
                 model: Usuarios,
-                attributes: ['email', 'imagen', 'nombre']
+                attributes: ['email', 'imagen', 'nombre'],
+                required: true
+            },
+            {
+                model: Categorias,
+                attributes: ['nombre'],
+                required: true
             }
         ]
     });
     const categorias = await Categorias.findAll();
-    //console.log("1111111", estrategias.usuarios);
     res.render('home',{
         nombrePagina: 'Home',
         estrategias,

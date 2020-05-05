@@ -8,9 +8,10 @@ const adminController = require('../controllers/adminController');
 const estrategiasController = require('../controllers/estrategiasController');
 const socketsController = require('../controllers/socketsController');
 const sentimientosController = require('../controllers/sentimientosController');
+const principalController = require('../controllers/principalController');
 
 module.exports = function() {
-    router.get('/', homeController.home);
+    router.get('/', authController.usuarioAutenticado, homeController.home);
 
     //Abre el form de crear cuenta
     router.get('/crear-cuenta', usuariosController.formCrearCuenta);
@@ -60,6 +61,8 @@ module.exports = function() {
     router.get('/imagen-perfil', authController.usuarioAutenticado, usuariosController.formAgregarImagenPerfil);
     router.post('/imagen-perfil', authController.usuarioAutenticado, usuariosController.subirImagen, usuariosController.AgregarImagenPerfil);
 
+    //Página principal de visualización de usuario
+    router.get('/principal', authController.usuarioAutenticado, principalController.panelPrincipal);
 
     //Nueva Estrategia Estrategias
     router.get('/nueva-estrategia', authController.usuarioAutenticado, estrategiasController.formNuevaEstrategia);
@@ -80,7 +83,11 @@ module.exports = function() {
     router.delete('/eliminar-estrategia/:idEstrategia', authController.usuarioAutenticado, estrategiasController.eliminarEstrategia);
 
     //Agregar sentimiento
-    router.get('/agregar-sentimiento', authController.usuarioAutenticado, sentimientosController.formAgregarSentimiento)
+    router.get('/agregar-sentimiento', authController.usuarioAutenticado, sentimientosController.formAgregarSentimiento);
+    //Guardar sentimientos
+    router.get('/sentimiento/:sentimiento', authController.usuarioAutenticado, sentimientosController.guardadoSentimientos);
 
+    //Datos Personales
+    router.post('/datos-personales', authController.usuarioAutenticado, usuariosController.saveDatos)
     return router;
 };

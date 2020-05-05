@@ -23,7 +23,7 @@
       <div class="container">
         <div class="row">
           <div class="col-12 my-2">
-            <form action="" method="POST">
+            <form action="/datos-personales" method="POST">
                 <div class="tab-content" id="pills-tabContent">
                     <!-- DATOS SALUD -->
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -61,11 +61,11 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="familiaressalud">¿Alguno de tus familiares tiene problemas de salud?</label>
-                                <textarea class="form-control" id="familiaressalud" name="problemasfamiliares" rows="3"></textarea>
+                                <textarea class="form-control" id="familiaressalud" name="problemasfamiliares" rows="3"><%=usuario.familiarEnfermedad %></textarea>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="saludpersonal">¿Presentas alguna enfermedad por la que tomes medicamento diario?</label>
-                                <textarea class="form-control" id="saludpersonal" name="saludpersonal" rows="3"></textarea>
+                                <textarea class="form-control" id="saludpersonal" name="saludpersonal" rows="3"><%=usuario.enfermedadPersonal %></textarea>
                             </div>
                         </div>
                         <div class="form-row">
@@ -86,16 +86,16 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="habitantes">¿Tienes Mascotas? </label>
-                                <select id="habitantes" class="form-control" name="habitantes">
+                                <label for="mascotas">¿Tienes Mascotas? </label>
+                                <select id="mascotas" class="form-control" name="mascotas">
                                   <option selected>--Selecciona una opcion--</option>
                                   <option>Si</option>
                                   <option>No</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="habitantes">¿Cómo consideras tu alimentación? </label>
-                                <select id="habitantes" class="form-control" name="habitantes">
+                                <label for="alimentacion">¿Cómo consideras tu alimentación? </label>
+                                <select id="alimentacion" class="form-control" name="alimentacion">
                                   <option selected>--Selecciona una opcion--</option>
                                   <option>Buena</option>
                                   <option>Mala</option>
@@ -114,14 +114,14 @@
                                 <div class="selectbox">
                                     <div class="select" id="select">
                                         <div class="contenido-select">
-                                            <h1 class="titulo"><%=nombrePagina %></h1>
+                                            <h1 class="titulo">¿Cómo te sientes hoy?</h1>
                                             <p class="descripcion">Dinos tu estado de animo.</p>
                                         </div>
                                         <i class="fas fa-angle-down"></i>
                                     </div>
                         
                                     <div class="opciones" id="opciones">
-                                        <a href="#" class="opcion sin-liga" >
+                                        <a href="sentimiento/feliz" class="opcion sin-liga" >
                                             <div class="contenido-opcion">
                                                 <img src="/img/feliz.png" alt="">
                                                 <div class="textos">

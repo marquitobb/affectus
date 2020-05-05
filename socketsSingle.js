@@ -3,32 +3,31 @@ const Chats = require('./models/Chats');
 
 module.exports = (single) => {
 
-    let users = {}
+    let users = {};
     single.on('connection', async socket => {
         console.log('new connected');
 
         socket.on('joinRoom', async (usuarios) => {
           try {
-            const {usuarioRecibe, usuarioEnvia} = usuarios
+            const {usuarioRecibe, usuarioEnvia} = usuarios;
             
             socket.usuarioRecibe = usuarioRecibe;
             socket.nickname = usuarioEnvia;
             users[socket.nickname] = socket;
 
           } catch (error) {
-              console.log(error)
+              console.log(error);
           }
-          
-        })
+        });
 
         socket.on('show mess', async(datosRecibe) => {
             console.log(datosRecibe);
-            let messages = await Chats.findAll({where: {nick: datosRecibe.nick, recibe: datosRecibe.recibe}})
+            let messages = await Chats.findAll({where: {nick: datosRecibe.nick, recibe: datosRecibe.recibe}});
             let messages1 = await Chats.findAll({where: {nick: datosRecibe.recibe, recibe: datosRecibe.nick}});
 
             socket.emit('load old msgs', messages, messages1);
 
-        })
+        });
         
   
 
@@ -54,14 +53,14 @@ module.exports = (single) => {
                                 msg,
                                 nick: socket.nickname,
                                 recibe: socket.usuarioRecibe
-                            }
+                            };
                             //console.log(newMsg);
                             await Chats.create(newMsg);
                         }else{
-                            cb('Error, ingrese un usuario')
+                            cb('Error, ingrese un usuario');
                         }
                     }else{
-                        cb('error ingrese mensaje')
+                        cb('error ingrese mensaje');
                     }
                 }else{
                 
@@ -72,11 +71,8 @@ module.exports = (single) => {
                     }); 
                 }
             } catch (error) {
-                console.log(error)
+                console.log(error);
             }
-
-        })
-    })
-
-}
-
+        });
+    });
+};

@@ -54,15 +54,30 @@ const Usuarios = db.define('usuarios', {
     discapacidad: {
         type: Sequelize.TEXT
     },
-    discapacidad: {
-        type: Sequelize.TEXT 
-    },
     cv: {
         type: Sequelize.STRING(60)
     },
     rol: {
         type: Sequelize.STRING(1),
         allowNull: false
+    },
+    familiarEnfermedad: {
+        type: Sequelize.TEXT
+    },
+    enfermedadPersonal: {
+        type: Sequelize.TEXT
+    },
+    vivienda: {
+        type: Sequelize.STRING(20)
+    },
+    viviendo: {
+        type: Sequelize.STRING(10)
+    },
+    mascota: {
+        type: Sequelize.STRING(4)
+    },
+    alimentacion: {
+        type: Sequelize.STRING(10)
     }
 }, {
     hooks: {

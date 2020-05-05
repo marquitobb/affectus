@@ -80,13 +80,13 @@ exports.nuevaEstrategia = async (req, res, next) => {
 
     let setArchivos = [];
     nombres.forEach(nombre => {
-        if (nombre.includes('.png') || nombre.includes('.jpg')) {
+        if (nombre.includes('.png') || nombre.includes('.jpg') || nombre.includes('.jpeg')) {
             setArchivos.push(nombre);
         }
-    })
+    });
     
     estrategia.archivos = nombres;
-    estrategia.imagen = setArchivos[0];   
+    estrategia.imagen = setArchivos[0];
 
     try {
         await Estrategias.create(estrategia);

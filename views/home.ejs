@@ -36,54 +36,10 @@
 
     <div class="contenedor mt-4" id="estrategiasSalud">
         <h2>Actividades Importantes Para tu salud</h2>
-        <div class="grid columnas-md-3 ">
+        <div class="row">
             <% estrategias.forEach(estrategia => { %>
-            <div class="card">
-                <% if(estrategia.imagen) { %>
-                <img class="lazy" src="/uploads/estrategias/<%=estrategia.imagen %>">
-                <% } else { %>
-                <img class="lazy" src="/img/leer.png">
-                <% } %>
-                <div class="card-body">
-                    <h5 class="card-title font-weight-bold"><%=estrategia.nombre %></h5>
-                    <p class="card-text text-center font-italic"><%=estrategia.descripcion %></p>
-                    <p class="card-text"><small class="text-muted"><%=categorias.nombre %></small></p>
-                    <p class="card-text text-right"><small class="text-muted"><%=estrategia.fecha_creacion %></small></p>
-                    <!--<hr />
-                    <p class="card-text text-right"><small class="">Responsable: <%=estrategia.usuario.nombre %></small></p>
-                    <p class="card-text text-right"><small class="font-italic"><%=estrategia.usuario.email %></small></p>-->
-                </div>
-                <div class="card-footer d-flex">
-                    <small class="text-muted mr-auto"><a href="/index" class="m-4">Chat Grupal</a></small>                    
-                    <small class="text-muted ,l-auto"><a href="/chatIndividual/<%=estrategia.usuario.email%>" class="m-4">Chat Individual</a></small>
-                  </div>
-            </div>
+                <%- include('partials/card-recurso.ejs', {estrategia: estrategia}) %>
 
-
-            <!--<div class="card">
-                <% if(estrategia.imagen) { %>
-                <img src="/uploads/estrategias/<%=estrategia.imagen %>">
-                <% } else { %>
-                <img src="/img/leer.jpg">
-                <% } %>
-                <div class="card-texto">
-                    <p class="fecha"><%=estrategia.fecha %></p>
-                    <a href="#">
-                        <h3><%=estrategia.nombre %></h3>
-                    </a>
-                    <div class="info-autor">
-                        <div class="imagen">
-                            <img src="/uploads/usuarios/<%=estrategia.usuario.imagen %>" alt="">
-                        </div>
-                        <div class="informacion">
-                            <p>Organizado por:</p>
-                            <p class="autor"><%=estrategia.usuario.email %></p>
-                        </div>
-                    </div>
-                    <a href="/index" class="m-4">Chat Grupal</a>
-                    <a href="/chatIndividual/<%=estrategia.usuario.email%>" class="m-4">Chat Individual</a>
-                </div>
-            </div>-->
             <% }) %>
         </div>
     </div>
@@ -99,10 +55,13 @@
                         <div class="card-body">
                             <h5 class="card-title font-weight-bold">Psicología</h5>
                             <hr />
-                            <p class="card-text text-center font-italic">"Ciencia que estudia la conducta y los procesos mentales. Trata de describir y explicar
-                                todos los aspectos del pensamiento, de los sentimientos, de las percepciones y de las acciones humanas."</p>
+                            <p class="card-text text-center font-italic">"Ciencia que estudia la conducta y los procesos
+                                mentales. Trata de describir y explicar
+                                todos los aspectos del pensamiento, de los sentimientos, de las percepciones y de las
+                                acciones humanas."</p>
                             <hr />
-                            <p class="card-text text-right"><small class="text-muted">Laura Anton. (s.f.). Psicología como ciencia. Instituo La Sernas</small></p>                            
+                            <p class="card-text text-right"><small class="text-muted">Laura Anton. (s.f.). Psicología
+                                    como ciencia. Instituo La Sernas</small></p>
                         </div>
                     </div>
                 </div>
@@ -112,13 +71,16 @@
                         <div class="card-body">
                             <h5 class="card-title font-weight-bold">Coaching</h5>
                             <hr />
-                            <p class="card-text text-center font-italic">"“El estudio científico de las experiencias positivas, de los
+                            <p class="card-text text-center font-italic">"“El estudio científico de las experiencias
+                                positivas, de los
                                 rasgos individuales positivos de las instituciones que facilitan el desarrollo y de los
                                 programas que ayudan a mejorar la calidad de vida de los individuos y previenen o
                                 reducen la incidencia de la psicopatología"</p>
                             <hr />
-                            <p class="card-text text-right"><small class="text-muted">Sans Zapata, M.. (2012). ¿Qué es el coaching? sus orígenes, definición, distintas metodologías y principios básicoas de actuación de un coach
-                                .  Área de Innovación y Desarrollo, S.L. </small></p>
+                            <p class="card-text text-right"><small class="text-muted">Sans Zapata, M.. (2012). ¿Qué es
+                                    el coaching? sus orígenes, definición, distintas metodologías y principios básicoas
+                                    de actuación de un coach
+                                    . Área de Innovación y Desarrollo, S.L. </small></p>
                         </div>
                     </div>
                 </div>
@@ -129,10 +91,12 @@
                             <h5 class="card-title font-weight-bold">Motivación</h5>
                             <hr />
                             <p class="card-text text-center font-italic">"Impulso que conduce a una
-                                persona a elegir y realizar una acción entre aquellas alternativas que se presentan en una
+                                persona a elegir y realizar una acción entre aquellas alternativas que se presentan en
+                                una
                                 determinada situación"</p>
                             <hr />
-                            <p class="card-text text-right"><small class="text-muted">Laura Anton. (s.f.). Psicología como ciencia. Instituo La Sernas</small></p>
+                            <p class="card-text text-right"><small class="text-muted">Laura Anton. (s.f.). Psicología
+                                    como ciencia. Instituo La Sernas</small></p>
                         </div>
                     </div>
                 </div>
@@ -201,6 +165,25 @@
             </div>
         </div>
     </div>
+
+    <footer class="text-center bg-dark mt-4" id="footerPrincipal">
+        <div class="container text-white">
+            <div class="row">
+                <div class="col-md-3 my-5">
+                    SOBRE NOSOTROS
+                </div>
+                <div class="col-md-3 my-5">
+                    ULTIMAS NOTICIAS
+                </div>
+                <div class="col-md-3 my-5">
+                    CONTACTO
+                </div>
+                <div class="col-md-3 my-5">
+                    CONÉCTATE
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

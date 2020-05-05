@@ -1,26 +1,23 @@
 const Sequelize = require('sequelize');
-//const Usuarios = require('./Usuarios');
+const Usuarios = require('./Usuarios');
 const db = require('../config/db');
 
-const Grupos = db.define('grupos', {
+const Sentimientos = db.define('sentimientos', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    msg: {
-        type: Sequelize.TEXT,
-    },
-    email: {
-        type: Sequelize.STRING(60) 
-    },
-    room: {
-        type: Sequelize.STRING(10) 
-    },
     fecha: {
         type: Sequelize.DATE,
         defaultValue: Date.now 
+    },
+    sentimiento: {
+        type: Sequelize.STRING(10),
+        allowNull: false
     }
 });
 
-module.exports = Grupos;
+Sentimientos.belongsTo(Usuarios);
+
+module.exports = Sentimientos;

@@ -1,4 +1,5 @@
 const Usuarios = require('../models/Usuarios');
+const Saluds = require('../models/datosSalud');
 const randomstring = require('randomstring');
 require('dotenv').config({ path: 'variables.env' });
 const mailer = require('../misc/mailer');
@@ -458,6 +459,56 @@ exports.recoverPass = async (req, res, next) => {
 
         req.flash('exito', 'Se ha modificado tu contraseña de forma exitosa.');
         res.redirect('/iniciar-sesion');
+
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+//Método para guardar los datos personales y familiares
+exports.saveDatos = async (req, res, next) => {
+    req.sanitizeBody('peso');
+    req.sanitizeBody('azucar');
+    req.sanitizeBody('temperatura');
+    req.sanitizeBody('estatura');
+    req.sanitizeBody('presion');
+
+    const datos = req.body;
+    datos.usuarioid = req.user.id;
+
+    const usuario = await Usuarios.findByPk(req.user.id);
+
+    usuario.familiarEnfermedad = req.body.problemasfamiliares;
+    usuario.enfermedadPersonal = req.body.saludpersonal;
+    usuario.vivienda = req.body.tipovivienda;
+    usuario.viviendo = req.body.habitantes;
+    usuario.mascota = req.body.mascotas;
+    usuario.alimentacion = req.body.alimentacion;
+
+    try {
+        if (req.body.peso != '' || req.body.estatura != '' || req.body.azucar != '' || req.body.presion != '' || req.body.temperatura != '') {
+            await Saluds.create(datos);
+            req.flash('exito', 'Se insertaron los campos correctamente');
+            res.redirect('/administracion');
+        }
+
+        if (req.body.tipovivienda == '--Selecciona una opcion--'){
+            usuario.vivienda = '';
+        }
+
+        if (req.body.habitantes == '--Selecciona una opcion--'){
+            usuario.viviendo = '';
+        }
+
+        if (req.body.mascotas == '--Selecciona una opcion--'){
+            usuario.mascota = '';
+        }
+
+        if (req.body.alimentacion == '--Selecciona una opcion--'){
+            usuario.alimentacion = '';
+        }
+        usuario.save();
+        res.redirect('/administracion');
 
     } catch (e) {
         console.log(e);

@@ -22,7 +22,6 @@
         <a href="/">
             <img src="/img/logo.png" alt="Logo Affectus" width="150" width="150">
         </a>
-
         <nav class="nav">
             <%if(locals.usuario.id) { %>
             <%- include('partials/nav-autenticado.ejs') %>
@@ -30,7 +29,6 @@
             <%- include('partials/nav-no-autenticado.ejs') %>
             <% } %>
         </nav>
-
     </header>
 
     <% if(locals.mensajes) { %>
@@ -45,23 +43,9 @@
     <% } %>
     <%- body %>
 
-    <footer class="site-footer bg-dark" id="footerPrincipal">
-        <div class="container text-white">
-            <div class="row">
-                <div class="col-md-3">
-                    SOBRE NOSOTROS
-                </div>
-                <div class="col-md-3">
-                    ULTIMAS NOTICIAS
-                </div>
-                <div class="col-md-3">
-                    CONTACTO
-                </div>
-                <div class="col-md-3">
-                    CONÉCTATE
-                </div>
-            </div>
-            <p class="copyright text-center text-white">Todos los derechos reservados Affectus &copy;<%=year %></p>
+    <footer class="site-footer">
+        <div class="container">
+            <p class="copyright text-center">Todos los derechos reservados Affectus &copy;<%=year %></p>
         </div>        
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.js"></script>

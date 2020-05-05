@@ -1,0 +1,25 @@
+<div class="col-md-4">
+    <div class="card">
+        <% if(estrategia.imagen) { %>
+        <img height="175" class="lazy" src="/uploads/estrategias/<%=estrategia.imagen %>">
+        <% } else { %>
+        <img height="175" class="lazy" src="/img/leer.png">
+        <% } %>
+        <div class="card-body">
+            <p class="card-text my-0"><small class="text-muted"><%=estrategia.categoria.nombre %></small></p>
+            <h5 class="card-title font-weight-bold"><%=estrategia.nombre %></h5>
+            <p class="card-text text-center font-italic mb-0"><%=estrategia.descripcion %></p>
+            <p class="card-text text-right mb-0"><small class="text-muted"><%=estrategia.fecha_creacion %></small>
+            </p>
+            <hr />
+            <p class="card-text text-right mb-0"><small>Responsable: <small
+                        class="font-weight-bold"><%=estrategia.usuario.nombre %></small></small></p>
+            <p class="card-text text-right mt-0"><small class="font-italic"><%=estrategia.usuario.email %></small></p>
+        </div>
+        <div class="card-footer d-flex">
+            <small class="text-muted mr-auto"><a href="/index" class="m-4">Chat Grupal</a></small>
+            <small class="text-muted ml-auto"><a href="/chatIndividual/<%=estrategia.usuario.email%>" class="m-4">Chat
+                    Individual</a></small>
+        </div>
+    </div>
+</div>
