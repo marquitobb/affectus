@@ -13,7 +13,7 @@ const Sentimientos = db.define('sentimientos', {
         defaultValue: Date.now 
     },
     sentimiento: {
-        type: Sequelize.STRING(10),
+        type: Sequelize.STRING(11),
         allowNull: false
     }
 });

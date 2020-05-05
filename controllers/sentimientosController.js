@@ -29,10 +29,15 @@ exports.formAgregarSentimiento = async (req, res) => {
 };
 
 exports.guardarSentimientos = async (req, res) => {
-    const sentimiento = req.params.sentimiento;
+    const sentimiento = req.params;
 
     sentimiento.usuarioId = req.user.id;
     sentimiento.sentimiento = req.params.sentimiento;
-    console.log(sentimiento);
-    await Sentimientos.create(sentimiento);
+    try {
+        await Sentimientos.create(sentimiento);
+        res.status(200).send('Sentimiento almacenado correctamente');
+
+    } catch (error) {
+        res.status(403).send('Hubo un error');
+    }  
 };

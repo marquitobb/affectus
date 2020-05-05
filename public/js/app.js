@@ -3,7 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const editarEst = document.querySelector(".editar-estrategia");
   const eliminarImagenEstrategia = document.querySelector(".eliminar-estrategia");
   const eliminarEstrategia = document.querySelector(".eliminar-estrategia-completa");
-  const insertarSentimiento = document.querySelector(".sentimientosPrincipal");
+  const sentFeliz = document.querySelector(".sentimientoFeliz");
+  const sentEnojado = document.querySelector(".sentimientoEnojado");
+  const sentPreocupado = document.querySelector(".sentimientoPreocupado");
+  const sentSorprendido = document.querySelector(".sentimientoSorprendido");
+  const sentTriste = document.querySelector(".sentimientoTriste");
   // const sentimientos = document.querySelector(".contenedor");
 
   if (listadoEstrategias) {
@@ -22,10 +26,25 @@ document.addEventListener("DOMContentLoaded", () => {
     eliminarEstrategia.addEventListener("click", eliminarEstrategiaCompleta);
   }
 
-  if (insertarSentimiento) {
-    insertarSentimiento.addEventListener("click", insertarSentimientoPrincipal);
+  if (sentFeliz) {
+    sentFeliz.addEventListener("click", atributoSentFeliz);
+  }
+  
+  if (sentEnojado) {
+    sentEnojado.addEventListener("click", atributoSentEnojado);
   }
 
+  if (sentPreocupado) {
+    sentPreocupado.addEventListener("click", atributoSentPreocupado);
+  }
+
+  if (sentSorprendido) {
+    sentSorprendido.addEventListener("click", atributoSentSorprendido);
+  }
+
+  if (sentTriste) {
+    sentTriste.addEventListener("click", atributoSentTriste);
+  }
   // if (sentimientos) {
   //   sentimientos.addEventListener("click", selectSentimientos);
   // }
@@ -67,9 +86,49 @@ $(".sidebar-dropdown > a").click(function() {
     $(".page-wrapper").addClass("toggled");
   });
 
-  const insertarSentimientoPrincipal = (e) => {
+  //Asignación para guardar en la base de datos los sentimientos de la pagina principal
+  const atributoSentFeliz = (e) => {
     e.preventDefault();
+    const url = `feliz`;
+    axiosSentimientos(url);
   };
+  const atributoSentEnojado = (e) => {
+    e.preventDefault();
+    const url = `enojado`;
+    axiosSentimientos(url);
+  };
+  const atributoSentPreocupado = (e) => {
+    e.preventDefault();
+    const url = `preocupado`;
+    axiosSentimientos(url);
+  };
+  const atributoSentSorprendido = (e) => {
+    e.preventDefault();
+    const url = `sorprendido`;
+    axiosSentimientos(url);
+  };
+  const atributoSentTriste = (e) => {
+    e.preventDefault();
+    const url = `triste`;
+    axiosSentimientos(url);
+  };
+  
+function axiosSentimientos(sentimiento){
+  const url = `${location.origin}/sentimiento/`+sentimiento;
+  axios
+  .post(url)
+  .then(function (respuesta){
+    Swal.fire(
+      'Excelente!',
+      respuesta.data,
+      'success'
+    );
+    $('#sentimientosPrincipal').hide();
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+}
 
 const ObtenerEstrategia = (e) => {
 e.preventDefault();

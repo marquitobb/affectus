@@ -84,7 +84,7 @@ module.exports = function() {
 
     //Agregar sentimiento
     router.get('/agregar-sentimiento', authController.usuarioAutenticado, sentimientosController.formAgregarSentimiento);
-    router.get('/sentimiento/:sentimiento', authController.usuarioAutenticado, sentimientosController.guardarSentimientos);
+    router.post('/sentimiento/:sentimiento', authController.usuarioAutenticado, sentimientosController.guardarSentimientos);
 
     //Datos Personales
     router.post('/datos-personales', authController.usuarioAutenticado, usuariosController.saveDatos);
