@@ -10,7 +10,6 @@ const Categorias = db.define('categorias', {
     nombre: {
         type: Sequelize.TEXT,
     },
-
-})
+});
 
 module.exports = Categorias;

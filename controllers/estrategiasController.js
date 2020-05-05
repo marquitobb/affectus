@@ -1,5 +1,6 @@
 const Categorias = require('../models/Categorias');
 const Estrategias = require('../models/Estrategias');
+const Usuarios = require('../models/Usuarios');
 const multer = require('multer');
 const shortid = require('shortid');
 const fs = require('fs');
@@ -57,10 +58,29 @@ exports.subirImagen = (req, res, next) => {
 
 //Form nueva estrategia
 exports.formNuevaEstrategia = async (req, res) => {
-    const categorias = await Categorias.findAll();
+    const consultas = [];
+    consultas.push(Usuarios.findByPk(req.user.id));
+    consultas.push(Estrategias.findAll({
+        include: [
+            {
+                model: Usuarios,
+                attributes: ['email', 'imagen', 'nombre'],
+                required: true
+            },
+            {
+                model: Categorias,
+                attributes: ['nombre'],
+                required: true
+            }
+        ]
+    }));
+    consultas.push(Categorias.findAll());
+    const [usuario, estrategias, categorias] = await Promise.all(consultas);
     res.render('nueva-estrategia', {
         nombrePagina: 'Nueva Estrategia',
-        categorias
+        categorias,
+        estrategias,
+        nombre: usuario.nombre
     });
 };
 
@@ -80,13 +100,13 @@ exports.nuevaEstrategia = async (req, res, next) => {
 
     let setArchivos = [];
     nombres.forEach(nombre => {
-        if (nombre.includes('.png') || nombre.includes('.jpg')) {
+        if (nombre.includes('.png') || nombre.includes('.jpg') || nombre.includes('.jpeg')) {
             setArchivos.push(nombre);
         }
-    })
+    });
     
     estrategia.archivos = nombres;
-    estrategia.imagen = setArchivos[0];   
+    estrategia.imagen = setArchivos[0];
 
     try {
         await Estrategias.create(estrategia);

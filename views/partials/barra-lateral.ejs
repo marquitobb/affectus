@@ -1,0 +1,155 @@
+<a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+<nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-content">
+        <div class="sidebar-brand">
+            <a href="/administracion">Panel de perfil</a>
+            <div id="close-sidebar">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <div class="sidebar-header">
+            <div class="user-pic">
+                <% if(usuario.imagen) { %>
+                <img class="img-responsive img-rounded" src="/uploads/usuarios/<%=usuario.imagen %>" alt="User picture">
+                <% }else { %>
+                <img class="img-responsive img-rounded"
+                    src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+                    alt="User picture">
+                <% } %>
+
+            </div>
+            <div class="user-info">
+                <span class="user-name text-center"><%=nombre %></span>
+                <% if(usuario.rol == 0) { %>
+                <span class="user-role">Administrador</span>
+                <% }else { %>
+                <% if (usuario.rol == 1){ %>
+                <span class="user-role">Usuario</span>
+                <% }else { %>
+                <span class="user-role">Profesional</span>
+                <% } %>
+                <% } %>
+                <span class="user-status">
+                    <i class="fa fa-circle"></i>
+                    <span>Online</span>
+                </span>
+            </div>
+        </div>
+        <!-- sidebar-header  -->
+        <div class="sidebar-search">
+            <div>
+                <div class="input-group">
+                    <input type="text" class="form-control search-menu" placeholder="Search...">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- sidebar-search  -->
+        <div class="sidebar-menu">
+            <ul>
+                <li class="header-menu">
+                    <span>General</span>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a>
+                        <i class="fas fa-user"></i>
+                        <span>Editar Perfil</span>
+                        <!--<span class="badge badge-pill badge-warning">New</span>-->
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul>
+                            <li>
+                                <a href="/editar-perfil">Editar Perfil</a>
+                            </li>
+                            <li>
+                                <a href="/cambiar-password">Cambiar Password</a>
+                            </li>
+                            <li>
+                                <% if(usuario.imagen) { %>
+                                <a href="/imagen-perfil">Cambiar Imagen<span
+                                        class="badge badge-pill badge-success">Si</span>
+                                    <% }else { %>
+                                    <a href="/imagen-perfil">Añadir Imagen<span
+                                            class="badge badge-pill badge-danger">No</span>
+                                        <% } %>
+                                    </a>
+                            </li>
+                            <li>
+                                <a href="/agregar-sentimiento">Agregar Sentimiento</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a>
+                        <!--href="/cv-perfil"-->
+                        <i class="fas fa-file-pdf"></i>
+                        <span>Ver mi agenda</span>
+                        <% if(usuario.cv) { %>
+                        <span class="badge badge-pill badge-success">Si</span>
+                        <% } else { %>
+                        <span class="badge badge-pill badge-danger">No</span>
+                        <% } %>
+                    </a>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a>
+                        <i class="far fa-gem"></i>
+                        <span>Recursos</span>
+                        <span class="badge badge-pill badge-warning"><%=estrategias.length%></span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul>
+                            <li>
+                                <a href="/nueva-estrategia">Nuevo recurso</a>
+                            </li>
+                            <li>
+                                <a href="/administracion">
+                                    <span class="badge badge-pill badge-warning"><%=estrategias.length%></span>
+                                    Ver mis recursos
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a href="#">
+                        <i class="fa fa-chart-line"></i>
+                        <span>Mis estadísticas</span>
+                    </a>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a href="#">
+                        <i class="fa fa-globe"></i>
+                        <span>Mapas</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- sidebar-menu  -->
+    </div>
+    <!-- sidebar-content  -->
+    <div class="sidebar-footer">
+        <a href="#">
+            <i class="fas fa-thumbs-up"></i>
+            <span class="badge badge-pill badge-warning notification">3</span>
+        </a>
+        <a href="#">
+            <i class="fas fa-comments"></i>
+            <span class="badge badge-pill badge-success notification">7</span>
+        </a>
+        <a href="#">
+            <i class="fa fa-cog"></i>
+            <span class="badge-sonar"></span>
+        </a>
+        <a href="/cerrar-sesion">
+            <i class="fa fa-power-off"></i>
+        </a>
+    </div>
+</nav>

@@ -61,13 +61,10 @@ const Estrategias = db.define('estrategias', {
     },
     descripcion: {
         type: Sequelize.TEXT
-    },
-    
+    }    
 });
 
 Estrategias.belongsTo(Usuarios);
 Estrategias.belongsTo(Categorias);
-
-
 
 module.exports = Estrategias;

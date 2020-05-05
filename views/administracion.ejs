@@ -1,159 +1,5 @@
 <div class="page-wrapper chiller-theme toggled">
-  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
-    <i class="fas fa-bars"></i>
-  </a>
-  <nav id="sidebar" class="sidebar-wrapper">
-    <div class="sidebar-content">
-      <div class="sidebar-brand">
-        <a href="/administracion"><%=nombrePagina %></a>
-        <div id="close-sidebar">
-          <i class="fas fa-times"></i>
-        </div>
-      </div>
-      <div class="sidebar-header">
-        <div class="user-pic">
-          <% if(usuario.imagen) { %>
-            <img class="img-responsive img-rounded" src="/uploads/usuarios/<%=usuario.imagen %>"
-            alt="User picture">
-          <% }else { %>
-            <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
-            alt="User picture">
-          <% } %>
-          
-        </div>
-        <div class="user-info">
-          <span class="user-name">
-            <%=nombre %>
-            <!--<strong>Smith</strong>-->
-          </span>
-          <span class="user-role">Administrator</span>
-          <span class="user-status">
-            <i class="fa fa-circle"></i>
-            <span>Online</span>
-          </span>
-        </div>
-      </div>
-      <!-- sidebar-header  -->
-      <div class="sidebar-search">
-        <div>
-          <div class="input-group">
-            <input type="text" class="form-control search-menu" placeholder="Search...">
-            <div class="input-group-append">
-              <span class="input-group-text">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- sidebar-search  -->
-      <div class="sidebar-menu">
-        <ul>
-          <li class="header-menu">
-            <span>General</span>
-          </li>
-          <li class="sidebar-dropdown">
-            <a href="#">
-              <i class="fas fa-user"></i>
-              <span>Editar Perfil</span>
-              <!--<span class="badge badge-pill badge-warning">New</span>-->
-            </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <a href="/editar-perfil">Editar Perfil</a>
-                </li>
-                <li>
-                  <a href="/cambiar-password">Cambiar Password</a>
-                </li> 
-                <li>
-                  <% if(usuario.imagen) { %>
-                    <a href="/imagen-perfil">Añadir Imagen<span class="badge badge-pill badge-success">Si</span>
-                  <% }else { %>
-                    <a href="/imagen-perfil">Añadir Imagen<span class="badge badge-pill badge-danger">No</span>
-                  <% } %>
-                  </a>
-                </li>                
-              </ul>
-            </div>
-          </li>
-          <li class="sidebar-dropdown">
-            <a href="/imagen-perfil">
-              <i class="far fa-image"></i>
-              <span>Imagen Perfil</span>
-                <% if(usuario.imagen) { %>
-                  <span class="badge badge-pill badge-success">Si</span>
-                <% } else { %>
-                  <span class="badge badge-pill badge-danger">No</span>
-                <% } %>
-            </a>
-          </li>
-          <li class="sidebar-dropdown">
-            <a href="/cv-perfil">
-              <i class="fas fa-file-pdf"></i>
-              <span>CV</span>
-              <% if(usuario.cv) { %>
-                <span class="badge badge-pill badge-success">Si</span>
-              <% } else { %>
-                <span class="badge badge-pill badge-danger">No</span>
-              <% } %>
-            </a>
-          </li>
-          <li class="sidebar-dropdown">
-            <a href="#">
-              <i class="far fa-gem"></i>
-              <span>Nueva Estrategia</span>
-                <span class="badge badge-pill badge-warning"><%=estrategias.length%></span>
-            </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <a href="/nueva-estrategia">Nueva estrategia</a>
-                </li>
-                <li>
-                  <a href="/ver-estrategias">
-                    <span class="badge badge-pill badge-warning"><%=estrategias.length%></span>
-                    Ver Estrategias
-                  </a>
-                </li>                
-              </ul>
-            </div>
-          </li>
-          <li class="sidebar-dropdown">
-            <a href="#">
-              <i class="fa fa-chart-line"></i>
-              <span>Charts</span>
-            </a>
-          </li>
-          <li class="sidebar-dropdown">
-            <a href="#">
-              <i class="fa fa-globe"></i>
-              <span>Maps</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-      <!-- sidebar-menu  -->
-    </div>
-    <!-- sidebar-content  -->
-    <div class="sidebar-footer">
-      <a href="#">
-        <i class="fas fa-thumbs-up"></i>
-        <span class="badge badge-pill badge-warning notification">3</span>
-      </a>
-      <a href="#">
-        <i class="fas fa-comments"></i>
-        <span class="badge badge-pill badge-success notification">7</span>
-      </a>
-      <a href="#">
-        <i class="fa fa-cog"></i>
-        <span class="badge-sonar"></span>
-      </a>
-      <a href="/cerrar-sesion">
-        <i class="fa fa-power-off"></i>
-      </a>
-    </div>
-  </nav>
+  <%- include('partials/barra-lateral.ejs') %>
   <!-- sidebar-wrapper  -->
   <main class="page-content">
     <div class="container-fluid">
@@ -162,47 +8,51 @@
 
       <ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Estrategias</a>
+          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+            aria-controls="pills-home" aria-selected="true">Estrategias</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Otro</a>
+          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+            aria-controls="pills-profile" aria-selected="false">Otro</a>
         </li>
       </ul>
- 
+
       <hr>
       <div class="container">
         <div class="row">
           <div class="col-12 my-2">
             <div class="tab-content" id="pills-tabContent">
               <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                  <div class="listado-estrategias">
-                    <% if(estrategias.length) { %>
-                        <h2>Estrategias</h2>
-                        <ul class="list-group">
-                            <% estrategias.forEach(estrategia => { %>
-                                <li class="list-group-item">
-                                    <div class="">
-                                        <h3><%=estrategia.nombre %></h3>
-                                    </div>
-                                    <div class="float-right">
-                                        <a href="" data-id="<%=estrategia.id %>" data-toggle="modal" data-target=".bd-example-modal-lg" class="btn btn-primary">Editar</a>
-                                        <a href="/imagen-estrategia/<%=estrategia.id%>" class="btn btn-warning">Imagen</a>
-                                        <a href="" data-id="<%=estrategia.id%>" class="eliminar-estrategia-completa btn btn-danger">Eliminar</a>
-                                    </div>
-                                   
-                                </li>
-                            <% }) %>
-                        </ul>
-                    <% }else { %>
-                        <h3 class="center">No hay ningun estrategia</h3>
-                    <% } %>
+                <div class="listado-estrategias">
+                  <% if(estrategias.length) { %>
+                  <h2>Estrategias</h2>
+                  <ul class="list-group">
+                    <% estrategias.forEach(estrategia => { %>
+                    <li class="list-group-item">
+                      <div class="">
+                        <h3><%=estrategia.nombre %></h3>
+                      </div>
+                      <div class="float-right">
+                        <a href="" data-id="<%=estrategia.id %>" data-toggle="modal" data-target=".bd-example-modal-lg"
+                          class="btn btn-primary">Editar</a>
+                        <a href="/imagen-estrategia/<%=estrategia.id%>" class="btn btn-warning">Imagen</a>
+                        <a href="" data-id="<%=estrategia.id%>"
+                          class="eliminar-estrategia-completa btn btn-danger">Eliminar</a>
+                      </div>
+
+                    </li>
+                    <% }) %>
+                  </ul>
+                  <% }else { %>
+                  <h3 class="center">No hay ningun estrategia</h3>
+                  <% } %>
                 </div>
               </div>
               <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                 Otros
               </div>
             </div>
-        </div>
+          </div>
         </div>
       </div>
     </div>
@@ -212,7 +62,4 @@
 </div>
 <!-- page-wrapper -->
 
-    <%- include('../views/editar-estrategia') %>
-
-
-
+<%- include('../views/editar-estrategia') %>
