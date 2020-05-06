@@ -18,16 +18,22 @@
 </head>
 
 <body>
-    <header class="site-header contenedor">
-        <a href="/">
-            <img src="/img/logo.png" alt="Logo Affectus" width="150" width="150">
-        </a>
-        <nav class="nav">
-            <%if(locals.usuario.id) { %>
-            <%- include('partials/nav-autenticado.ejs') %>
-            <% }else { %>
-            <%- include('partials/nav-no-autenticado.ejs') %>
-            <% } %>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-transparent">
+            <a class="ml-5" href="/">
+                <img src="/img/logo.png" alt="Logo Affectus" width="150" width="150">
+            </a>
+            <button class="navbar-toggler border border-dark" type="button" data-toggle="collapse" data-target="#navPrincipal" aria-controls="navPrincipal" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navPrincipal">
+                    <%if(locals.usuario.id) { %>
+                    <%- include('partials/nav-autenticado.ejs') %>
+                    <% }else { %>
+                    <%- include('partials/nav-no-autenticado.ejs') %>
+                    <% } %>
+
+            </div>
         </nav>
     </header>
 
@@ -42,14 +48,9 @@
     <% } %>
     <% } %>
     <%- body %>
-
-    <footer class="site-footer">
-        <div class="container">
-            <p class="copyright text-center">Todos los derechos reservados Affectus &copy;<%=year %></p>
-        </div>        
-    </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.js"></script>
     <script src="/js/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.3/qs.min.js"></script>

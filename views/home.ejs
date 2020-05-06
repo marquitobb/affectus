@@ -7,20 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Affectus</title>
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
-    
-    <link rel="stylesheet" href="/css/home.css">
 </head>
 
 <body>
     <div class="hero">
-        <h1>Encuentra ayuda para tu bienestar</h1>
+        <h1 style="font-size: 3.2rem;">Encuentra ayuda para tu bienestar</h1>
         <a href="/crear-cuenta" class="btn btn-amarillo">Obtener Cuenta</a>
     </div>
 
     <div class="buscador-inicio" id="buscadorAyudaPais">
         <div class="contenedor">
             <h2>Busca ayuda en tu pais</h2>
-            <form action="#">
+            <form action="">
                 <select name="categoria">
                     <option value="" disabled selected>-- Selecciona Categoría --</option>
                     <option value="programacion">Psicologia</option>
@@ -36,10 +34,9 @@
 
     <div class="contenedor my-4" id="estrategiasSalud">
         <h2>Actividades Importantes Para tu salud</h2>
-        <div class="row">
+        <div class="row mt-4">
             <% estrategias.forEach(estrategia => { %>
-                <%- include('partials/card-recurso.ejs', {estrategia: estrategia}) %>
-
+            <%- include('partials/card-recurso.ejs', {estrategia: estrategia}) %>
             <% }) %>
         </div>
     </div>
@@ -47,7 +44,7 @@
 
     <main class="bg-gris py-5" id="visualizadoCategorias">
         <h2>Encuentra Ayuda por Categoría</h2>
-        <div class="container">
+        <div class="container mt-4">
             <div class="row">
                 <div class="col-md-4">
                     <div class="card">
@@ -116,21 +113,20 @@
         </div>
     </main>
 
-    <div class="" id="nosotrosMain">
-        <div class="row">
-            <div class="col-md-6 px-0">
-            <section class="container p-5 crearActividadesPartido text-white">
-                <h3 class="font-weight-bold">Crea una actividad</h3>
-                <h5>Comparte lo que te gusta o tu pasión con los demás, crea tu propio grupo hoy mismo sin costos</h5>
-            </section>
+    <div class="meeti-bg" id="nosotrosMain">
+        <div class="meeti container">
+            <div class="row">
+                <section class="col-md-6 text-white">
+                    <h3 class="font-weight-bold">Crea una actividad</h3>
+                    <p>Comparte lo que te gusta o tu pasión con los demás, crea tu propio grupo hoy mismo sin costos
+                    </p>
+                </section>
+                <section class="col-md-6 text-white">
+                    <h3 class="text-right font-weight-bold">Únete a una actividad</h3>
+                    <p class="text-right">Conoce actividades que favoreceran a tu salud en tiempos dificles</p>
+                </section>
+            </div>
         </div>
-        <div class="col-md-6 px-0">
-            <section class="p-5 containertext-right text-white unirseAUnaActividad">
-                <h3 class="text-right font-weight-bold">Únete a una actividad</h3>
-                <p class="text-right">Conoce actividades que favoreceran a tu salud en tiempos dificles</p>
-            </section>
-        </div>
-    </div>
     </div>
 
     <div class="container my-3" id="institucionesMain">
@@ -150,20 +146,20 @@
                 <img class="mx-auto my-auto lazy instituciones" src="/img/tecnm.png"
                     alt="Tecnológico Nacional de México">
             </div>
-            <div class="col-md-3 d-flex my-3">
+            <div class="col-md-3 d-flex my-4">
                 <img class="mx-auto my-auto lazy instituciones" src="/img/cecytcol.png" alt="CECYTCOL">
             </div>
-            <div class="col-md-3 d-flex my-3">
+            <div class="col-md-3 d-flex my-4">
                 <img class="mx-auto my-auto lazy instituciones" src="/img/bisite.png" alt="BISITE">
             </div>
-            <div class="col-md-3 d-flex my-3">
+            <div class="col-md-3 d-flex my-4">
                 <img class="mx-auto my-auto lazy instituciones" src="/img/salud colima.png"
                     alt="Secretaría de Salud del gobierno del estado de Colima">
             </div>
-            <div class="col-md-3 d-flex my-3">
+            <div class="col-md-3 d-flex my-4">
                 <img class="mx-auto my-auto lazy instituciones" src="/img/ateneo.png" alt="Grupo ATENEO">
             </div>
-            <div class="col-md-3 mx-auto">
+            <div class="col-md-3 mx-auto my-4">
                 <img class="mx-auto my-auto lazy instituciones" src="/img/tec Colima.png"
                     alt="Tecnológico Nacional de México - Campus Colima">
             </div>
@@ -174,18 +170,19 @@
         <div class="container text-white">
             <div class="row">
                 <div class="col-md-3 my-5">
-                    SOBRE NOSOTROS
+                    <h4>SOBRE NOSOTROS</h4>
                 </div>
                 <div class="col-md-3 my-5">
-                    ULTIMAS NOTICIAS
+                    <h4>ÚLTIMAS NOTICIAS</h4>
                 </div>
                 <div class="col-md-3 my-5">
-                    CONTACTO
+                    <h4>CONTACTO</h4>
                 </div>
                 <div class="col-md-3 my-5">
-                    CONÉCTATE
+                    <h4>CONÉCTATE</h4>
                 </div>
             </div>
+            <h6 class="text-center">Todos los derechos reservados Affectus &copy;<%=year %></h6>
         </div>
     </footer>
 </body>
