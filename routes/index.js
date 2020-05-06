@@ -37,6 +37,7 @@ module.exports = function() {
     //Cerrar sesión
     router.get('/cerrar-sesion', authController.usuarioAutenticado,  authController.CS);
 
+    //Chat
     router.get('/index', authController.usuarioAutenticado, socketsController.index);
     router.get('/chat', authController.usuarioAutenticado, socketsController.chat);
 
