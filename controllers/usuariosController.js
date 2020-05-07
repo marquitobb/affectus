@@ -142,6 +142,14 @@ exports.verificarCorreo = async (req, res, next) => {
 //crea la cuentad el usaurio
 exports.crearCuenta = async (req, res, next) => {
     const usuario = req.body;
+    console.log(req.body);
+
+    let rol;
+    if(req.body.rol == 'on'){
+        rol = 2;
+    } else {
+        rol = 1;
+    }
 
     //validacion de campos
     req.checkBody('confirmar', 'El password confirmado no puede ir vacio').notEmpty();
@@ -163,7 +171,7 @@ exports.crearCuenta = async (req, res, next) => {
 
         //Bandera la cuenta como inactivo
         usuario.activo = false;
-        usuario.rol = 0;
+        usuario.rol = rol;
 
         await Usuarios.create(usuario);
 

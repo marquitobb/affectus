@@ -38,6 +38,7 @@ p {
 /** NAV **/
 .textoNav {
   font-size: 1.15rem;
+  color: rgb(206, 65, 65);
 }
 
 /*** COMPONENTES **/
