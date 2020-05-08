@@ -441,8 +441,8 @@ a {
   .sidebar-wrapper .sidebar-header .user-info .user-status i {
     font-size: 8px;
     margin-right: 4px;
-    color: #5cb85c;
   }
+
   
   /*-----------------------sidebar-search------------------------*/
   
@@ -850,4 +850,21 @@ a {
     .selectbox {
       width: 100%;
     }
+  }
+
+  /** Estado actual Barra lateral **/
+  .selectEstadoBarra{
+    color: white;
+    border: 1px solid #6c7b88;
+    background-color: transparent;
+  }
+
+  .selectEstadoBarra:hover{
+    border: 1px solid #fff;
+  }
+
+  .selectEstadoBarra option {
+    color: #6c7b88;
+    background: #434343;
+    font-size: 12px;
   }

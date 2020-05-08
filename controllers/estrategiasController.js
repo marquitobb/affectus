@@ -80,7 +80,8 @@ exports.formNuevaEstrategia = async (req, res) => {
         nombrePagina: 'Nueva Estrategia',
         categorias,
         estrategias,
-        nombre: usuario.nombre
+        nombre: usuario.nombre,
+        usuario
     });
 };
 
@@ -191,7 +192,7 @@ exports.EditarImagen = async(req, res, next) => {
                 if (nombre.includes('.png') || nombre.includes('.jpg')) {
                     setArchivos.push(nombre);
                 }
-            })
+            });
 
             estrategia.imagen = setArchivos[0];
         }

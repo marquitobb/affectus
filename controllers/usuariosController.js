@@ -172,6 +172,7 @@ exports.crearCuenta = async (req, res, next) => {
         //Bandera la cuenta como inactivo
         usuario.activo = false;
         usuario.rol = rol;
+        usuario.estadoActual = '2';
 
         await Usuarios.create(usuario);
 
@@ -289,12 +290,13 @@ exports.EditarPerfil = async (req, res, next) => {
     req.sanitizeBody('direccion');
     req.sanitizeBody('ocupacion');
     req.sanitizeBody('discapacidad');
+    req.sanitizeBody('whatsapp');
 
 
     const usuario = await Usuarios.findByPk(req.user.id);
     console.log(req.body);
     //leer valores
-    const { nombre, descripcion, email, genero, fechanacimiento, ocupacion, direccion, discapacidad, telefono } = req.body;
+    const { nombre, descripcion, email, genero, fechanacimiento, ocupacion, direccion, discapacidad, telefono, whatsapp } = req.body;
 
     //Asignar valores
     usuario.nombre = nombre;
@@ -306,6 +308,7 @@ exports.EditarPerfil = async (req, res, next) => {
     usuario.direccion = direccion;
     usuario.discapacidad = discapacidad;
     usuario.telefono = telefono;
+    usuario.whatsapp = whatsapp;
 
     //guardar en db
     await usuario.save();
@@ -313,9 +316,19 @@ exports.EditarPerfil = async (req, res, next) => {
     res.redirect('/administracion');
 };
 
-exports.formCambiarPassword = (req, res) => {
+exports.formCambiarPassword = async (req, res) => {
+    const consultas = [];
+    consultas.push(Usuarios.findByPk(req.user.id));
+    consultas.push(Estrategias.findAll({where: {usuarioId: req.user.id}}));
+    consultas.push(Categorias.findAll());
+
+    const [usuario, estrategias, categorias] = await Promise.all(consultas);
     res.render('cambiar-password', {
-        nombrePagina: 'Cambiar password'
+        nombrePagina: 'Cambiar password',
+        nombre: usuario.nombre,
+        estrategias,
+        categorias,
+        usuario
     });
 };
 
@@ -351,10 +364,30 @@ exports.CambiarPassword = async (req, res, next) => {
 
 //form para agregar imagen
 exports.formAgregarImagenPerfil = async (req, res) => {
-    const usuario = await Usuarios.findByPk(req.user.id);
+    const consultas = [];
+    consultas.push(Usuarios.findByPk(req.user.id));
+    consultas.push(Estrategias.findAll({
+        include: [
+            {
+                model: Usuarios,
+                attributes: ['email', 'imagen', 'nombre'],
+                required: true
+            },
+            {
+                model: Categorias,
+                attributes: ['nombre'],
+                required: true
+            }
+        ]
+    }));
+    consultas.push(Categorias.findAll());
+    const [usuario, estrategias, categorias] = await Promise.all(consultas);
 
     res.render('imagen-perfil', {
         nombrePagina: 'Añade imagen de perfil',
+        categorias,
+        estrategias,
+        nombre: usuario.nombre,
         usuario
     });
 };
@@ -544,4 +577,19 @@ exports.saveDatos = async (req, res, next) => {
     } catch (e) {
         console.log(e);
     }
+};
+
+//Método que se ejecuta para cambiar el estado del usuario
+exports.updateEstado = async (req, res, next) => {
+    const estado = req.params.estado;
+    const usuario = await Usuarios.findByPk(req.user.id);
+
+    usuario.estadoActual = estado;
+    try {
+        await usuario.save();
+        res.status(200).send('Estado actualizado correctamente');
+
+    } catch (error) {
+        res.status(403).send('Hubo un error');
+    } 
 };

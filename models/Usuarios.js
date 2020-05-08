@@ -81,6 +81,12 @@ const Usuarios = db.define('usuarios', {
     },
     alimentacion: {
         type: Sequelize.STRING(10)
+    },
+    estadoActual: {
+        type: Sequelize.STRING(1)
+    },
+    whatsapp: {
+        type: Sequelize.STRING(10)
     }
 }, {
     hooks: {
@@ -93,12 +99,12 @@ const Usuarios = db.define('usuarios', {
 //Metodo para comparar los passwords 
 Usuarios.prototype.validarPassword = function(password){
     return bcrypt.compareSync(password, this.password);
-}
+};
 
 //
 Usuarios.prototype.hashPassword = function(password){
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 
-}
+};
 
 module.exports = Usuarios;

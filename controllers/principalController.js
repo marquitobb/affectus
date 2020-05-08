@@ -26,6 +26,7 @@ exports.panelPrincipal = async (req, res) => {
         nombrePagina: 'bienvenido de nuevo',
         estrategias,
         categorias,
-        nombre: usuario.nombre
+        nombre: usuario.nombre,
+        usuario
     });
 };
