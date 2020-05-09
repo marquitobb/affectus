@@ -11,7 +11,9 @@ const Horarios = db.define('horarios', {
     lunes: {
         type: Sequelize.STRING,
     },
-    
+    lunescompleto: {
+        type: Sequelize.STRING,
+    },
     InicioLunes: { 
         type: Sequelize.STRING,
         defaultValue: null,
@@ -51,6 +53,9 @@ const Horarios = db.define('horarios', {
         },
     }, 
     martes: {
+        type: Sequelize.STRING,
+    },
+    martescompleto: {
         type: Sequelize.STRING,
     },
     InicioMartes: { 
@@ -93,12 +98,20 @@ const Horarios = db.define('horarios', {
     miercoles: {
         type: Sequelize.STRING,
     },
+    miercolescompleto: {
+        type: Sequelize.STRING,
+    },
     InicioMiercoles: { 
         type: Sequelize.STRING,
         allowNull: true,
 
         get() {
-            return this.getDataValue('InicioMiercoles').split(';')
+            if (this.getDataValue('InicioMiercoles')) {
+                return this.getDataValue('InicioMiercoles').split(';')
+            }else{
+                return this.getDataValue('InicioMiercoles') 
+            }
+            
         },
         set(val) {
             if (val === '') {
@@ -132,6 +145,9 @@ const Horarios = db.define('horarios', {
         },
     },
     jueves: {
+        type: Sequelize.STRING,
+    },
+    juevescompleto: {
         type: Sequelize.STRING,
     },
     InicioJueves: { 
@@ -175,6 +191,9 @@ const Horarios = db.define('horarios', {
     viernes: {
         type: Sequelize.STRING,
     },
+    viernescompleto: {
+        type: Sequelize.STRING,
+    },
     InicioViernes: { 
         type: Sequelize.STRING,
         allowNull: true,
@@ -214,6 +233,9 @@ const Horarios = db.define('horarios', {
         },
     },
     sabado: {
+        type: Sequelize.STRING,
+    },
+    sabadocompleto: {
         type: Sequelize.STRING,
     },
     InicioSabado: { 
@@ -256,6 +278,9 @@ const Horarios = db.define('horarios', {
     },
     domingo: {
         type: Sequelize.STRING,
+    },
+    domingocompleto: {
+        type: Sequelize.STRING, 
     },
     InicioDomingo: { 
         type: Sequelize.STRING,
