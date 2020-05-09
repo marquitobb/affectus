@@ -1,6 +1,6 @@
 /** CHECHBOX EN FORMA DE SWITCH **/
 .toggle input[type="checkbox"]{
-    width: 400px;
+    width: 50%;
     height: 40px;
     background: #bdc3c7;
     -webkit-appearance: none;
@@ -19,7 +19,7 @@ input[type="checkbox"]::before{
     z-index: 2;
     position: absolute;
     content: '';
-    left: 17%;
+    left: 25%;
     width: 40px;
     height: 40px;
     background: #fff;
@@ -29,10 +29,6 @@ input[type="checkbox"]::before{
     transition: .4s;
 }
 
-input:checked[type="checkbox"]::before{
-    left: 76%;
-}
-
 .toggle {
     text-align: center;
     position: relative;
@@ -40,19 +36,157 @@ input:checked[type="checkbox"]::before{
 
 .toggle label{
     position: absolute;
-    font-weight: 600;
-    font-size: 20px;
     pointer-events: none;
 }
 
 .usuariobtn {
     bottom: 5px;
     left: 0%;
-    color: #34495e;
+    color: #ADADAD;
 }
 
 .psquiatrabtn{
     bottom: 5px;
     right: 0%;
-    color: #34495e;
+    color: #ADADAD;
+}
+
+@media screen and (max-width: 400px){
+    input:checked[type="checkbox"]::before{
+        left: 65%;
+    }
+    .toggle label {
+        font-weight: 600;
+        font-size: 12px;
+    }
+
+    .usuariobtn {
+        left: 8%;
+    }
+
+    .usuariobtn, .psquiatrabtn{
+        bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 600px) and (min-width: 400px){
+    input:checked[type="checkbox"]::before{
+        left: 66%;
+    }
+    .toggle label {
+        font-weight: 600;
+        font-size: 13px;
+    }
+
+    .usuariobtn {
+        left: 7%;
+    }
+
+    .usuariobtn, .psquiatrabtn{
+        bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 800px) and (min-width: 600px){
+    input:checked[type="checkbox"]::before{
+        left: 67%;
+    }
+    .toggle label {
+        font-weight: 600;
+        font-size: 15px;
+    }
+
+    .usuariobtn {
+        left: 7%;
+    }
+
+    .usuariobtn, .psquiatrabtn{
+        bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 1000px) and (min-width: 800px){
+    input:checked[type="checkbox"]::before{
+        left: 68%;
+    }
+    .toggle label {
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    .usuariobtn {
+        left: 5%;
+    }
+
+    .usuariobtn, .psquiatrabtn{
+        bottom: 8px;
+    }
+}
+
+@media screen and (max-width: 1250px) and (min-width: 1000px){
+    input:checked[type="checkbox"]::before{
+        left: 68%;
+    }
+
+    .toggle label {
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    .usuariobtn {
+        left: 5%;
+    }
+
+    .psquiatrabtn {
+        right: 1%;
+    }
+
+    .usuariobtn, .psquiatrabtn{
+        bottom: 6px;
+    }
+}
+
+@media screen and (max-width: 1500px) and (min-width: 1250px){
+    input:checked[type="checkbox"]::before{
+        left: 69%;
+    }
+
+    .toggle label {
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    .usuariobtn {
+        left: 5%;
+    }
+
+    .psquiatrabtn {
+        right: 3%;
+    }
+
+    .usuariobtn, .psquiatrabtn{
+        bottom: 6px;
+    }
+}
+
+@media screen and (min-width: 1500px){
+    input:checked[type="checkbox"]::before{
+        left: 70%;
+    }
+    .toggle label {
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    .usuariobtn {
+        left: 5%;
+    }
+
+    .psquiatrabtn {
+        right: 3%;
+    }
+
+    .usuariobtn, .psquiatrabtn{
+        bottom: 6px;
+    }
 }

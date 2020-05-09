@@ -9,6 +9,7 @@ const estrategiasController = require('../controllers/estrategiasController');
 const socketsController = require('../controllers/socketsController');
 const sentimientosController = require('../controllers/sentimientosController');
 const principalController = require('../controllers/principalController');
+const perfilController = require('../controllers/perfilController');
 
 module.exports = function() {
     router.get('/', authController.usuarioAutenticado, homeController.home);
@@ -92,5 +93,8 @@ module.exports = function() {
 
     //Cambiar el estado en el que se encuantra el usuario
     router.post('/estadoAffectus/:estado', authController.usuarioAutenticado, usuariosController.updateEstado);
+
+    //Ruta para ir al perfil
+    router.get('/perfil/:correo', authController.usuarioAutenticado, perfilController.visualizarPerfil);
     return router;
 };

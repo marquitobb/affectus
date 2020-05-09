@@ -192,6 +192,8 @@ exports.crearCuenta = async (req, res, next) => {
         req.flash('exito', 'Se creo la cuenta correctamente, favor de confirmarla en su correo');
         res.redirect('/iniciar-sesion');
     } catch (error) {
+        //console.log(error);
+        
         //extraer unicamente el message de los errores
         const erroresSequelize = error.errors.map(err => err.message);
 
@@ -209,6 +211,7 @@ exports.crearCuenta = async (req, res, next) => {
 
         req.flash('error', listaErrores);
         res.redirect('/crear-cuenta');
+        
     }
 };
 

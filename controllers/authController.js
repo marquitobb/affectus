@@ -16,7 +16,7 @@ exports.usuarioAutenticado = (req, res, next) => {
     }
 
     //si no esta autenticado
-    return res.redirect('/iniciar-sesion');
+    return next();//res.redirect('/iniciar-sesion');
 };
 
 exports.CS = (req, res, next) => {

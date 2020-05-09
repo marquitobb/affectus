@@ -5,7 +5,7 @@ body {
     background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
     font-family: montserrat;
     height: 100vh;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .textoNav {
@@ -19,12 +19,11 @@ body {
     text-shadow: 2px 2px 5px white;
 }
 
-.fondo {
-    position: absolute;
-    top: 50%;
+.fondo, .fondoRegistro {
+    position: relative;
+    top: 30%;
     left: 50%;
     background-color: white;
-    width: 400px;
     transform: translate(-50%, -40%);
     border-radius: 20px;
     -webkit-box-shadow: 20px 15px 50px 0px rgba(133, 133, 133, 1);
@@ -32,17 +31,133 @@ body {
     box-shadow: 10px 10px 50px 0px rgba(133, 133, 133, 1);
 }
 
-.fondoRegistro {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    background-color: white;
-    width: 700px;
-    transform: translate(-50%, -40%);
-    border-radius: 20px;
-    -webkit-box-shadow: 20px 15px 50px 0px rgba(133, 133, 133, 1);
-    -moz-box-shadow: 20px 15px 50px 0px rgba(133, 133, 133, 1);
-    box-shadow: 10px 10px 50px 0px rgba(133, 133, 133, 1);
+@media screen and (max-width: 400px){
+    .fondo {
+        width: 100%;
+    }
+
+    .fondoRegistro {
+        width: 100%;
+        margin-top: 0%;
+        margin-bottom: 5%;
+    }
+
+    .fondoRegistro form {
+        padding: 0px 10px;
+        box-sizing: border-box;
+    }
+}
+
+@media screen and (max-width: 600px) and (min-width: 400px){
+    .fondo {
+        width: 80%;
+    }
+    .fondoRegistro {
+        width: 80%;
+        margin-top: 0%;
+        margin-bottom: 5%;
+    }
+
+    .fondoRegistro form {
+        padding: 0px 10px;
+        box-sizing: border-box;
+    }
+}
+
+@media screen and (max-width: 800px) and (min-width: 600px){
+    .fondo {
+        width: 60%;
+    }
+    .fondoRegistro {
+        width: 60%;
+        margin-top: 0%;
+        margin-bottom: 5%;
+    }
+
+    .fondoRegistro form {
+        padding: 0px 15px;
+        box-sizing: border-box;
+    }
+}
+
+@media screen and (max-width: 1000px) and (min-width: 800px){
+    .fondo {
+        width: 50%;
+    }
+    .fondoRegistro {
+        width: 60%;
+        margin-top: 0%;
+        margin-bottom: 5%;
+    }
+
+    .fondoRegistro form {
+        padding: 0px 20px;
+        box-sizing: border-box;
+    }
+
+    .paddingContra{
+        padding-right: 0%;
+    }
+
+    .paddingConfirmContra {
+    padding-left: 0;
+    }
+}
+
+@media screen and (max-width: 1250px) and (min-width: 1000px){
+    .fondo {
+        width: 40%;
+    }
+    .fondoRegistro {
+        width: 50%;
+        margin-top: 0%;
+        margin-bottom: 5%;
+    }
+
+    .fondoRegistro form {
+        padding: 0px 30px;
+        box-sizing: border-box;
+    }
+
+    .paddingContra{
+        padding-right: 0%;
+    }
+
+    .paddingConfirmContra {
+    padding-left: 0;
+    }
+}
+
+@media screen and (max-width: 1500px) and (min-width: 1250px){
+    .fondo {
+        width: 35%;
+    }
+    .fondoRegistro {
+        width: 50%;
+        margin-top: 0%;
+        margin-bottom: 5%;
+    }
+
+    .fondoRegistro form {
+        padding: 0px 40px;
+        box-sizing: border-box;
+    }
+}
+
+@media screen and (min-width: 1500px){
+    .fondo {
+        width: 30%;
+    }
+    .fondoRegistro {
+        width: 50%;
+        margin-top: 0%;
+        margin-bottom: 5%;
+    }
+
+    .fondoRegistro form {
+        padding: 0px 40px;
+        box-sizing: border-box;
+    }
 }
 
 .fondo h1 {
@@ -61,8 +176,7 @@ body {
     border-bottom: 1px solid #E0C3FC;
 }
 
-.fondo form,
-.fondoRegistro form {
+.fondo form {
     padding: 0px 40px;
     box-sizing: border-box;
 }
