@@ -9,15 +9,18 @@
             </div>
         </div>
         <% if(usuario.imagen) { %>
-            <div class="campo">
-                <img src="/uploads/usuarios/<%=usuario.imagen %>" width="150">
-            </div>
+        <div class="campo">
+            <img src="/uploads/usuarios/<%=usuario.imagen %>" width="150">
+        </div>
         <% }else { %>
-            <p>No hay imagen actual</p>
+        <p>No hay imagen actual</p>
         <% } %>
-        
+
         <div class="form-group col-md-8">
             <input type="submit" class="btn btn-primary float-right" value="Subir Imagen"></input>
         </div>
-  </form>
+    </form>
+</div>
+<div style="height: 0px; width: 0px;">
+    <%- include('partials/barra-lateral.ejs', {nombre:usuario.nombre ,estrategias: estrategias}) %>
 </div>

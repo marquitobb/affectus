@@ -1,11 +1,13 @@
 <div class="container">
     <h1><%=nombre %>, <%=nombrePagina %></h1>
     <hr>
+    <% if (usuario.rol == 1) {
+        %>
     <div id="sentimientosPrincipal">
         <div class="d-flex">
             <h4 class="mx-auto">¿Cómo te sientes hoy?</h4>
             <div id="cerrarSentimientosPrincipal">
-                <button class="btn btn-light"><i class="fas fa-times"></i></button>                
+                <button class="btn btn-light"><i class="fas fa-times"></i></button>
             </div>
         </div>
         <div class="row mx-auto">
@@ -53,12 +55,15 @@
         </div>
         <hr>
     </div>
+    <%
+    } %>
+
     <div class="row">
         <% estrategias.forEach(estrategia => { %>
         <%- include('partials/card-recurso.ejs', {estrategia: estrategia}) %>
         <% }) %>
     </div>
 </div>
-<div class="page-wrapper chiller-theme toggled">
-    <%- include('partials/barra-lateral.ejs') %>
+<div style="height: 0px; width: 0px;">
+    <%- include('partials/barra-lateral.ejs', {nombre:usuario.nombre ,estrategias: estrategias}) %>
 </div>

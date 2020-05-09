@@ -29,6 +29,9 @@ passport.use(new LocalStrategy({
             message: 'Usuario no verificado, favor de revisar su correo'
         });
 
+        usuario.estadoActual = '0';
+        await usuario.save();
+
         //todo bien
         return next(null, usuario);
     }

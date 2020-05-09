@@ -5,3 +5,4 @@ public/uploads/cv/*
 public/uploads/estrategias/*
 public/uploads/usuarios/*
 .jshintrc
+.vscode

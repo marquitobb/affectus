@@ -9,6 +9,7 @@ const estrategiasController = require('../controllers/estrategiasController');
 const socketsController = require('../controllers/socketsController');
 const sentimientosController = require('../controllers/sentimientosController');
 const principalController = require('../controllers/principalController');
+const perfilController = require('../controllers/perfilController');
 
 module.exports = function() {
     router.get('/', authController.usuarioAutenticado, homeController.home);
@@ -35,8 +36,9 @@ module.exports = function() {
     router.post('/iniciar-sesion', authController.autenticarUsuario);
 
     //Cerrar sesión
-    router.get('/cerrar-sesion', authController.usuarioAutenticado,  authController.CS);
+    router.get('/cerrar-sesion', authController.usuarioAutenticado, authController.CS);
 
+    //Chat
     router.get('/index', authController.usuarioAutenticado, socketsController.index);
     router.get('/chat', authController.usuarioAutenticado, socketsController.chat);
 
@@ -88,5 +90,11 @@ module.exports = function() {
 
     //Datos Personales
     router.post('/datos-personales', authController.usuarioAutenticado, usuariosController.saveDatos);
+
+    //Cambiar el estado en el que se encuantra el usuario
+    router.post('/estadoAffectus/:estado', authController.usuarioAutenticado, usuariosController.updateEstado);
+
+    //Ruta para ir al perfil
+    router.get('/perfil/:correo', authController.usuarioAutenticado, perfilController.visualizarPerfil);
     return router;
 };

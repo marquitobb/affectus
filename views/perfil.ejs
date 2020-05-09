@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/perfil.css">
+</head>
+
+<body>
+  <div style="height: 0px; width: 0px;">
+    <%- include('partials/barra-lateral.ejs', {nombre:usuario.nombre,estrategias: estrategias}) %>
+  </div>
+  <div class="container">
+    <div class="perfilEncabezado form-inline mt-3 d-flex py-3">
+      <div class="ml-2 mx-auto" style="height: 132px; width: 132px;">
+        <% if(userPerfil.imagen) { %>
+        <img class="rounded-circle border border-dark" src="/uploads/usuarios/<%=userPerfil.imagen %>"
+          alt="Foto de usuario" />
+        <% }else { %>
+        <img class="rounded-circle border border-dark"
+          src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+          alt="Foto Usuario" />
+        <% } %>
+      </div>
+      <div class="mx-auto">
+        <h1 class="text-center"><%=userPerfil.nombre%></h1>
+        <h6 class="text-center"><%= userPerfil.email %> </h6>
+      </div>
+
+      <div class="mx-auto">
+        <% if(userPerfil.rol == 0) { %>
+          <h4 class="text-center">Administrador</h4>
+          <% }else { %>
+          <% if (userPerfil.rol == 1){ %>
+          <h4 class="text-center">Usuario</h4>
+          <% }else { %>
+          <h4 class="text-center">Profesional</h4>
+          <% } %>
+          <% } %>
+          <button class="btn btn-primary">Contactar</button>
+      </div>
+    </div>
+    
+  </>
+</body>
+
+</html>

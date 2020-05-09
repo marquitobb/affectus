@@ -1,5 +1,3 @@
-<div class="page-wrapper chiller-theme toggled">
-  <%- include('partials/barra-lateral.ejs') %>
   <!-- sidebar-wrapper  -->
   <main class="page-content">
     <div class="container-fluid">
@@ -56,10 +54,10 @@
         </div>
       </div>
     </div>
-
   </main>
   <!-- page-content" -->
-</div>
-<!-- page-wrapper -->
+  <div style="height: 0px; width: 0px;">
+    <%- include('partials/barra-lateral.ejs', {nombre:usuario.nombre ,estrategias: estrategias}) %>
+  </div>
 
 <%- include('../views/editar-estrategia') %>
