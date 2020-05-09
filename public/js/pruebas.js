@@ -191,17 +191,18 @@ $(document).ready(function () {
 
 //Variables Globales
 var totalHorarios = 5; //Número total de horarios desponibles permitidos para un día
-var xLunes = 1, conLunes = 1;
-var xMartes = 1, conMartes = 1;
-var xMiercoles = 1, conMiercoles = 1;
-var xJueves = 1, conJueves = 1;
-var xViernes = 1, conViernes = 1;
-var xSabado = 1, conSabado = 1;
-var xDomingo = 1, conDomingo = 1;
+var xLunes = 0, conLunes = 0, xLunesEdit = -1;
+var xMartes = 0, conMartes = 0, xMartesEdit = 2;
+var xMiercoles = 0, conMiercoles = 0, xMiercolesEdit = 2;
+var xJueves = 0, conJueves = 0, xJuevesEdit = 2;
+var xViernes = 0, conViernes = 0, xViernesEdit = 2;
+var xSabado = 0, conSabado = 0, xSabadoEdit = 2;
+var xDomingo = 0, conDomingo = 0, xDomingoEdit = 2;
 
 
 //Agregar horario lunes
 function agregarLunes() {
+    
     if (xLunes < totalHorarios) {
         xLunes++;
         conLunes++;
@@ -214,11 +215,18 @@ function agregarLunes() {
 }
 //Eliminar horario Lunes
 function eliminarLunes(numero) {
+     console.log("num borrado", numero);
+    // xLunes--;
+    // console.log("xlunes", xLunes)
+    // return
+    // $('#lun').val(null);
     $('div.lunes' + numero).remove();
     xLunes--;
-    if (xLunes == 1) {
+    console.log(xLunes)
+    if (xLunes == 0) {
         $('#btnEliminarLunes').hide();
     }
+    
     $('#addLunes').show();
 }
 
@@ -236,11 +244,15 @@ function agregarMartes() {
 }
 //Eliminar horario Martes
 function eliminarMartes(numero) {
+    // console.log(numero);
+    // return
     $('div.martes' + numero).remove();
     xMartes--;
-    if (xMartes == 1) {
+    console.log(xMartes)
+    if (xMartes == 0) {
         $('#btnEliminarMartes').hide();
-    }
+    }    
+    
     $('#addMartes').show();
 }
 
@@ -259,11 +271,14 @@ function agregarMiercoles() {
 
 //Eliminar horario Miercoles
 function eliminarMiercoles(numero) {
+    // console.log(numero);
+    // return
     $('div.miercoles' + numero).remove();
     xMiercoles--;
-    if (xMiercoles == 1) {
+    if (xMiercoles == 0) {
         $('#btnEliminarMiercoles').hide();
     }
+    
     $('#addMiercoles').show();
 }
 
@@ -277,11 +292,14 @@ function agregarJueves() {
 
 //Eliminar horario Jueves
 function eliminarJueves(numero) {
+    // console.log(numero);
+    // return
     $('div.jueves' + numero).remove();
     xJueves--;
-    if (xJueves == 1) {
+    if (xJueves == 0) {
         $('#btnEliminarJueves').hide();
     }
+    
     $('#addJueves').show();
 }
 
@@ -296,11 +314,14 @@ function agregarViernes() {
 
 //Eliminar horario Viernes
 function eliminarViernes(numero) {
+    // console.log(numero);
+    // return
     $('div.viernes' + numero).remove();
     xViernes--;
-    if (xViernes == 1) {
+    if (xViernes == 0) {
         $('#btnEliminarViernes').hide();
     }
+    
     $('#addViernes').show();
 }
 
@@ -314,11 +335,14 @@ function agregarSabado() {
 
 //Eliminar horario Sabado
 function eliminarSabado(numero) {
+    // console.log(numero);
+    // return
     $('div.sabado' + numero).remove();
     xSabado--;
-    if (xSabado == 1) {
+    if (xSabado == 0) {
         $('#btnEliminarSabado').hide();
     }
+    
     $('#addSabado').show();
 }
 
@@ -333,11 +357,14 @@ function agregarDomingo() {
 
 //Eliminar horario Domingo
 function eliminarDomingo(numero) {
+    // console.log(numero);
+    // return
     $('div.domingo' + numero).remove();
     xDomingo--;
-    if (xDomingo == 1) {
+    if (xDomingo == 0) {
         $('#btnEliminarDomingo').hide();
     }
+   
     $('#addDomingo').show();
 }
 

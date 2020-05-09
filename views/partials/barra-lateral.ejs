@@ -117,20 +117,29 @@
                     </li>
                     <li class="sidebar-dropdown">
                         <a>
-                            <!--href="/cv-perfil"-->
-                            <i class="fas fa-file-pdf"></i>
-                            <% if (usuario.rol == '1') {
-                                %><span>Ver mis citas</span><%
-                            } else {
-                                %><span>Ver mi agenda</span><%
-                            } %>
-
-                            <% if(usuario.cv) { %>
-                            <span class="badge badge-pill badge-success">Si</span>
-                            <% } else { %>
-                            <span class="badge badge-pill badge-danger">No</span>
-                            <% } %>
+                            <i class="fas fa-user"></i>
+                            <span>Agenda</span>
+                            <!--<span class="badge badge-pill badge-warning">New</span>-->
                         </a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <% if(usuario.rol === '1') { %>
+                                    <li>
+                                        <a href="/ver-citas">Mis Citas</a>
+                                    </li>
+                                <% } else { %>
+                                    <li>
+                                        <a href="/agregar-horario">Agregar Horarios</a>
+                                    </li>
+                                    <li>
+                                        <a href="/editar-horario">Editar Horarios</a>
+                                    </li>
+                                    <li>
+                                        <a href="/ver-citas">Ver Citas Programadas</a>
+                                    </li>
+                                <% } %>
+                            </ul>
+                        </div>
                     </li>
                     <li class="sidebar-dropdown">
                         <a>

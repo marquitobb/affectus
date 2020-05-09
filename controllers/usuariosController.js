@@ -292,11 +292,10 @@ exports.EditarPerfil = async (req, res, next) => {
     req.sanitizeBody('discapacidad');
     req.sanitizeBody('whatsapp');
 
-
+    
     const usuario = await Usuarios.findByPk(req.user.id);
-    console.log(req.body);
     //leer valores
-    const { nombre, descripcion, email, genero, fechanacimiento, ocupacion, direccion, discapacidad, telefono, whatsapp } = req.body;
+    const { nombre, descripcion, email, genero, fechanacimiento, ocupacion, direccion, discapacidad, telefono, whatsapp} = req.body;
 
     //Asignar valores
     usuario.nombre = nombre;
@@ -533,7 +532,7 @@ exports.saveDatos = async (req, res, next) => {
     req.sanitizeBody('temperatura');
     req.sanitizeBody('estatura');
     req.sanitizeBody('presion');
-
+    
     const datos = req.body;
     datos.usuarioId = req.user.id;
     
