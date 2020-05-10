@@ -1,5 +1,5 @@
 <div class="container">
-    <h1><%=nombre %>, <%=nombrePagina %></h1>
+    <h1><%=nombre %>, BIENVENIDO DE NUEVO</h1>
     <hr>
     <% if (usuario.rol == 1) {
         %>
@@ -63,7 +63,24 @@
         <%- include('partials/card-recurso.ejs', {estrategia: estrategia}) %>
         <% }) %>
     </div>
+    <div class="row">
+        <div class=" bg-dark col-md-6" style="height: auto;">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores quaerat sit magni dolorem totam aperiam at, quidem corrupti suscipit rem ipsa natus eius quam deserunt, laudantium ad fuga earum ipsam?
+        </div>
+        <div class=" bg-danger col-md-6" style="height: auto;">
+            HOLA
+        </div>
+        <div class=" bg-danger col-md-6">
+            HOLA
+        </div>
+    </div>
 </div>
 <div style="height: 0px; width: 0px;">
     <%- include('partials/barra-lateral.ejs', {nombre:usuario.nombre ,estrategias: estrategias}) %>
 </div>
+<a class="ir-arriba" javascript:void(0) title="Volver arriba">
+    <span class="fa-stack">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-arrow-up fa-stack-1x fa-inverse"></i>
+    </span>
+</a>

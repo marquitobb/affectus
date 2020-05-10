@@ -29,15 +29,25 @@ exports.visualizarPerfil = async(req, res) => {
                 required: true
             }
         ]
-    }));
+    }));    
     consultas.push(Categorias.findAll());
-    const [usuario, estrategias, categorias] = await Promise.all(consultas);
+    consultas.push(Sentimientos.findAll({
+        include: [
+            {
+                model: Usuarios,
+                attributes: ['nombre'],
+                required: true
+            }
+        ]
+    }),{where: {usuarioId: userPerfil.Id}});
+    const [usuario, estrategias, categorias, sentimientos] = await Promise.all(consultas);
     res.render('perfil', {
         nombrePagina: 'Perfil',
         categorias,
         estrategias,
         nombre: usuario.nombre,
         usuario,
-        userPerfil
+        userPerfil,
+        sentimientos        
     });
 };

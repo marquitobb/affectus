@@ -9,6 +9,8 @@ const Usuarios = db.define('usuarios', {
         autoIncrement: true
     },
     nombre: Sequelize.STRING(60),
+    aPaterno: Sequelize.STRING(60),
+    aMaterno: Sequelize.STRING(60),
     imagen: Sequelize.STRING(60),
     secretToken: Sequelize.STRING(60),
     email:{
@@ -87,6 +89,12 @@ const Usuarios = db.define('usuarios', {
     },
     whatsapp: {
         type: Sequelize.STRING(10)
+    },
+    cualidades: {
+        type: Sequelize.STRING(500)
+    },
+    aboutme: {
+        type: Sequelize.STRING(500)
     }
 }, {
     hooks: {
