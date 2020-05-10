@@ -244,6 +244,14 @@ exports.EditarHorario =async (req, res, next) => {
         res.redirect('/administracion');
     }     
 
+}
 
+exports.formAgregarCita = async (req, res) => {
 
+    const horario = await Horarios.findOne({where: {usuarioId: req.params.id}})
+    // console.log(horario)
+    res.render('agendar-cita', {
+        nombrePagina: 'Agrega Cita',
+        horario
+    })
 }

@@ -94,11 +94,15 @@ module.exports = function() {
     //Cambiar el estado en el que se encuantra el usuario
     router.post('/estadoAffectus/:estado', authController.usuarioAutenticado, usuariosController.updateEstado);
 
+    //Agrega horarios el psicologo
     router.get('/agregar-horario', authController.usuarioAutenticado, horariosController.formAgregarHorario);
     router.post('/agregar-horario', authController.usuarioAutenticado, horariosController.agregarHorarios);
-
+    //Edita horarios el psicologo
     router.get('/editar-horario', authController.usuarioAutenticado, horariosController.formEditarHorario);
     router.post('/editar-horario', authController.usuarioAutenticado, horariosController.EditarHorario);
+
+    //El usuario genera una cita
+    router.get('/agendar-cita/:id', authController.usuarioAutenticado, horariosController.formAgregarCita)
 
     return router;
 };
