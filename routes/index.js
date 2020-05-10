@@ -103,6 +103,10 @@ module.exports = function() {
 
     //El usuario genera una cita
     router.get('/agendar-cita/:id', authController.usuarioAutenticado, horariosController.formAgregarCita)
+    router.post('/agendar-cita/:id', authController.usuarioAutenticado, horariosController.AgregarCita)
 
-    return router;
+    router.get('/ver-citas/:id', authController.usuarioAutenticado, horariosController.formVerCitas)
+
+
+    return router; 
 };

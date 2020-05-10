@@ -5,6 +5,8 @@
     <form action="" method="POST">
         <div class="row">
 
+            <input type="hidden" id="usuarioprofesional" value="<%=horario.usuarioId %>">
+            <input type="hidden" id="idagenda" value="<%=horario.id %>">
             <!--INICIO LUNES-->
             <% if(horario.lunes === 'on') { %>
                 <div class="col-md-4 pr-0 mt-4">
@@ -28,13 +30,14 @@
                                     <% for (let i = 0; i < horario.InicioLunes.length; i++) { %>
                                         <% const element = horario.InicioLunes[i] %>
                                         <% const element2 = horario.FinLunes[i] %>
+                                            <input type="hidden" id="hiddenlunes" value="lunes">
                                             <div class="form-inline lunes<%=i%>">
-                                                <input name="InicioLunes" class="mb-1" type="time" value="<%=element%>" disabled>
+                                                <input name="InicioLunes" class="mb-1" type="time" id="iniciolunes<%=i%>" value="<%=element%>" disabled>
                                                 <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
-                                                <input name="FinLunes" class="mb-1 mr-2" type="time" value="<%=element2%>" disabled>
-                                                <span id="btnEliminarLunes">
-                                                    <!-- <i class="far fa-times-circle fa-2x"></i> -->
-                                                    <input type="checkbox" name="luneselegir" id="lunes">
+                                                <input name="FinLunes" class="mb-1 mr-2" type="time" id="finlunes<%=i%>" value="<%=element2%>" disabled>
+                                                <span id="btnAddLunes" onclick="agregarCitaLunes('<%=i %>');">
+                                                    <i class="fas fa-check cursor"></i>                                                    
+                                                    <!-- <input type="checkbox" name="luneselegir" id="lunes"> -->
                                                 </span>                          
                                             </div>
                                     <% } %>
@@ -75,13 +78,15 @@
                                     <% for (let i = 0; i < horario.InicioMartes.length; i++) { %>
                                         <% const element = horario.InicioMartes[i] %>
                                         <% const element2 = horario.FinMartes[i] %>
+                                            <input type="hidden" id="hiddenmartes" value="martes">
                                             <div class="form-inline martes<%=i%>">
-                                                <input name="InicioMartes" class="mb-1" type="time" value="<%=element%>" disabled>
+                                                <input name="InicioMartes" class="mb-1" type="time" id="iniciomartes<%=i%>" value="<%=element%>" disabled>
                                                 <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
-                                                <input name="FinMartes" class="mb-1 mr-2" type="time" value="<%=element2%>" disabled>
-                                                <span id="btnEliminarMartes">
+                                                <input name="FinMartes" class="mb-1 mr-2" type="time" id="finmartes<%=i%>" value="<%=element2%>" disabled>
+                                                <span id="btnAddMartes" onclick="agregarCitaMartes('<%=i%>')">
                                                     <!-- <i class="far fa-times-circle fa-2x"></i> -->
-                                                    <input type="checkbox" name="marteselegir" id="lunes">
+                                                    <i class="fas fa-check cursor"></i>                                                    
+                                                    <!-- <input type="checkbox" name="marteselegir" id="lunes"> -->
                                                 </span>                          
                                             </div>
                                             
@@ -127,13 +132,15 @@
                                     <% for (let i = 0; i < horario.InicioMiercoles.length; i++) { %>
                                         <% const element = horario.InicioMiercoles[i] %>
                                         <% const element2 = horario.FinMiercoles[i] %>
+                                        <input type="hidden" id="hiddenmiercoles" value="miercoles">
+
                                             <div class="form-inline miercoles<%=i%>">
-                                                <input name="InicioMiercoles" class="mb-1" type="time" value="<%=element%>" disabled>
+                                                <input name="InicioMiercoles" class="mb-1" type="time" id="iniciomiercoles<%=i %>" value="<%=element%>" disabled>
                                                 <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
-                                                <input name="FinMiercoles" class="mb-1 mr-2" type="time" value="<%=element2%>" disabled>
-                                                <span id="btnEliminarMiercoles">
-                                                    <!-- <i class="far fa-times-circle fa-2x"></i> -->
-                                                    <input type="checkbox" name="miercoleselegir" id="lunes">
+                                                <input name="FinMiercoles" class="mb-1 mr-2" type="time" id="finmiercoles<%=i %>" value="<%=element2%>" disabled>
+                                                <span id="btnAddMiercoles" onclick="agregarCitaMiercoles('<%=i%>')">
+                                                    <i class="fas fa-check cursor"></i>                                                    
+                                                    <!-- <input type="checkbox" name="miercoleselegir" id="lunes"> -->
                                                 </span>                          
                                             </div>
                                     <% } %>
@@ -177,13 +184,14 @@
                                     <% for (let i = 0; i < horario.InicioJueves.length; i++) { %>
                                         <% const element = horario.InicioJueves[i] %>
                                         <% const element2 = horario.FinJueves[i] %>
+                                        <input type="hidden" id="hiddenjueves" value="jueves">
                                             <div class="form-inline jueves<%=i%>">
-                                                <input name="InicioJueves" class="mb-1" type="time" value="<%=element%>" disabled>
+                                                <input name="InicioJueves" class="mb-1" type="time" id="iniciojueves<%=i %>" value="<%=element%>" disabled>
                                                 <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
-                                                <input name="FinJueves" class="mb-1 mr-2" type="time" value="<%=element2%>" disabled>
-                                                <span id="btnEliminarJueves" >
-                                                    <!-- <i class="far fa-times-circle fa-2x"></i> -->
-                                                    <input type="checkbox" name="jueveselegir" id="lunes">
+                                                <input name="FinJueves" class="mb-1 mr-2" type="time" id="finjueves<%=i %>" value="<%=element2%>" disabled>
+                                                <span id="btnAddJueves" onclick="agregarCitaJueves('<%=i %>')">
+                                                    <i class="fas fa-check cursor"></i>                                                    
+                                                    <!-- <input type="checkbox" name="jueveselegir" id="lunes"> -->
                                                 </span>
                                             </div>
                                     <% } %>
@@ -226,13 +234,15 @@
                                     <% for (let i = 0; i < horario.InicioViernes.length; i++) { %>
                                         <% const element = horario.InicioViernes[i] %>
                                         <% const element2 = horario.FinViernes[i] %>
+                                            <input type="hidden" id="hiddenviernes" value="viernes">
+
                                             <div class="form-inline viernes<%=i%>">
-                                                <input name="InicioViernes" class="mb-1" type="time" value="<%=element%>" disabled>
+                                                <input name="InicioViernes" class="mb-1" type="time" id="inicioviernes<%=i %>" value="<%=element%>" disabled>
                                                 <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
-                                                <input name="FinViernes" class="mb-1 mr-2" type="time" value="<%=element2%>" disabled>
-                                                <span id="btnEliminarViernes">
-                                                    <!-- <i class="far fa-times-circle fa-2x"></i> -->
-                                                    <input type="checkbox" name="vierneselegir" id="lunes">
+                                                <input name="FinViernes" class="mb-1 mr-2" type="time" id="finviernes<%=i %>" value="<%=element2%>" disabled>
+                                                <span id="btnAddViernes" onclick="agregarCitaViernes('<%=i%>')">
+                                                    <i class="fas fa-check cursor"></i>                                                    
+                                                    <!-- <input type="checkbox" name="vierneselegir" id="lunes"> -->
                                                 </span>
                                             </div>
                                     <% } %>
@@ -276,13 +286,15 @@
                                     <% for (let i = 0; i < horario.InicioSabado.length; i++) { %>
                                         <% const element = horario.InicioSabado[i] %>
                                         <% const element2 = horario.FinSabado[i] %>
+                                        <input type="hidden" id="hiddensabado" value="sabado">
+
                                             <div class="form-inline sabado<%=i%>">
-                                                <input name="InicioSabado" class="mb-1" type="time" value="<%=element%>" disabled>
+                                                <input name="InicioSabado" class="mb-1" type="time" id="iniciosabado<%=i %>" value="<%=element%>" disabled>
                                                 <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
-                                                <input name="FinSabado" class="mb-1 mr-2" type="time" value="<%=element2%>" disabled>
-                                                <span id="btnEliminarSabado" >
-                                                    <!-- <i class="far fa-times-circle fa-2x"></i> -->
-                                                    <input type="checkbox" name="sabadoelegir" id="lunes">
+                                                <input name="FinSabado" class="mb-1 mr-2" type="time" id="finsabado<%=i %>" value="<%=element2%>" disabled>
+                                                <span id="btnAddSabado" onclick="agregarCitaSabado('<%=i%>')">
+                                                    <i class="fas fa-check cursor"></i>                                                    
+                                                    <!-- <input type="checkbox" name="sabadoelegir" id="lunes"> -->
                                                 </span>
                                             </div>
                                     <% } %>
@@ -327,14 +339,15 @@
                                     <% for (let i = 0; i < horario.InicioDomingo.length; i++) { %>
                                         <% const element = horario.InicioDomingo[i] %>
                                         <% const element2 = horario.FinDomingo[i] %>
-                                        <div class="form-inline domingo<%=i %>">
-                                            <input name="InicioDomingo" class="mb-1" type="time" value="<%=element %>" disabled>
-                                            <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
-                                            <input name="FinDomingo" class="mb-1 mr-2" type="time" value="<%=element2 %>" disabled>
-                                            <span id="btnEliminarDomingo">
-                                                <!-- <i class="far fa-times-circle fa-2x"></i> -->
-                                                <input type="checkbox" name="domingoelegir" id="lunes">
+                                        <input type="hidden" id="hiddendomingo" value="domingo">
 
+                                        <div class="form-inline domingo<%=i %>">
+                                            <input name="InicioDomingo" class="mb-1" type="time" id="iniciodomingo<%=i %>" value="<%=element %>" disabled>
+                                            <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
+                                            <input name="FinDomingo" class="mb-1 mr-2" type="time" id="findomingo<%=i %>" value="<%=element2 %>" disabled>
+                                            <span id="btnAddDomingo" onclick="agregarCitaDomingo('<%=i%>')">
+                                                <i class="fas fa-check cursor"></i>                                                    
+                                                <!-- <input type="checkbox" name="domingoelegir" id="lunes"> -->
                                             </span>
                                         </div>
                                         <% } %>

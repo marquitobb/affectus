@@ -587,7 +587,163 @@ function eliminarDomingoEditar(numero) {
     $('#addDomingo').show();
 }
 
+//Agregar cita lunes
+function agregarCitaLunes(numero){
+    console.log(numero)
+    console.log(`hiddenlunes${numero}`)
+    const hiddenlunes = $('#hiddenlunes').val();
+    const iniciolunes = $(`#iniciolunes${numero}`).val();
+    const finlunes = $(`#finlunes${numero}`).val();
+    const usuarioprofesional = $(`#usuarioprofesional`).val();
+    const idagenda = $(`#idagenda`).val();
 
+    console.log(hiddenlunes);
+    console.log(iniciolunes);
+    console.log(finlunes);
+    console.log("usuario-profesiona", usuarioprofesional);
+    console.log("idagendaregistro", idagenda);
+    agregarCitas(hiddenlunes, iniciolunes, finlunes, usuarioprofesional, idagenda);
+
+}
+
+//Agregar cita martes
+function agregarCitaMartes(numero){
+    console.log(numero)
+    const hiddenmartes = $('#hiddenmartes').val();
+    const iniciomartes = $(`#iniciomartes${numero}`).val();
+    const finmartes = $(`#finmartes${numero}`).val();
+    const usuarioprofesional = $(`#usuarioprofesional`).val();
+    const idagenda = $(`#idagenda`).val();
+    console.log(hiddenmartes);
+    console.log(iniciomartes);
+    console.log(finmartes);
+    console.log("usuario-profesiona", usuarioprofesional);
+    console.log("idagendaregistro", idagenda);
+    agregarCitas(hiddenmartes, iniciomartes, finmartes, usuarioprofesional, idagenda)
+}
+
+//Agregar cita miercoles
+function agregarCitaMiercoles(numero){
+    console.log(numero)
+    const hiddenmiercoles = $('#hiddenmiercoles').val();
+    const iniciomiercoles = $(`#iniciomiercoles${numero}`).val();
+    const finmiercoles = $(`#finmiercoles${numero}`).val();
+    const usuarioprofesional = $(`#usuarioprofesional`).val();
+    const idagenda = $(`#idagenda`).val();
+    
+    console.log(hiddenmiercoles);
+    console.log(iniciomiercoles);
+    console.log(finmiercoles);
+    console.log("usuario-profesiona", usuarioprofesional);
+    console.log("idagendaregistro", idagenda);
+    agregarCitas(hiddenmiercoles, iniciomiercoles, finmiercoles, usuarioprofesional, idagenda)
+
+}
+
+//Agregar cita jueves
+function agregarCitaJueves(numero){
+    console.log(numero)
+    const hiddenjueves = $('#hiddenjueves').val();
+    const iniciojueves = $(`#iniciojueves${numero}`).val();
+    const finjueves = $(`#finjueves${numero}`).val();
+    const usuarioprofesional = $(`#usuarioprofesional`).val();
+    const idagenda = $(`#idagenda`).val();
+    console.log(hiddenjueves);
+    console.log(iniciojueves);
+    console.log(finjueves);
+    console.log("usuario-profesiona", usuarioprofesional);
+    console.log("idagendaregistro", idagenda);
+    agregarCitas(hiddenjueves, iniciojueves, finjueves, usuarioprofesional, idagenda)
+
+}
+
+//Agregar cita viernes
+function agregarCitaViernes(numero){
+    console.log(numero)
+    const hiddenviernes = $('#hiddenviernes').val();
+    const inicioviernes = $(`#inicioviernes${numero}`).val();
+    const finviernes = $(`#finviernes${numero}`).val();
+    const usuarioprofesional = $(`#usuarioprofesional`).val();
+    const idagenda = $(`#idagenda`).val();
+    console.log(hiddenviernes);
+    console.log(inicioviernes);
+    console.log(finviernes);
+    console.log("usuario-profesiona", usuarioprofesional);
+    console.log("idagendaregistro", idagenda);
+    agregarCitas(hiddenviernes, inicioviernes, finviernes, usuarioprofesional, idagenda)
+
+}
+
+//Agregar cita saabado
+function agregarCitaSabado(numero){
+    console.log(numero)
+    const hiddensabado = $('#hiddensabado').val();
+    const iniciosabado = $(`#iniciosabado${numero}`).val();
+    const finsabado = $(`#finsabado${numero}`).val();
+    const usuarioprofesional = $(`#usuarioprofesional`).val();
+    const idagenda = $(`#idagenda`).val();
+    console.log(hiddensabado);
+    console.log(iniciosabado);
+    console.log(finsabado);
+    console.log("usuario-profesiona", usuarioprofesional);
+    console.log("idagendaregistro", idagenda);
+    agregarCitas(hiddensabado, iniciosabado, finsabado, usuarioprofesional, idagenda)
+
+}
+
+//Agregar cita domingo
+function agregarCitaDomingo(numero){
+    console.log(numero)
+    const hiddendomingo = $('#hiddendomingo').val();
+    const iniciodomingo = $(`#iniciodomingo${numero}`).val();
+    const findomingo = $(`#findomingo${numero}`).val();
+    const usuarioprofesional = $(`#usuarioprofesional`).val();
+    const idagenda = $(`#idagenda`).val();
+    console.log(hiddendomingo);
+    console.log(iniciodomingo);
+    console.log(findomingo);
+    console.log("usuario-profesiona", usuarioprofesional);
+    console.log("idagendaregistro", idagenda);
+    agregarCitas(hiddendomingo, iniciodomingo, findomingo, usuarioprofesional, idagenda)
+
+}
+
+
+function agregarCitas(dia, inicio, fin, usuarioprofesional, idagenda){
+    Swal.fire({
+        title: '¿Seguro que quieres agregar la cita?',
+        icon: 'success',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si agregala!'
+      }).then((result) => {
+        if (result.value) {
+            const url = `${location.origin}/agendar-cita/${usuarioprofesional}`
+            axios.post(url, {
+                params: {
+                    dia,
+                    inicio, 
+                    fin,
+                    usuarioprofesional, 
+                    idagenda
+                }
+            }).then(function(respuesta){
+                console.log(respuesta)
+                if (respuesta.status === 200) {
+                    Swal.fire("Correcto!", respuesta.data, "success");
+                }
+            }).catch(function(error) {
+                Swal.fire({
+                    type: "error",
+                    title: "Hubo un error",
+                    text: error.data,
+                  });
+            })
+        }
+      })
+    
+}
 
 
 $('#estadoActual').change(function () {

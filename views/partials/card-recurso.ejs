@@ -18,7 +18,9 @@
         </div>
         <div class="card-footer d-flex">
             <small class="text-muted mr-auto"><a href="/index" class="m-4">Chat Grupal</a></small>
-            <small class="text-muted mx-auto"><a href="/agendar-cita/<%=estrategia.usuario.id%>">Agendar Cita</a></small>
+            <% if(usuario.rol === '1') { %>
+                <small class="text-muted mx-auto"><a href="/agendar-cita/<%=estrategia.usuario.id%>">Agendar Cita</a></small>
+            <% } %>
             <small class="text-muted ml-auto"><a href="/chatIndividual/<%=estrategia.usuario.email%>" class="m-4">Chat
                     Individual</a></small>
         </div>

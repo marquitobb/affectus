@@ -8,7 +8,7 @@ exports.home = async (req, res) => {
         include: [
             {
                 model: Usuarios,
-                attributes: ['id', 'email', 'imagen', 'nombre'],
+                attributes: ['id', 'email', 'imagen', 'nombre', 'rol'],
                 required: true
             },
             {

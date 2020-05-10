@@ -1,4 +1,6 @@
 const Horarios = require('../models/Horarios');
+const Citas = require('../models/Citas');
+const Usuarios = require('../models/Usuarios');
 
 exports.formAgregarHorario = async (req, res) => {
     const horario = await Horarios.findOne({where: {usuarioId : req.user.id}})
@@ -253,5 +255,60 @@ exports.formAgregarCita = async (req, res) => {
     res.render('agendar-cita', {
         nombrePagina: 'Agrega Cita',
         horario
+    })
+}
+
+exports.AgregarCita = async (req, res, next) => {
+    console.log(req.body.params);
+    const {dia, inicio, fin, usuarioprofesional, idagenda} = req.body.params
+
+    const cita = {
+        dia,
+        diainicio: inicio,
+        diafin: fin,
+        usuarioprofesional,
+        usuarioId: req.user.id,
+        horarioId: idagenda
+
+    }
+
+    try {
+        await Citas.create(cita);
+        console.log('correcto')
+        res.json('Cita agregada correctamente')
+        //req.flash('exito', 'Se añadieron tus citas correctamente');
+        //res.redirect('/administracion');
+    } catch (error) {
+        console.log(error);
+        res.json('Hubo un error')
+        //res.redirect('/nueva-estrategia');
+    }
+}
+
+
+exports.formVerCitas = async(req, res) => {
+    const usuario = await Usuarios.findByPk(req.user.id, {
+        attributes: ['rol']
+    });
+    const citas = await Citas.findAll({
+        where: {usuarioprofesional: req.user.id},
+        include: [
+            {
+                model: Usuarios,
+                attributes: ['email', 'imagen', 'nombre', 'rol'],
+                required: true
+            }
+        ]
+    });
+
+    const citaspersonales = await Citas.findAll({
+        where: {usuarioId : req.user.id}
+    })
+    
+    res.render('ver-citas', {
+        nombrePagina: 'Mis citas',
+        usuario,
+        citas,
+        citaspersonales
     })
 }
