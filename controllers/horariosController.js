@@ -312,3 +312,27 @@ exports.formVerCitas = async(req, res) => {
         citaspersonales
     })
 }
+
+exports.eliminarCita = async(req, res) => {
+    console.log(req.params);
+    const cita = await Citas.findOne({where: {id: req.params.idcita, usuarioId: req.user.id}});
+
+    if (!cita) {
+        res.status(403).send('Hubo un error');
+        return next();
+    }
+
+    try {
+        //todo bien elimina el grupo
+        await Citas.destroy({
+            where: {
+                id: req.params.idcita
+            }
+        });
+    res.status(200).send('Cita Eliminada Correctamente');
+    } catch (error) {
+        console.log(error)
+        res.status(500).send('Hubo un error');
+    }
+    
+}

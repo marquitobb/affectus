@@ -745,6 +745,41 @@ function agregarCitas(dia, inicio, fin, usuarioprofesional, idagenda){
     
 }
 
+function eliminarCita(idcita) {
+    console.log(idcita)
+    
+    Swal.fire({
+        title: '¿Seguro que eliminar la cita?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminala!'
+      }).then((result) => {
+        if (result.value) {
+            const url = `${location.origin}/eliminar-cita/${idcita}`
+            axios.delete(url, {
+                params: {
+                    idcita
+                }
+            }).then(function(respuesta){
+                console.log(respuesta)
+                if (respuesta.status === 200) {
+                    Swal.fire("Correcto!", respuesta.data, "success");
+                    $('#citaspersonales').remove();
+                }
+            }).catch(function(error) {
+                Swal.fire({
+                    type: "error",
+                    title: "Hubo un error",
+                    text: error.data,
+                  });
+            })
+        }
+      })
+        
+}
+
 
 $('#estadoActual').change(function () {
     const url = `${location.origin}/estadoAffectus/` + $('#estadoActual').val();

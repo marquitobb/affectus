@@ -30,7 +30,7 @@
 
             <% if(citaspersonales.length > 0 && usuario.rol === '1') { %>
                 <% citaspersonales.forEach(cp => { %>
-                    <div class="col-md-4 pr-0">
+                    <div class="col-md-4 pr-0" id="citaspersonales">
                         <div class="form-group">
                             <label for="lunes"><%=cp.dia %></label>
                         </div>
@@ -39,11 +39,15 @@
                                 <label class="ml-4">Hora de inicio</label>
                                 <label class="ml-auto mr-5">Hora de termino</label>
                             </div>
-                            <div class="form-group mb-0 text-center">
+                            <div class="form-group mb-0 text-center" >
                                 <div class="form-inline lunes0">
                                     <input name="InicioLunes" class="mb-1" type="time" value="<%=cp.diainicio %>" disabled >
                                     <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
                                     <input name="FinLunes" class="mb-1 mr-2" type="time" value="<%=cp.diafin %>" disabled>
+                                    <span id="btnEliminarCita" onclick="eliminarCita('<%=cp.id %>');">
+                                        <i class="far fa-times-circle fa-2x cursor"></i>
+
+                                    </span>     
                                 </div>
                                 <div id="divHorariosLunes"></div>
                             </div>

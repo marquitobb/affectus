@@ -107,6 +107,9 @@ module.exports = function() {
 
     router.get('/ver-citas/:id', authController.usuarioAutenticado, horariosController.formVerCitas)
 
+    //Eliminar citas
+    router.delete('/eliminar-cita/:idcita', authController.usuarioAutenticado, horariosController.eliminarCita);
+
 
     return router; 
 };
