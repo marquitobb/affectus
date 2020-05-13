@@ -110,7 +110,7 @@
                   <label for="idioma">Idiomas que domina</label>
                   <div class="row">
                     <div class="col-md-2">
-                      <div class="form-group">
+                      <div class="form-group text-center">
                         <% if (usuario.idiomaEspanol == 1) {
                           %><input type="checkbox" name="espanol" id="espanol" checked><%
                         } else {
@@ -121,7 +121,7 @@
                     </div>
 
                     <div class="col-md-2">
-                      <div class="form-group">
+                      <div class="form-group text-center">
                         <% if (usuario.idiomaIngles == 1) {
                       %><input type="checkbox" name="ingles" id="ingles" checked><%
                     } else {
@@ -132,7 +132,7 @@
                     </div>
 
                     <div class="col-md-2">
-                      <div class="form-group">
+                      <div class="form-group text-center">
                         <% if (usuario.idiomaPortugues == 1) {
                       %><input type="checkbox" name="portugues" id="portugues" checked><%
                     } else {
@@ -142,7 +142,7 @@
                       </div>
                     </div>
                     <div class="col-md-2">
-                      <div class="form-group">
+                      <div class="form-group text-center">
                         <% if (usuario.idiomaItaliano == 1) {
                       %><input type="checkbox" name="italiano" id="italiano" checked><%
                     } else {
@@ -152,7 +152,7 @@
                       </div>
                     </div>
                     <div class="col-md-2">
-                      <div class="form-group">
+                      <div class="form-group text-center">
                         <% if (usuario.idiomaFrances == 1) {
                       %><input type="checkbox" name="frances" id="frances" checked><%
                     } else {
@@ -164,6 +164,7 @@
                   </div>
                 </div>
 
+                <!--
                 <% if (usuario.rol == 2) {
                   %>
                 <%
@@ -398,6 +399,10 @@
 
               <!--Inicio de cambiar imagen-->
               <div class="tab-pane fade" id="pills-image" role="tabpanel" aria-labelledby="pills-image-tab">
+                <div class="text-center">
+                  <a href="/imagen-perfil" class="btn btn-secondary">Editar imagen</a>
+                </div>
+
                 <!--<legend>Esta imagen se mostrará en miniatura en todas las estrategias que agregues</legend>
                 <form method="POST" enctype="multipart/form-data">
                   <div class="form-row">
@@ -417,8 +422,8 @@
                   <div class="form-group col-md-8">
                     <input type="submit" class="btn btn-primary float-right" value="Subir Imagen"></input>
                   </div>
-                </form>
-                -->
+                </form>  
+              -->
               </div>
               <!--FIN DE CAMBIAR IMAGEN-->
 

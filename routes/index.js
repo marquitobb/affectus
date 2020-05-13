@@ -105,10 +105,10 @@ module.exports = function() {
     router.post('/editar-horario', authController.usuarioAutenticado, horariosController.EditarHorario);
 
     //El usuario genera una cita
-    router.get('/agendar-cita/:id', authController.usuarioAutenticado, horariosController.formAgregarCita)
-    router.post('/agendar-cita/:id', authController.usuarioAutenticado, horariosController.AgregarCita)
+    router.get('/agendar-cita/:id', authController.usuarioAutenticado, horariosController.formAgregarCita);
+    router.post('/agendar-cita/:id', authController.usuarioAutenticado, horariosController.AgregarCita);
 
-    router.get('/ver-citas/:id', authController.usuarioAutenticado, horariosController.formVerCitas)
+    router.get('/ver-citas/:id', authController.usuarioAutenticado, horariosController.formVerCitas);
 
     //Eliminar citas
     router.delete('/eliminar-cita/:idcita', authController.usuarioAutenticado, horariosController.eliminarCita);
