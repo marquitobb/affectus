@@ -81,7 +81,7 @@ exports.formNuevaEstrategia = async (req, res) => {
 
     const [usuario, estrategias, categorias, citas] = await Promise.all(consultas);
     res.render('nueva-estrategia', {
-        nombrePagina: 'Nueva Estrategia',
+        nombrePagina: 'Nuevo Recurso',
         categorias,
         estrategias,
         nombre: usuario.nombre,

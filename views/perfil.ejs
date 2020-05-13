@@ -106,15 +106,16 @@
         <h4 class="text-center">Usuario</h4>
         <% }else { %>
         <h4 class="text-center">Profesional</h4>
-        <% if (userPerfil.estadoActual == '0') {
-          if (userPerfil.email == usuario.email) {
+        <% if (userPerfil.email == usuario.email) {
             %><a href="/nueva-estrategia" class="btn btn-success mr-2">Agregar Recurso</a>
         <a href="/editar-perfil" class="btn btn-info">Editar Perfil</a><%
           }
+         if (userPerfil.estadoActual == '0') {
           %>
         <hr><button class="btn btn-primary">Contactar</button><%
         } else {
-          %><button class="btn btn-primary" disabled>Contactar</button><%
+          %>
+        <hr><button class="btn btn-primary" disabled>Contactar</button><%
         } %>
         <button class="btn btn-danger ml-2">Reportar</button>
         <% } %>
@@ -129,58 +130,173 @@
       <div class="d-flex">
         <div class="mx-auto text-center">
           <h4>Horarios de atención</h4>
-          <p>FALTA FUNCIONALIDAD</p>
+          <h6>Representado en 24 horas</h6>
         </div>
       </div>
       <div class="row bg-light mx-2">
         <div class="col-md-2 bg-dark rounded">
           <div class="text-white text-center px-1 border-light border-bottom">
             <h6 class="px-3 pt-1 font-weight-bold">Domingo</h6>
-            <p>12:00 a.m. - 14:00 p.m.</p>
-            <p>12:00 a.m. - 14:00 p.m.</p>
+            <% if (horario) {
+              if (horario.domingo == 'on') {
+              if (horario.domingocompleto == 'on') {
+                %><p>00:00 a.m. - 23:59 p.m.</p><%
+              } else {
+                let dom = 0;
+                do {
+                  %><p><%=horario.InicioDomingo[dom]%> - <%=horario.FinDomingo[dom]%></p><%  
+                  dom++;
+                } while (horario.InicioDomingo.length > dom);
+              }
+            } else {
+              %><p>No disponible</p><%
+            }
+            } else {
+              %><p>No disponible</p><%
+            }
+             %>
           </div>
 
           <div class="mx-auto text-white text-center px-1">
             <h6 class="px-3 pt-1 font-weight-bold">Sabado</h6>
-            <p>12:00 a.m. - 14:00 p.m.</p>
+            <% if (horario) {
+              if (horario.sabado == 'on') {
+              if (horario.sabadocompleto == 'on') {
+                %><p>00:00 a.m. - 23:59 p.m.</p><%
+              } else {
+                let sab = 0;
+                do {
+                  %><p><%=horario.InicioSabado[sab]%> - <%=horario.FinSabado[sab]%></p><%  
+                  sab++;
+                } while (horario.InicioSabado.length > sab);
+              }
+            } else {
+              %><p>No disponible</p><%
+            }
+            } else {
+              %><p>No disponible</p><%
+            }
+              %>
           </div>
         </div>
 
         <div class="col-md-2 rounded border-bottom">
           <div class="mx-auto text-center px-1">
             <h6 class="pt-1 font-weight-bold">Lunes</h6>
-            <p>12:00 a.m. - 14:00 p.m.</p>
+            <% if (horario) {
+              if (horario.lunes == 'on') {
+              if (horario.lunescompleto == 'on') {
+                %><p>00:00 a.m. - 23:59 p.m.</p><%
+              } else {
+                let lun = 0;
+                do {
+                  %><p><%=horario.InicioLunes[lun]%> - <%=horario.FinLunes[lun]%></p><%  
+                  lun++;
+                } while (horario.InicioLunes.length > lun); 
+              }
+            } else {
+              %><p>No disponible</p><%
+            }
+            } else {
+              %><p>No disponible</p><%
+            }
+             %>
           </div>
         </div>
 
         <div class="col-md-2 rounded border-bottom">
           <div class="mx-auto text-center px-1">
             <h6 class="pt-1 font-weight-bold">Martes</h6>
-            <p>12:00 a.m. - 14:00 p.m.</p>
-            <p>12:00 a.m. - 14:00 p.m.</p>
-            <p>12:00 a.m. - 14:00 p.m.</p>
-            <p>12:00 a.m. - 14:00 p.m.</p>
+            <% if (horario) {
+              if (horario.martes == 'on') {
+              if (horario.martescompleto == 'on') {
+                %><p>00:00 a.m. - 23:59 p.m.</p><%
+              } else {
+                let mar = 0;
+                do {
+                  %><p><%=horario.InicioMartes[mar]%> - <%=horario.FinMartes[mar]%></p><%  
+                  mar++;
+                } while (horario.InicioMartes.length > mar);  
+              }
+            } else {
+              %><p>No disponible</p><%
+            }
+            } else {
+              %><p>No disponible</p><%
+            }
+             %>
           </div>
         </div>
 
         <div class="col-md-2 rounded border-bottom">
           <div class="mx-auto text-center px-1">
             <h6 class="pt-1 font-weight-bold">Miércoles</h6>
-            <p>12:00 a.m. - 14:00 p.m.</p>
+            <% if (horario) {
+              if (horario.miercoles == 'on') {
+              if (horario.miercolescompleto == 'on') {
+                %><p>00:00 a.m. - 23:59 p.m.</p><%
+              } else {
+                let mie = 0;
+                do {
+                  %><p><%=horario.InicioMiercoles[mie]%> - <%=horario.FinMiercoles[mie]%></p><%  
+                  mie++;
+                } while (horario.InicioMiercoles.length > mie);                
+              }
+            } else {
+              %><p>No disponible</p><%
+            }
+            } else {
+              %><p>No disponible</p><%
+            }
+             %>
           </div>
         </div>
 
         <div class="col-md-2 rounded border-bottom">
           <div class="mx-auto text-center px-1">
             <h6 class="pt-1 font-weight-bold">Jueves</h6>
-            <p>12:00 a.m. - 14:00 p.m.</p>
+            <% if (horario) {
+              if (horario.jueves == 'on') {
+              if (horario.juevescompleto == 'on') {
+                %><p>00:00 a.m. - 23:59 p.m.</p><%
+              } else {
+                let jue = 0;
+                do {
+                  %><p><%=horario.InicioJueves[jue]%> - <%=horario.FinJueves[jue]%></p><%  
+                  jue++;
+                } while (horario.InicioJueves.length > jue); 
+              }
+            } else {
+              %><p>No disponible</p><%
+            }
+            } else {
+              %><p>No disponible</p><%
+            }
+             %>
           </div>
         </div>
 
         <div class="col-md-2 rounded">
           <div class=" mx-auto text-center px-1">
             <h6 class="pt-1 font-weight-bold">Viernes</h6>
-            <p>12:00 a.m. - 14:00 p.m.</p>
+            <% if (horario) {
+              if (horario.viernes == 'on') {
+              if (horario.viernescompleto == 'on') {
+                %><p>00:00 a.m. - 23:59 p.m.</p><%
+              } else {
+                let vie = 0;
+                do {
+                  %><p><%=horario.InicioViernes[vie]%> - <%=horario.FinViernes[vie]%></p><%  
+                  vie++;
+                } while (horario.InicioViernes.length > vie); 
+              }
+            } else {
+              %><p>No disponible</p><%
+            }
+            } else {
+              %><p>No disponible</p><%
+            }
+             %>
           </div>
         </div>
       </div>
@@ -584,19 +700,49 @@
           <% } else {
             if (userPerfil.rol == 2) {
               %>
-          <h4 class="text-center">Estadisticas Profesional</h4>
-          <%
-            }
+          <div class="row border-bottom mx-3">
+            <div class="col-md-6  bg-gris d-flex">
+              <p class="my-auto mx-auto font-weight-bold">Total de publicaciones</p>
+            </div>
+            <div class="col-md-2 bg-gris d-flex">
+              <p class="my-auto mx-auto font-weight-bold"><%=estrategias.length%></p>
+            </div>
+            <div class="col-md-4 bg-gris d-flex">
+              <p class="my-auto mx-auto font-weight-bold">100%</p>
+            </div>
+          </div>
+          <% categorias.forEach(categoria => { %>
+          <div class="row border-bottom mx-3">
+            <div class="col-md-6 d-flex">
+              <p class="my-auto mx-auto font-italic"><%=categoria.nombre %></p>
+            </div>
+            <div class="col-md-2 d-flex">
+              <% let variable = 0;
+              estrategias.forEach(nombre => {
+                if (nombre.categoria.nombre == categoria.nombre) {
+                  variable++;
+                }
+              }); 
+              let porcentaje = (variable * 100) / estrategias.length;
+              %>
+              <p class="my-auto mx-auto font-italic"><%=variable%></p>
+            </div>
+            <div class="col-md-4 d-flex">
+              <p class="my-auto mx-auto font-italic"><%=porcentaje %>%</p>
+            </div>
+          </div>
+          <% }); %>
+          <% }
           } %>
         </div>
         <!--Fin de Estadisticas-->
 
         <% estrategias.forEach(estrategia => { %>
-          <% if (estrategia.usuario.email == userPerfil.email) { %>
-            <div class="mt-3">
+        <% if (estrategia.usuario.email == userPerfil.email) { %>
+        <div class="mt-3">
           <%- include('partials/card-recurso.ejs', {estrategia: estrategia}) %>
         </div>
-         <% } %>
+        <% } %>
         <% }) %>
       </div>
     </div>

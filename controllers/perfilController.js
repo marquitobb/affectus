@@ -4,6 +4,7 @@ const Estrategias = require('../models/Estrategias');
 const Categorias = require('../models/Categorias');
 const Sentimientos = require('../models/Sentimientos');
 const Citas = require('../models/Citas');
+const Horarios = require('../models/Horarios');
 
 require('dotenv').config({ path: 'variables.env' });
 const mailer = require('../misc/mailer');
@@ -19,6 +20,7 @@ exports.visualizarPerfil = async (req, res) => {
     const consultas = [];
     consultas.push(Usuarios.findByPk(req.user.id));
     consultas.push(Estrategias.findAll({
+        where: { usuarioId: userPerfil.id },
         include: [
             {
                 model: Usuarios,
@@ -34,6 +36,7 @@ exports.visualizarPerfil = async (req, res) => {
     }));
     consultas.push(Categorias.findAll());
     consultas.push(Sentimientos.findAll({
+        where: { usuarioId: userPerfil.id },
         include: [
             {
                 model: Usuarios,
@@ -41,10 +44,10 @@ exports.visualizarPerfil = async (req, res) => {
                 required: true
             }
         ]
-    }), { where: { usuarioId: userPerfil.Id } });
+    }));
     consultas.push(Citas.findAll({where: {usuarioprofesional: req.user.id}}));
-
     const [usuario, estrategias, categorias, sentimientos, citas] = await Promise.all(consultas);
+    const horario = await Horarios.findOne({ where: { usuarioId: req.user.id } });    
     res.render('perfil', {
         nombrePagina: 'Perfil',
         categorias,
@@ -53,6 +56,6 @@ exports.visualizarPerfil = async (req, res) => {
         usuario,
         userPerfil,
         sentimientos,
-        citas
+        citas, horario
     });
 };

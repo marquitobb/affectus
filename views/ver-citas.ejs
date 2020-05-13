@@ -1,8 +1,8 @@
     <div class="container mt-4">
         <h2 class="text-center mb-3"><%=nombrePagina %><h5>
-        <div class="row">
-            <% if(citas.length > 0 && usuario.rol === '2') { %>
-                <% citas.forEach(cita => { %>
+                <div class="row">
+                    <% if(citas.length > 0 && usuario.rol === '2') { %>
+                    <% citas.forEach(cita => { %>
                     <div class="col-md-4 pr-0">
                         <div class="form-group">
                             <label for="lunes"><%=cita.dia %></label>
@@ -14,22 +14,25 @@
                             </div>
                             <div class="form-group mb-0 text-center">
                                 <div class="form-inline lunes0">
-                                    <input name="InicioLunes" class="mb-1" type="time" value="<%=cita.diainicio %>" disabled >
+                                    <input name="InicioLunes" class="mb-1" type="time" value="<%=cita.diainicio %>"
+                                        disabled>
                                     <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
-                                    <input name="FinLunes" class="mb-1 mr-2" type="time" value="<%=cita.diafin %>" disabled>
+                                    <input name="FinLunes" class="mb-1 mr-2" type="time" value="<%=cita.diafin %>"
+                                        disabled>
                                 </div>
                                 <div id="divHorariosLunes"></div>
                             </div>
                             <div class="text-center mt-4">
-                                <span id="addLunes" class="alert alert-success">Cita con: <%= cita.usuario.nombre %></span>
+                                <span id="addLunes" class="alert alert-success">Cita con:
+                                    <%= cita.usuario.nombre %></span>
                             </div>
                         </div>
                     </div>
-                <% }) %>
-            <% } %>
+                    <% }) %>
+                    <% } %>
 
-            <% if(citaspersonales.length > 0 && usuario.rol === '1') { %>
-                <% citaspersonales.forEach(cp => { %>
+                    <% if(citaspersonales.length > 0 && usuario.rol === '1') { %>
+                    <% citaspersonales.forEach(cp => { %>
                     <div class="col-md-4 pr-0" id="citaspersonales">
                         <div class="form-group">
                             <label for="lunes"><%=cp.dia %></label>
@@ -39,24 +42,27 @@
                                 <label class="ml-4">Hora de inicio</label>
                                 <label class="ml-auto mr-5">Hora de termino</label>
                             </div>
-                            <div class="form-group mb-0 text-center" >
+                            <div class="form-group mb-0 text-center">
                                 <div class="form-inline lunes0">
-                                    <input name="InicioLunes" class="mb-1" type="time" value="<%=cp.diainicio %>" disabled >
+                                    <input name="InicioLunes" class="mb-1" type="time" value="<%=cp.diainicio %>"
+                                        disabled>
                                     <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
-                                    <input name="FinLunes" class="mb-1 mr-2" type="time" value="<%=cp.diafin %>" disabled>
+                                    <input name="FinLunes" class="mb-1 mr-2" type="time" value="<%=cp.diafin %>"
+                                        disabled>
                                     <span id="btnEliminarCita" onclick="eliminarCita('<%=cp.id %>');">
                                         <i class="far fa-times-circle fa-2x cursor"></i>
 
-                                    </span>     
+                                    </span>
                                 </div>
                                 <div id="divHorariosLunes"></div>
                             </div>
                         </div>
                     </div>
-                <% }) %>
-            <% } %>
-            
-            
+                    <% }) %>
+                    <% } %>
+                </div>
     </div>
-</div>
-    
+
+    <div style="height: 0px; width: 0px;">
+        <%- include('partials/barra-lateral.ejs', {nombre:usuario.nombre,estrategias: estrategias, citas}) %>
+    </div>

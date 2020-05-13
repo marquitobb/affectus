@@ -439,14 +439,16 @@ exports.formAgregarImagenPerfil = async (req, res) => {
         ]
     }));
     consultas.push(Categorias.findAll());
-    const [usuario, estrategias, categorias] = await Promise.all(consultas);
+    consultas.push(Citas.findAll({where: {usuarioprofesional: req.user.id}}));
+    const [usuario, estrategias, categorias, citas] = await Promise.all(consultas);
 
     res.render('imagen-perfil', {
         nombrePagina: 'Añade imagen de perfil',
         categorias,
         estrategias,
         nombre: usuario.nombre,
-        usuario
+        usuario,
+        citas
     });
 };
 
