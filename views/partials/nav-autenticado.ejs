@@ -31,25 +31,68 @@
         </div>
 
         <a class="mx-auto" href="/principal">
-            <img src="/img/logo.png" alt="Logo Affectus" width="100" width="100">
+            <img src="/img/logo.png" alt="Logo Affectus" width="60" width="60">
         </a>
         <div id="divisorNavExtra" class="mx-auto"></div>
 
         <div class="btn-group">
-            <a type="button" class="rounded-circle btnMasNavAut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a type="button" class="rounded-circle btnMasNavAut" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
                 <i class="fas fa-caret-down"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 <span class="dropdown-header">Opciones disponibles</span>
-                <a class="dropdown-item" style="color: rgb(206, 65, 65);" href="/principal">Principal</a>
-                <a class="dropdown-item" style="color: rgb(206, 65, 65);" href="/administracion">Administración</a>
-                <a class="dropdown-item" style="color: rgb(206, 65, 65);" href="/nueva-estrategia">Nuevo Recurso</a>
-                <a class="dropdown-item" style="color: rgb(206, 65, 65);" href="/index">Chat Grupal</a>
+                <a class="dropdown-item" href="/principal">Principal</a>
+                <% if (usuario.rol == '2') {
+                    %><a class="dropdown-item" href="/administracion">Administración</a>
+                <a class="dropdown-item" href="/nueva-estrategia">Nuevo Recurso</a><%
+                } %>
+
+                <a class="dropdown-item" href="/index">Chat Grupal</a>
                 <div class="dropdown-divider"></div>
                 <span class="dropdown-header">Idioma</span>
-                AQUI VAN LAS BANDERAS
+                <div class="row mx-0 pl-0 dropdown-item">
+                    <div class="col-md-6">
+                        <a href="">
+                            <img src="/img/españa.svg" alt="Español" width="70">
+                        </a>
+                        <span class="ml-1">Español</span>
+                    </div>                  
+                </div>
+                <div class="row mx-0 pl-0 dropdown-item">
+                    <div class="col-md-6">
+                        <a href="">
+                            <img src="/img/francia.svg" alt="Francés" width="70">
+                        </a>
+                        <span class="ml-1">Francés</span>
+                    </div>                  
+                </div>
+                <div class="row mx-0 pl-0 dropdown-item">
+                    <div class="col-md-6">
+                        <a href="">
+                            <img src="/img/inglaterra.svg" alt="Inglés" width="70">
+                        </a>
+                        <span class="ml-1">Inglés</span>
+                    </div>                  
+                </div>
+                <div class="row mx-0 pl-0 dropdown-item">
+                    <div class="col-md-6">
+                        <a href="">
+                            <img src="/img/pt.png" alt="Español" width="70">
+                        </a>
+                        <span class="ml-1">Portugués</span>
+                    </div>                  
+                </div>
+                <div class="row mx-0 pl-0 dropdown-item">
+                    <div class="col-md-6">
+                        <a href="">
+                            <img src="/img/italia.svg" alt="Italiano" width="70">
+                        </a>
+                        <span class="ml-1">Italiano</span>
+                    </div>                  
+                </div>
                 <div class="dropdown-divider"></div>
-                <a class="text-primary dropdown-item" href="/cerrar-sesion">Cerrar Sesión</a>
+                <a class="text-primary font-weight-bold dropdown-item" href="/cerrar-sesion">Cerrar Sesión</a>
             </div>
         </div>
     </div>

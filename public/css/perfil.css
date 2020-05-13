@@ -1,16 +1,60 @@
 body {
-    background-color: #08AEEA;
-    background-image: linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
+    background-color: white;
     height: 100vh;
 }
 
 .perfilEncabezado {
     height: auto;
     width: 100%;
+}
+
+.efectoPerfil {
     border: 1.5px solid silver;
-    border-radius: 25px;
+    border-radius: 15px;
     background-color: white;
-    -webkit-box-shadow: 20px 9px 24px -4px rgba(255, 255, 255, 1);
-    -moz-box-shadow: 20px 9px 24px -4px rgba(255, 255, 255, 1);
-    box-shadow: 20px 9px 24px -4px rgba(255, 255, 255, 1);
+    -webkit-box-shadow: 20px 9px 24px -4px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: 20px 9px 24px -4px rgba(0, 0, 0, 0.6);
+    box-shadow: 20px 9px 24px -4px rgba(0, 0, 0, 0.6);
+}
+
+.borderConectado {
+    border: 4px solid #5cb85c;
+}
+
+.borderAusente {
+    border: 4px solid rgb(255, 238, 0);
+}
+
+.borderNoDisponible {
+    border: 4px solid rgb(255, 51, 0);
+}
+
+.textoCard {
+    width: 100%;
+    height: auto;
+    padding: 5px 15px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    transition: all 1s;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.textoCard:hover {
+    width: 100%;
+    white-space: initial;
+    overflow:visible;
+    cursor: pointer;
+}
+
+.decoracionText:active, .decoracionText:link {
+    text-decoration: none;
+}
+
+.chatPrincipal:hover {
+    background-color: rgba(0, 0, 0, 0.3);
 }

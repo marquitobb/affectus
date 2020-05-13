@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap');
 
 body {
-    background-color: #8EC5FC;
-    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+    background-color: white;
     font-family: montserrat;
     height: 100vh;
     overflow: visible;
@@ -19,7 +18,8 @@ body {
     text-shadow: 2px 2px 5px white;
 }
 
-.fondo, .fondoRegistro {
+.fondo,
+.fondoRegistro {
     position: relative;
     top: 30%;
     left: 50%;
@@ -31,14 +31,14 @@ body {
     box-shadow: 10px 10px 50px 0px rgba(133, 133, 133, 1);
 }
 
-@media screen and (max-width: 400px){
+@media screen and (max-width: 400px) {
     .fondo {
         width: 100%;
     }
 
     .fondoRegistro {
         width: 100%;
-        margin-top: 20%;
+        margin-top: 26%;
         margin-bottom: 5%;
     }
 
@@ -48,13 +48,14 @@ body {
     }
 }
 
-@media screen and (max-width: 600px) and (min-width: 400px){
+@media screen and (max-width: 600px) and (min-width: 400px) {
     .fondo {
         width: 80%;
     }
+
     .fondoRegistro {
         width: 80%;
-        margin-top: 15%;
+        margin-top: 25%;
         margin-bottom: 5%;
     }
 
@@ -64,13 +65,14 @@ body {
     }
 }
 
-@media screen and (max-width: 800px) and (min-width: 600px){
+@media screen and (max-width: 800px) and (min-width: 600px) {
     .fondo {
         width: 60%;
     }
+
     .fondoRegistro {
         width: 60%;
-        margin-top: 10%;
+        margin-top: 18%;
         margin-bottom: 5%;
     }
 
@@ -80,10 +82,11 @@ body {
     }
 }
 
-@media screen and (max-width: 1000px) and (min-width: 800px){
+@media screen and (max-width: 1000px) and (min-width: 800px) {
     .fondo {
         width: 50%;
     }
+
     .fondoRegistro {
         width: 60%;
         margin-top: 5%;
@@ -95,19 +98,20 @@ body {
         box-sizing: border-box;
     }
 
-    .paddingContra{
+    .paddingContra {
         padding-right: 0%;
     }
 
     .paddingConfirmContra {
-    padding-left: 0;
+        padding-left: 0;
     }
 }
 
-@media screen and (max-width: 1250px) and (min-width: 1000px){
+@media screen and (max-width: 1250px) and (min-width: 1000px) {
     .fondo {
         width: 40%;
     }
+
     .fondoRegistro {
         width: 50%;
         margin-top: 5%;
@@ -119,22 +123,23 @@ body {
         box-sizing: border-box;
     }
 
-    .paddingContra{
+    .paddingContra {
         padding-right: 0%;
     }
 
     .paddingConfirmContra {
-    padding-left: 0;
+        padding-left: 0;
     }
 }
 
-@media screen and (max-width: 1500px) and (min-width: 1250px){
+@media screen and (max-width: 1500px) and (min-width: 1250px) {
     .fondo {
         width: 35%;
     }
+
     .fondoRegistro {
         width: 50%;
-        margin-top: 0%;
+        margin-top: 2%;
         margin-bottom: 5%;
     }
 
@@ -144,10 +149,11 @@ body {
     }
 }
 
-@media screen and (min-width: 1500px){
+@media screen and (min-width: 1500px) {
     .fondo {
         width: 30%;
     }
+
     .fondoRegistro {
         width: 50%;
         margin-top: 0%;
@@ -187,18 +193,20 @@ form .campos {
     margin: 0px 20px;
 }
 
-form label{
+form label {
     font-size: 16px;
     color: #ADADAD;
 }
 
-.divisor{
+.divisor {
     margin: 30px 0;
 }
 
 .campos input[type="password"],
 .campos input[type="email"],
-.campos input[type="text"] {
+.campos input[type="text"],
+.campos input[type="date"],
+.campos select {
     width: 100%;
     padding: 0px 5px;
     margin-bottom: 0;
@@ -209,7 +217,14 @@ form label{
     outline: none;
 }
 
-.campos label{
+.campos input[type=date]:required:invalid::-webkit-datetime-edit {
+    color: transparent;
+}
+.campos input[type=date]:focus::-webkit-datetime-edit {
+    color: #ADADAD !important;
+}
+
+.campos label {
     position: absolute;
     top: 50%;
     left: 5px;
@@ -220,7 +235,7 @@ form label{
     transition: .5s;
 }
 
-.campos span::before{
+.campos span::before {
     content: '';
     position: absolute;
     top: 40px;
@@ -229,31 +244,40 @@ form label{
     height: 2px;
     background: #2691d9;
 }
-.campos input[type="password"]:focus ~ label,
-.campos input[type="password"]:valid ~ label,
-.campos input[type="email"]:focus ~ label,
-.campos input[type="email"]:valid ~ label,
-.campos input[type="text"]:focus ~ label,
-.campos input[type="text"]:valid ~ label{
+
+.campos input[type="password"]:focus~label,
+.campos input[type="password"]:valid~label,
+.campos input[type="email"]:focus~label,
+.campos input[type="email"]:valid~label,
+.campos input[type="text"]:focus~label,
+.campos input[type="text"]:valid~label,
+.campos input[type="date"]:focus~label,
+.campos input[type="date"]:valid~label,
+.campos select:focus~label,
+.campos select:valid~label {
     top: -5px;
     color: #2691d9;
 }
 
-.campos input[type="password"]:focus ~ span::before,
-.campos input[type="password"]:valid ~ span::before,
-.campos input[type="email"]:focus ~ span::before,
-.campos input[type="email"]:valid ~ span::before,
-.campos input[type="text"]:focus ~ span::before,
-.campos input[type="text"]:valid ~ span::before{
+.campos input[type="password"]:focus~span::before,
+.campos input[type="password"]:valid~span::before,
+.campos input[type="email"]:focus~span::before,
+.campos input[type="email"]:valid~span::before,
+.campos input[type="text"]:focus~span::before,
+.campos input[type="text"]:valid~span::before,
+.campos input[type="date"]:focus~span::before,
+.campos input[type="date"]:valid~span::before,
+.campos select:focus~span::before,
+.campos select:valid~span::before {
     width: 100%;
 }
 
-.pass{
+.pass {
     text-align: center;
     margin: 15px 0;
 }
 
-.pass a{
+.pass a {
     color: #a6a6a6;
     text-decoration: none;
 }
@@ -262,7 +286,7 @@ form label{
     text-decoration: underline;
 }
 
-input[type="submit"]{
+input[type="submit"] {
     width: 100%;
     height: 50px;
     border: 1px solid;
@@ -275,43 +299,43 @@ input[type="submit"]{
     outline: none;
 }
 
-input[type="submit"]:hover{
+input[type="submit"]:hover {
     border: 10px solid #2691d9;
     transition: 1s;
 }
 
-.unete2{
+.unete2 {
     margin-top: 30px;
     text-align: center;
     font-size: 16px;
     color: #666666;
 }
 
-.unete{
+.unete {
     margin: 30px 0;
     text-align: center;
     font-size: 16px;
     color: #666666;
 }
 
-.unete a{
+.unete a {
     color: #2691d9;
     text-decoration: none;
 }
 
-.unete a:hover{
+.unete a:hover {
     text-decoration: underline;
 }
 
-.check{
+.check {
     margin: 20px 0;
     text-align: center;
 }
 
-.check label{
+.check label {
     color: #666666;
 }
 
-.check label:hover{
+.check label:hover {
     color: #2691d9;
 }
