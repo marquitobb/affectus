@@ -3,12 +3,12 @@ const Usuarios = require('../models/Usuarios');
 const Categorias = require('../models/Categorias');
 
 
-exports.home = async (req, res) => {
+exports.home = async(req, res) => {
     const estrategias = await Estrategias.findAll({
         include: [
             {
                 model: Usuarios,
-                attributes: ['email', 'imagen', 'nombre'],
+                attributes: ['id', 'email', 'imagen', 'nombre', 'rol'],
                 required: true
             },
             {

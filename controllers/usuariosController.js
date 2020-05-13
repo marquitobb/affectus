@@ -3,6 +3,8 @@ const Saluds = require('../models/datosSalud');
 const Estrategias = require('../models/Estrategias');
 const Categorias = require('../models/Categorias');
 const Sentimientos = require('../models/Sentimientos');
+const Citas = require('../models/Citas');
+
 const randomstring = require('randomstring');
 require('dotenv').config({ path: 'variables.env' });
 const mailer = require('../misc/mailer');
@@ -141,7 +143,14 @@ exports.verificarCorreo = async (req, res, next) => {
 
 //crea la cuentad el usaurio
 exports.crearCuenta = async (req, res, next) => {
-    const usuario = req.body;
+    const usuario = req.body;    
+
+    let rol;
+    if (req.body.rol == 'on') {
+        rol = 2;
+    } else {
+        rol = 1;
+    }
 
     //validacion de campos
     req.checkBody('confirmar', 'El password confirmado no puede ir vacio').notEmpty();
@@ -163,8 +172,12 @@ exports.crearCuenta = async (req, res, next) => {
 
         //Bandera la cuenta como inactivo
         usuario.activo = false;
-        usuario.rol = 0;
-
+        usuario.rol = rol;
+        usuario.estadoActual = '2';
+        usuario.fechanacimiento = req.body.fechanacimiento;
+        usuario.aPaterno = req.body.aPaterno;
+        usuario.aMaterno = req.body.aMaterno;
+        usuario.genero = req.body.genero;
         await Usuarios.create(usuario);
 
         //Se crea el correo electrónico
@@ -174,6 +187,7 @@ exports.crearCuenta = async (req, res, next) => {
         <br/> <br/>
         Please verify your email on the following page:
         <a href="${process.env.HOST}:${process.env.PORT}/verificar/${secretToken}">${process.env.HOST}:${process.env.PORT}/verificar/${secretToken}</a>
+        <a href="${process.env.HOST}/verificar/${secretToken}">${process.env.HOST}/verificar/${secretToken}</a>
         <br/> <br/>
         Have a pleasant day!`;
 
@@ -183,6 +197,8 @@ exports.crearCuenta = async (req, res, next) => {
         req.flash('exito', 'Se creo la cuenta correctamente, favor de confirmarla en su correo');
         res.redirect('/iniciar-sesion');
     } catch (error) {
+        //console.log(error);
+
         //extraer unicamente el message de los errores
         const erroresSequelize = error.errors.map(err => err.message);
 
@@ -200,6 +216,7 @@ exports.crearCuenta = async (req, res, next) => {
 
         req.flash('error', listaErrores);
         res.redirect('/crear-cuenta');
+
     }
 };
 
@@ -262,12 +279,14 @@ exports.formEditarPerfil = async (req, res, next) => {
             }
         ]
     }));
-    const [estrategias] = await Promise.all(consultas);
+    consultas.push(Citas.findAll({where: {usuarioprofesional: req.user.id}}));
+    const [estrategias, citas] = await Promise.all(consultas);
     const usuario = await Usuarios.findByPk(req.user.id);
     res.render('editar-perfil', {
         nombrePagina: 'Editar Perfil',
         usuario,
-        estrategias
+        estrategias,
+        citas
     });
 };
 
@@ -281,12 +300,47 @@ exports.EditarPerfil = async (req, res, next) => {
     req.sanitizeBody('direccion');
     req.sanitizeBody('ocupacion');
     req.sanitizeBody('discapacidad');
-
+    req.sanitizeBody('whatsapp');
+    req.sanitizeBody('cualidades');
+    req.sanitizeBody('aPaterno');
+    req.sanitizeBody('aMaterno');
+    req.sanitizeBody('aboutme');
+    req.sanitizeBody('nacionalidad');
 
     const usuario = await Usuarios.findByPk(req.user.id);
-    console.log(req.body);
     //leer valores
-    const { nombre, descripcion, email, genero, fechanacimiento, ocupacion, direccion, discapacidad, telefono } = req.body;
+
+    const { nombre, descripcion, email, genero, fechanacimiento, ocupacion, direccion, discapacidad, telefono, whatsapp, cualidades, aMaterno, aPaterno, aboutme, nacionalidad } = req.body;
+
+    if (req.body.espanol == 'on') {        
+        usuario.idiomaEspanol = true;
+    } else {
+        usuario.idiomaEspanol = false;
+    }
+
+    if (req.body.portugues == 'on') {
+        usuario.idiomaPortugues = true;
+    } else {
+        usuario.idiomaPortugues = false;
+    }
+
+    if (req.body.ingles == 'on') {
+        usuario.idiomaIngles = true;
+    } else {
+        usuario.idiomaIngles = false;
+    }
+
+    if (req.body.italiano == 'on') {
+        usuario.idiomaItaliano = true;
+    } else {
+        usuario.idiomaItaliano = false;
+    }
+
+    if (req.body.frances == 'on') {
+        usuario.idiomaFrances = true;
+    } else {
+        usuario.idiomaFrances = false;
+    }
 
     //Asignar valores
     usuario.nombre = nombre;
@@ -298,16 +352,41 @@ exports.EditarPerfil = async (req, res, next) => {
     usuario.direccion = direccion;
     usuario.discapacidad = discapacidad;
     usuario.telefono = telefono;
+    usuario.whatsapp = whatsapp;
+    usuario.cualidades = cualidades;
+    usuario.aMaterno = aMaterno;
+    usuario.aPaterno = aPaterno;
+    usuario.aboutme = aboutme;
+    usuario.nacionalidad = nacionalidad;    
 
     //guardar en db
-    await usuario.save();
-    req.flash('exito', 'Cambios guardados correctamente');
-    res.redirect('/administracion');
+    try {
+        await usuario.save();
+        req.flash('exito', 'Cambios guardados correctamente');
+        res.redirect('/principal');
+    } catch (error) {
+        console.log(error);
+        req.flash('exito', 'Cambios guardados correctamente');
+        res.redirect('/principal');
+    }
 };
 
-exports.formCambiarPassword = (req, res) => {
+exports.formCambiarPassword = async (req, res) => {
+    const consultas = [];
+    consultas.push(Usuarios.findByPk(req.user.id));
+    consultas.push(Estrategias.findAll({ where: { usuarioId: req.user.id } }));
+    consultas.push(Categorias.findAll());
+    consultas.push(Citas.findAll({where: {usuarioprofesional: req.user.id}}));
+
+
+    const [usuario, estrategias, categorias, citas] = await Promise.all(consultas);
     res.render('cambiar-password', {
-        nombrePagina: 'Cambiar password'
+        nombrePagina: 'Cambiar password',
+        nombre: usuario.nombre,
+        estrategias,
+        categorias, 
+        usuario,
+        citas
     });
 };
 
@@ -343,10 +422,30 @@ exports.CambiarPassword = async (req, res, next) => {
 
 //form para agregar imagen
 exports.formAgregarImagenPerfil = async (req, res) => {
-    const usuario = await Usuarios.findByPk(req.user.id);
+    const consultas = [];
+    consultas.push(Usuarios.findByPk(req.user.id));
+    consultas.push(Estrategias.findAll({
+        include: [
+            {
+                model: Usuarios,
+                attributes: ['email', 'imagen', 'nombre'],
+                required: true
+            },
+            {
+                model: Categorias,
+                attributes: ['nombre'],
+                required: true
+            }
+        ]
+    }));
+    consultas.push(Categorias.findAll());
+    const [usuario, estrategias, categorias] = await Promise.all(consultas);
 
     res.render('imagen-perfil', {
         nombrePagina: 'Añade imagen de perfil',
+        categorias,
+        estrategias,
+        nombre: usuario.nombre,
         usuario
     });
 };
@@ -405,6 +504,7 @@ exports.olvidarContrasena = async (req, res, next) => {
     <br/> <br/>
     Recover your password on the following link:
     <a href="${process.env.HOST}:${process.env.PORT}/recuperar-pass/${secretToken}">${process.env.HOST}:${process.env.PORT}/recuperar-pass/${secretToken}</a>
+    <a href="${process.env.HOST}/recuperar-pass/${secretToken}">${process.env.HOST}/recuperar-pass/${secretToken}</a>
     <br/> <br/>
     Have a pleasant day!`;
 
@@ -457,7 +557,7 @@ exports.recoverPass = async (req, res, next) => {
         const usuario = await Usuarios.findOne({ where: { secretToken } });
 
         const secret = randomstring.generate();
-        usuario.secretToken = secret;       
+        usuario.secretToken = secret;
         //si el password es correcto el nuevo lo hasheamos
         const hash = usuario.hashPassword(user.password);
 
@@ -471,11 +571,12 @@ exports.recoverPass = async (req, res, next) => {
         <br/> <br/>
         If it was not you, please recover your password at the following link:
         <a href="${process.env.HOST}:${process.env.PORT}/recuperar-pass/${secret}">${process.env.HOST}:${process.env.PORT}/recuperar-pass/${secret}</a>
+        <a href="${process.env.HOST}/recuperar-pass/${secret}">${process.env.HOST}/recuperar-pass/${secret}</a>
         <br/> <br/>
         Have a pleasant day!`;
-    
+
         //Envío de correo
-        await mailer.sendEmail('Affectus', usuario.email, 'Affectus: Recover your password !!', html);
+        await mailer.sendEmail('Affectus', usuario.email, 'Affectus: Password Changed !!', html);
 
         req.flash('exito', 'Se ha modificado tu contraseña de forma exitosa.');
         res.redirect('/iniciar-sesion');
@@ -492,10 +593,10 @@ exports.saveDatos = async (req, res, next) => {
     req.sanitizeBody('temperatura');
     req.sanitizeBody('estatura');
     req.sanitizeBody('presion');
-
+    
     const datos = req.body;
     datos.usuarioId = req.user.id;
-    
+
     const usuario = await Usuarios.findByPk(req.user.id);
 
     usuario.familiarEnfermedad = req.body.problemasfamiliares;
@@ -511,23 +612,23 @@ exports.saveDatos = async (req, res, next) => {
             req.flash('exito', 'Se insertaron los campos correctamente');
         }
 
-        if(req.body.sentimiento != ''){
+        if (req.body.sentimiento != '') {
             await Sentimientos.create(datos);
         }
 
-        if (req.body.tipovivienda == '--Selecciona una opcion--'){
+        if (req.body.tipovivienda == '--Selecciona una opcion--') {
             usuario.vivienda = '';
         }
 
-        if (req.body.habitantes == '--Selecciona una opcion--'){
+        if (req.body.habitantes == '--Selecciona una opcion--') {
             usuario.viviendo = '';
         }
 
-        if (req.body.mascotas == '--Selecciona una opcion--'){
+        if (req.body.mascotas == '--Selecciona una opcion--') {
             usuario.mascota = '';
         }
 
-        if (req.body.alimentacion == '--Selecciona una opcion--'){
+        if (req.body.alimentacion == '--Selecciona una opcion--') {
             usuario.alimentacion = '';
         }
         usuario.save();
@@ -535,5 +636,20 @@ exports.saveDatos = async (req, res, next) => {
 
     } catch (e) {
         console.log(e);
+    }
+};
+
+//Método que se ejecuta para cambiar el estado del usuario
+exports.updateEstado = async (req, res, next) => {
+    const estado = req.params.estado;
+    const usuario = await Usuarios.findByPk(req.user.id);
+
+    usuario.estadoActual = estado;
+    try {
+        await usuario.save();
+        res.status(200).send('Estado actualizado correctamente');
+
+    } catch (error) {
+        res.status(403).send('Hubo un error');
     }
 };

@@ -9,13 +9,13 @@ exports.index = async (req, res) => {
         usuario: req.user.email,
         categorias
     });
-}
+};
 
 exports.chat = (req, res) => {
     res.render('chat', {
         nombrePagina: 'Chat'
     });
-}
+};
 
 exports.chatIndividual = (req, res) => {
     //console.log("usuario envia", req.user.email);
@@ -25,4 +25,4 @@ exports.chatIndividual = (req, res) => {
         usuarioEnvia: req.user.email,
         usuarioRecibe : req.params.emailRecibe
     });
-}
+};

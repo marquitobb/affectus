@@ -9,6 +9,8 @@ const Usuarios = db.define('usuarios', {
         autoIncrement: true
     },
     nombre: Sequelize.STRING(60),
+    aPaterno: Sequelize.STRING(60),
+    aMaterno: Sequelize.STRING(60),
     imagen: Sequelize.STRING(60),
     secretToken: Sequelize.STRING(60),
     email:{
@@ -81,6 +83,36 @@ const Usuarios = db.define('usuarios', {
     },
     alimentacion: {
         type: Sequelize.STRING(10)
+    },
+    estadoActual: {
+        type: Sequelize.STRING(1)
+    },
+    whatsapp: {
+        type: Sequelize.STRING(10)
+    },
+    cualidades: {
+        type: Sequelize.STRING(500)
+    },
+    aboutme: {
+        type: Sequelize.STRING(500)
+    },
+    nacionalidad: {
+        type: Sequelize.STRING(30)
+    },
+    idiomaEspanol: {
+        type: Sequelize.BOOLEAN
+    },
+    idiomaIngles: {
+        type: Sequelize.BOOLEAN
+    },
+    idiomaPortugues: {
+        type: Sequelize.BOOLEAN
+    },
+    idiomaFrances: {
+        type: Sequelize.BOOLEAN
+    },
+    idiomaItaliano: {
+        type: Sequelize.BOOLEAN
     }
 }, {
     hooks: {
@@ -93,12 +125,12 @@ const Usuarios = db.define('usuarios', {
 //Metodo para comparar los passwords 
 Usuarios.prototype.validarPassword = function(password){
     return bcrypt.compareSync(password, this.password);
-}
+};
 
 //
 Usuarios.prototype.hashPassword = function(password){
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 
-}
+};
 
 module.exports = Usuarios;

@@ -20,6 +20,8 @@ const db = require('./config/db');
     require('./models/Grupos');
     require('./models/Sentimientos');
     require('./models/datosSalud');
+    require('./models/Horarios');
+    require('./models/Citas');
 
     db.sync().then(() => console.log('DB CONECTADA')).catch((error) => console.log(error));
 
@@ -30,7 +32,7 @@ require('dotenv').config({path: 'variables.env'});
 const app = express();
 
 //Sockets
-const server = http.createServer(app)
+const server = http.createServer(app);
 const io = socketio.listen(server);
 require('./sockets')(io);
 require('./socketsSingle')(io);

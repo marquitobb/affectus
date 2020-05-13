@@ -9,9 +9,12 @@ const estrategiasController = require('../controllers/estrategiasController');
 const socketsController = require('../controllers/socketsController');
 const sentimientosController = require('../controllers/sentimientosController');
 const principalController = require('../controllers/principalController');
+const horariosController = require('../controllers/horariosController');
+const perfilController = require('../controllers/perfilController');
+
 
 module.exports = function() {
-    router.get('/', authController.usuarioAutenticado, homeController.home);
+    router.get('/', homeController.home);
 
     //Abre el form de crear cuenta
     router.get('/crear-cuenta', usuariosController.formCrearCuenta);
@@ -35,8 +38,9 @@ module.exports = function() {
     router.post('/iniciar-sesion', authController.autenticarUsuario);
 
     //Cerrar sesión
-    router.get('/cerrar-sesion', authController.usuarioAutenticado,  authController.CS);
+    router.get('/cerrar-sesion', authController.usuarioAutenticado, authController.CS);
 
+    //Chat
     router.get('/index', authController.usuarioAutenticado, socketsController.index);
     router.get('/chat', authController.usuarioAutenticado, socketsController.chat);
 
@@ -88,5 +92,29 @@ module.exports = function() {
 
     //Datos Personales
     router.post('/datos-personales', authController.usuarioAutenticado, usuariosController.saveDatos);
+
+    //Cambiar el estado en el que se encuantra el usuario
+    router.post('/estadoAffectus/:estado', authController.usuarioAutenticado, usuariosController.updateEstado);
+
+
+    //Agrega horarios el psicologo
+    router.get('/agregar-horario', authController.usuarioAutenticado, horariosController.formAgregarHorario);
+    router.post('/agregar-horario', authController.usuarioAutenticado, horariosController.agregarHorarios);
+    //Edita horarios el psicologo
+    router.get('/editar-horario', authController.usuarioAutenticado, horariosController.formEditarHorario);
+    router.post('/editar-horario', authController.usuarioAutenticado, horariosController.EditarHorario);
+
+    //El usuario genera una cita
+    router.get('/agendar-cita/:id', authController.usuarioAutenticado, horariosController.formAgregarCita)
+    router.post('/agendar-cita/:id', authController.usuarioAutenticado, horariosController.AgregarCita)
+
+    router.get('/ver-citas/:id', authController.usuarioAutenticado, horariosController.formVerCitas)
+
+    //Eliminar citas
+    router.delete('/eliminar-cita/:idcita', authController.usuarioAutenticado, horariosController.eliminarCita);
+
+    //Ruta para ir al perfil
+    router.get('/perfil/:correo', authController.usuarioAutenticado, perfilController.visualizarPerfil);
     return router;
+
 };

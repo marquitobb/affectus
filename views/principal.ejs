@@ -1,11 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/perfil.css">
+</head>
+
+<body>
+
+</body>
+
+</html>
+
 <div class="container">
-    <h1><%=nombre %>, <%=nombrePagina %></h1>
+    <h1><%=nombre %>, BIENVENIDO DE NUEVO</h1>
     <hr>
+    <% if (usuario.rol == 1) {
+        %>
     <div id="sentimientosPrincipal">
         <div class="d-flex">
             <h4 class="mx-auto">¿Cómo te sientes hoy?</h4>
             <div id="cerrarSentimientosPrincipal">
-                <button class="btn btn-light"><i class="fas fa-times"></i></button>                
+                <button class="btn btn-light"><i class="fas fa-times"></i></button>
             </div>
         </div>
         <div class="row mx-auto">
@@ -53,12 +70,24 @@
         </div>
         <hr>
     </div>
+    <%
+    } %>
+
     <div class="row">
         <% estrategias.forEach(estrategia => { %>
-        <%- include('partials/card-recurso.ejs', {estrategia: estrategia}) %>
+        <div class="col-md-6 mb-3">
+            <%- include('partials/card-recurso.ejs', {estrategia: estrategia}) %>
+        </div>
         <% }) %>
     </div>
 </div>
-<div class="page-wrapper chiller-theme toggled">
-    <%- include('partials/barra-lateral.ejs') %>
+<div style="height: 0px; width: 0px;">
+    <%- include('partials/barra-lateral.ejs', {nombre:usuario.nombre ,estrategias: estrategias, citas}) %>
 </div>
+
+<a class="ir-arriba" javascript:void(0) title="Volver arriba">
+    <span class="fa-stack">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-arrow-up fa-stack-1x fa-inverse"></i>
+    </span>
+</a>

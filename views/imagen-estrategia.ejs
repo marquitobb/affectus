@@ -7,34 +7,40 @@
                 <input type="file" multiple class="form-control" id="archivos" name="archivos">
             </div>
         </div>
-        <div class="form-group eliminar-estrategia" >
-                <input type="hidden" id="idEstrategia" value="<%=estrategia.id%>">
-                <% for (let i = 0; i < estrategia.archivos.length; i++) { %>
-                    <% const element = estrategia.archivos[i] %>
-                    <% if(element.includes('.pdf')) { %>
-                        <div id="divArchivos" class="d-inline pr-4" >
-                            <i  class="cursor fas fa-times-circle " onclick="EliminarArchivoEstrategia" data-id="<%=element%>">
-                                <div class="">
-                                    <i class="tamano far fa-file-pdf">
-                                    </i> 
-                                </div>
-                            </i>
-                        </div>
-                    <% } else { %>
-                        <div id="divArchivos" class="d-inline pr-4" >
-                            <i  class="cursor fas fa-times-circle " onclick="EliminarArchivoEstrategia" data-id="<%=element%>">
-                                <div class="">
-                                    <img src="/uploads/estrategias/<%=element%>" width="100">
-                                </div>
-                            </i>
-                        </div>
-                    <% } %>
-                    
-                <% } %>
+        <a class="ir-arriba" javascript:void(0) title="Volver arriba">
+            <span class="fa-stack">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-arrow-up fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+        <div class="form-group eliminar-estrategia">
+            <input type="hidden" id="idEstrategia" value="<%=estrategia.id%>">
+            <% for (let i = 0; i < estrategia.archivos.length; i++) { %>
+            <% const element = estrategia.archivos[i] %>
+            <% if(element.includes('.pdf')) { %>
+            <div id="divArchivos" class="d-inline pr-4">
+                <i class="cursor fas fa-times-circle " onclick="EliminarArchivoEstrategia" data-id="<%=element%>">
+                    <div class="">
+                        <i class="tamano far fa-file-pdf">
+                        </i>
+                    </div>
+                </i>
+            </div>
+            <% } else { %>
+            <div id="divArchivos" class="d-inline pr-4">
+                <i class="cursor fas fa-times-circle " onclick="EliminarArchivoEstrategia" data-id="<%=element%>">
+                    <div class="">
+                        <img src="/uploads/estrategias/<%=element%>" width="100">
+                    </div>
+                </i>
+            </div>
+            <% } %>
+
+            <% } %>
         </div>
-        
+
         <div class="form-group">
             <input type="submit" class="btn btn-primary float-right" value="Subir Imagen"></input>
         </div>
-  </form>
+    </form>
 </div>
