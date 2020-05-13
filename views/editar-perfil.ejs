@@ -13,6 +13,10 @@
           aria-controls="pills-home" aria-selected="true">Datos Personales</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" id="pills-image-tab" data-toggle="pill" href="#pills-image" role="tab"
+          aria-controls="pills-image" aria-selected="false">Cambiar imagen</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
           aria-controls="pills-profile" aria-selected="false">Datos de Familiares Cercanos</a>
       </li>
@@ -25,48 +29,142 @@
             <div class="tab-content" id="pills-tabContent">
               <!-- INICIO DATOS PERFIL -->
               <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                <div class="form-group">
-                  <label for="nombre">Nombre</label>
-                  <input maxlength="60" type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre"
-                    value="<%=usuario.nombre%>" title="El nombre debe contener únicamente letras" pattern="^[A-ZÑÁÉÍÓÚa-zñáéíóú]+[.]*([ ]*[A-ZÑÁÉÍÓÚa-zñáéíóú]*)*">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="nombre">Nombre</label>
+                      <input maxlength="60" required type="text" class="form-control" id="nombre" placeholder="Nombre"
+                        name="nombre" value="<%=usuario.nombre%>" title="El nombre debe contener únicamente letras"
+                        pattern="^[A-ZÑÁÉÍÓÚa-zñáéíóú]+[.]*([ ]*[A-ZÑÁÉÍÓÚa-zñáéíóú]*)*">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="aPaterno">Apellido Paterno</label>
+                      <input maxlength="60" required type="text" class="form-control" id="aPaterno"
+                        placeholder="Apellido Paterno" name="aPaterno" value="<%=usuario.aPaterno%>"
+                        title="El apellido paterno debe contener únicamente letras"
+                        pattern="^[A-ZÑÁÉÍÓÚa-zñáéíóú]+([ ]*[A-ZÑÁÉÍÓÚa-zñáéíóú]*)*">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="aMaterno">Apellido Materno</label>
+                      <input maxlength="60" type="text" class="form-control" id="aMaterno"
+                        placeholder="Apellido Materno" name="aMaterno" value="<%=usuario.aMaterno%>"
+                        title="El apellido materno debe contener únicamente letras"
+                        pattern="^[A-ZÑÁÉÍÓÚa-zñáéíóú]+([ ]*[A-ZÑÁÉÍÓÚa-zñáéíóú]*)*">
+                    </div>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label for="aPaterno">Apellido Paterno</label>
-                  <input maxlength="60" type="text" class="form-control" id="aPaterno" placeholder="Apellido Paterno" name="aPaterno"
-                    value="<%=usuario.aPaterno%>" title="El apellido paterno debe contener únicamente letras" pattern="^[A-ZÑÁÉÍÓÚa-zñáéíóú]+([ ]*[A-ZÑÁÉÍÓÚa-zñáéíóú]*)*">
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="nombre">Email</label>
+                      <input type="text" required class="form-control" id="email" placeholder="email" name="email"
+                        value="<%=usuario.email%>">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="WhatsApp">WhatsApp (Opcional)</label>
+                      <input type="text" minlength="10" maxlength="10" class="form-control" id="whatsapp"
+                        placeholder="1234567890" name="whatsapp" value="<%=usuario.whatsapp%>"
+                        title="El número debe contener 10 dígitos" pattern="^[0-9]{10}*">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="nacionalidad">Nacionalidad</label>
+                      <input maxlength="50" class="form-control" name="nacionalidad" placeholder="Ingrese nacionalidad"
+                        value="<%=usuario.nacionalidad%>">
+                    </div>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label for="aMaterno">Apellido Materno</label>
-                  <input maxlength="60" type="text" class="form-control" id="aMaterno" placeholder="Apellido Materno" name="aMaterno"
-                    value="<%=usuario.aMaterno%>" title="El apellido materno debe contener únicamente letras" pattern="^[A-ZÑÁÉÍÓÚa-zñáéíóú]+([ ]*[A-ZÑÁÉÍÓÚa-zñáéíóú]*)*">
-                </div>
+
                 <div class="form-group">
                   <label for="descripcion">Mi descripción</label>
                   <textarea class="form-control" name="descripcion"
                     placeholder="Ingrese descripcion"><%=usuario.descripcion%></textarea>
                 </div>
-                <div class="form-group">
-                  <label for="nombre">Email</label>
-                  <input type="text" class="form-control" id="email" placeholder="email" name="email"
-                    value="<%=usuario.email%>">
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="cualidades">¿Cuáles son tus cualidades profesionales?</label>
+                      <textarea type="text" maxlength="500" class="form-control" id="cualidades" name="cualidades"
+                        placeholder="Cualidades"><%=usuario.cualidades%></textarea>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="aboutme">Sobre mi</label>
+                      <textarea maxlength="500" type="text" class="form-control" id="aboutme" name="aboutme"
+                        placeholder="Escribe sobre ti"><%=usuario.aboutme%></textarea>
+                    </div>
+                  </div>
                 </div>
+
                 <div class="form-group">
-                  <label for="WhatsApp">WhatsApp (Opcional)</label>
-                  <input type="text" minlength="10" maxlength="10" class="form-control" id="whatsapp" placeholder="1234567890" name="whatsapp"
-                    value="<%=usuario.whatsapp%>" title="El número debe contener 10 dígitos" pattern="^[0-9]{10}*">
+                  <label for="idioma">Idiomas que domina</label>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <% if (usuario.idiomaEspanol == 1) {
+                          %><input type="checkbox" name="espanol" id="espanol" checked><%
+                        } else {
+                          %><input type="checkbox" name="espanol" id="espanol"><%
+                        } %>
+                        <label for="espanol">Español</label>
+                      </div>
+                    </div>
+
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <% if (usuario.idiomaIngles == 1) {
+                      %><input type="checkbox" name="ingles" id="ingles" checked><%
+                    } else {
+                      %><input type="checkbox" name="ingles" id="ingles"><%
+                    } %>
+                        <label for="ingles">Inglés</label>
+                      </div>
+                    </div>
+
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <% if (usuario.idiomaPortugues == 1) {
+                      %><input type="checkbox" name="portugues" id="portugues" checked><%
+                    } else {
+                      %><input type="checkbox" name="portugues" id="portugues"><%
+                    } %>
+                        <label for="portugues">Portugués</label>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <% if (usuario.idiomaItaliano == 1) {
+                      %><input type="checkbox" name="italiano" id="italiano" checked><%
+                    } else {
+                      %><input type="checkbox" name="italiano" id="italiano"><%
+                    } %>
+                        <label for="italiano">Italiano</label>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <% if (usuario.idiomaFrances == 1) {
+                      %><input type="checkbox" name="frances" id="frances" checked><%
+                    } else {
+                      %><input type="checkbox" name="frances" id="frances"><%
+                    } %>
+                        <label for="frances">Francés</label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <% if (usuario.rol == 2) {
                   %>
-                <div class="form-group">
-                  <label for="cualidades">¿Cuáles son tus cualidades profesionales?</label>
-                  <textarea type="text" maxlength="500" class="form-control" id="cualidades" name="cualidades"
-                    placeholder="Cualidades"><%=usuario.cualidades%></textarea>
-                </div>
-                <div class="form-group">
-                  <label for="aboutme">Sobre mi</label>
-                  <textarea maxlength="500" type="text" class="form-control" id="aboutme" name="aboutme"
-                    placeholder="Escribe sobre ti"><%=usuario.aboutme%></textarea>
-                </div>
                 <%
                 } %>
                 <h5 class="text-center mb-3">¿En qué horario puedes atender a los usuarios?</h5>
@@ -297,12 +395,38 @@
               </div>
               <!-- FIN DATOS PERFIL -->
 
+              <!--Inicio de cambiar imagen-->
+              <div class="tab-pane fade" id="pills-image" role="tabpanel" aria-labelledby="pills-image-tab">
+                <!--<legend>Esta imagen se mostrará en miniatura en todas las estrategias que agregues</legend>
+                <form method="POST" enctype="multipart/form-data">
+                  <div class="form-row">
+                    <div class="form-group col-md-8">
+                      <label for="file">Subir Imagen de Perfil</label>
+                      <input type="file" class="form-control" id="archivos" name="imagen">
+                    </div>
+                  </div>
+                  <% if(usuario.imagen) { %>
+                  <div class="campo">
+                    <img src="/uploads/usuarios/<%=usuario.imagen %>" width="150">
+                  </div>
+                  <% }else { %>
+                  <p>No hay imagen actual</p>
+                  <% } %>
+
+                  <div class="form-group col-md-8">
+                    <input type="submit" class="btn btn-primary float-right" value="Subir Imagen"></input>
+                  </div>
+                </form>
+                -->
+              </div>
+              <!--FIN DE CAMBIAR IMAGEN-->
+
               <!-- INICIO DATOS GENERALES -->
               <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                 <div class="form-row">
                   <div class="form-group col-md-4">
                     <label for="genero">Género</label>
-                    <select id="genero" class="form-control" name="genero">
+                    <select required id="genero" class="form-control" name="genero">
                       <% if(usuario.genero == '') {%>
                       <option value="">--Selecciona una opcion--</option>
                       <option value="1">Masculino</option>
@@ -331,7 +455,7 @@
                   </div>
                   <div class="form-group col-md-4">
                     <label for="fechanacimiento">Fecha de nacimiento</label>
-                    <input type="date" class="form-control" name="fechanacimiento" id="fechanacimiento"
+                    <input required type="date" class="form-control" name="fechanacimiento" id="fechanacimiento"
                       value="<%=usuario.fechanacimiento %>">
                   </div>
                   <div class="form-group col-md-4">

@@ -1,3 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/perfil.css">
+</head>
+
+<body>
+
+</body>
+
+</html>
+
 <div class="container">
     <h1><%=nombre %>, BIENVENIDO DE NUEVO</h1>
     <hr>
@@ -60,19 +75,10 @@
 
     <div class="row">
         <% estrategias.forEach(estrategia => { %>
-        <%- include('partials/card-recurso.ejs', {estrategia: estrategia}) %>
+        <div class="col-md-6 mb-3">
+            <%- include('partials/card-recurso.ejs', {estrategia: estrategia}) %>
+        </div>
         <% }) %>
-    </div>
-    <div class="row">
-        <div class=" bg-dark col-md-6" style="height: auto;">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores quaerat sit magni dolorem totam aperiam at, quidem corrupti suscipit rem ipsa natus eius quam deserunt, laudantium ad fuga earum ipsam?
-        </div>
-        <div class=" bg-danger col-md-6" style="height: auto;">
-            HOLA
-        </div>
-        <div class=" bg-danger col-md-6">
-            HOLA
-        </div>
     </div>
 </div>
 <div style="height: 0px; width: 0px;">

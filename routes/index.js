@@ -12,7 +12,7 @@ const principalController = require('../controllers/principalController');
 const perfilController = require('../controllers/perfilController');
 
 module.exports = function() {
-    router.get('/', authController.usuarioAutenticado, homeController.home);
+    router.get('/', homeController.home);
 
     //Abre el form de crear cuenta
     router.get('/crear-cuenta', usuariosController.formCrearCuenta);

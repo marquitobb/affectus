@@ -95,6 +95,24 @@ const Usuarios = db.define('usuarios', {
     },
     aboutme: {
         type: Sequelize.STRING(500)
+    },
+    nacionalidad: {
+        type: Sequelize.STRING(30)
+    },
+    idiomaEspanol: {
+        type: Sequelize.BOOLEAN
+    },
+    idiomaIngles: {
+        type: Sequelize.BOOLEAN
+    },
+    idiomaPortugues: {
+        type: Sequelize.BOOLEAN
+    },
+    idiomaFrances: {
+        type: Sequelize.BOOLEAN
+    },
+    idiomaItaliano: {
+        type: Sequelize.BOOLEAN
     }
 }, {
     hooks: {

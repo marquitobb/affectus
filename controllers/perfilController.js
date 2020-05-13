@@ -11,7 +11,7 @@ const shortid = require('shortid');
 const fs = require('fs');
 
 //Visualizar página de perfil
-exports.visualizarPerfil = async(req, res) => {
+exports.visualizarPerfil = async (req, res) => {
     const email = req.params.correo;
     const userPerfil = await Usuarios.findOne({ where: { email } });
     const consultas = [];
@@ -20,7 +20,7 @@ exports.visualizarPerfil = async(req, res) => {
         include: [
             {
                 model: Usuarios,
-                attributes: ['email', 'imagen', 'nombre'],
+                attributes: ['email', 'imagen', 'nombre', 'aPaterno'],
                 required: true
             },
             {
@@ -29,7 +29,7 @@ exports.visualizarPerfil = async(req, res) => {
                 required: true
             }
         ]
-    }));    
+    }));
     consultas.push(Categorias.findAll());
     consultas.push(Sentimientos.findAll({
         include: [
@@ -39,7 +39,7 @@ exports.visualizarPerfil = async(req, res) => {
                 required: true
             }
         ]
-    }),{where: {usuarioId: userPerfil.Id}});
+    }), { where: { usuarioId: userPerfil.Id } });    
     const [usuario, estrategias, categorias, sentimientos] = await Promise.all(consultas);
     res.render('perfil', {
         nombrePagina: 'Perfil',
@@ -48,6 +48,6 @@ exports.visualizarPerfil = async(req, res) => {
         nombre: usuario.nombre,
         usuario,
         userPerfil,
-        sentimientos        
+        sentimientos
     });
 };

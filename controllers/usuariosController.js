@@ -301,12 +301,42 @@ exports.EditarPerfil = async (req, res, next) => {
     req.sanitizeBody('aPaterno');
     req.sanitizeBody('aMaterno');
     req.sanitizeBody('aboutme');
-
+    req.sanitizeBody('nacionalidad');
 
     const usuario = await Usuarios.findByPk(req.user.id);
     console.log(req.body);
     //leer valores
-    const { nombre, descripcion, email, genero, fechanacimiento, ocupacion, direccion, discapacidad, telefono, whatsapp, cualidades, aMaterno, aPaterno, aboutme } = req.body;
+    const { nombre, descripcion, email, genero, fechanacimiento, ocupacion, direccion, discapacidad, telefono, whatsapp, cualidades, aMaterno, aPaterno, aboutme, nacionalidad } = req.body;
+
+    if (req.body.espanol == 'on') {        
+        usuario.idiomaEspanol = true;
+    } else {
+        usuario.idiomaEspanol = false;
+    }
+
+    if (req.body.portugues == 'on') {
+        usuario.idiomaPortugues = true;
+    } else {
+        usuario.idiomaPortugues = false;
+    }
+
+    if (req.body.ingles == 'on') {
+        usuario.idiomaIngles = true;
+    } else {
+        usuario.idiomaIngles = false;
+    }
+
+    if (req.body.italiano == 'on') {
+        usuario.idiomaItaliano = true;
+    } else {
+        usuario.idiomaItaliano = false;
+    }
+
+    if (req.body.frances == 'on') {
+        usuario.idiomaFrances = true;
+    } else {
+        usuario.idiomaFrances = false;
+    }
 
     //Asignar valores
     usuario.nombre = nombre;
@@ -323,11 +353,18 @@ exports.EditarPerfil = async (req, res, next) => {
     usuario.aMaterno = aMaterno;
     usuario.aPaterno = aPaterno;
     usuario.aboutme = aboutme;
+    usuario.nacionalidad = nacionalidad;    
 
     //guardar en db
-    await usuario.save();
-    req.flash('exito', 'Cambios guardados correctamente');
-    res.redirect('/administracion');
+    try {
+        await usuario.save();
+        req.flash('exito', 'Cambios guardados correctamente');
+        res.redirect('/principal');
+    } catch (error) {
+        console.log(error);
+        req.flash('exito', 'Cambios guardados correctamente');
+        res.redirect('/principal');
+    }
 };
 
 exports.formCambiarPassword = async (req, res) => {
