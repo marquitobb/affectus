@@ -10,7 +10,7 @@ exports.panelPrincipal = async (req, res) => {
         include: [
             {
                 model: Usuarios,
-                attributes: ['id', 'email', 'imagen', 'nombre', 'rol'],
+                attributes: ['id', 'email', 'imagen', 'nombre', 'rol', aPaterno],
                 required: true
             },
             {
@@ -26,7 +26,7 @@ exports.panelPrincipal = async (req, res) => {
     const [usuario, estrategias, categorias, citas] = await Promise.all(consultas);
 
     res.render('principal', {
-        nombrePagina: 'bienvenido de nuevo',
+        nombrePagina: 'Principal',
         estrategias,
         categorias,
         nombre: usuario.nombre,

@@ -32,7 +32,7 @@ require('dotenv').config({path: 'variables.env'});
 const app = express();
 
 //Sockets
-const server = http.createServer(app)
+const server = http.createServer(app);
 const io = socketio.listen(server);
 require('./sockets')(io);
 require('./socketsSingle')(io);

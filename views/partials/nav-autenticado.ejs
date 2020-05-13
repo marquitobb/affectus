@@ -1,18 +1,101 @@
-<ul class="navbar-nav font-weight-bold d-flex ml-auto">
-    <li class="nav-item mr-3">
-        <a class="nav-link textoNav" style="color: rgb(206, 65, 65);" href="/principal">Principal</a>        
-    </li>
-    <li class="nav-item mr-3">
-        <a class="nav-link textoNav" style="color: rgb(206, 65, 65);" href="/administracion">Administración</a>
-    </li>
-    <li class="nav-item mr-3">
-        <a class="nav-link textoNav" style="color: rgb(206, 65, 65);" href="/nueva-estrategia">Nuevo Recurso</a>
-    </li>
-    <li class="nav-item mr-5">
-        <a class="nav-link textoNav" style="color: rgb(206, 65, 65);" href="/index">Chat Grupal</a>
-    </li>
-    <span style="border-right: 2px solid rgb(221, 220, 220);"></span>
-    <li class="nav-item mx-5">
-        <a class="nav-link textoNav text-primary" href="/cerrar-sesion">Cerrar Sesión</a>
-    </li>
-</ul>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/nav-Autenticado.css">
+</head>
+
+<body>
+    <div class="form-inline d-flex" style="background-color: #72FFCC;">
+        <a href="/perfil/<%=usuario.email %>" class="ml-5 rounded-pill imagenNav pr-2">
+            <div class="form-inline">
+                <div style="height: 35px; width: 35px;">
+                    <% if(usuario.imagen) { %>
+                    <img class="rounded-circle" src="/uploads/usuarios/<%=usuario.imagen %>" alt="Foto de usuario" />
+                    <% }else { %>
+                    <img class="rounded-circle"
+                        src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+                        alt="Foto Usuario" />
+                    <% } %>
+                </div>
+                <span class="ml-2 font-weight-bold spanNombreNav"><%=usuario.nombre %></span>
+            </div>
+        </a>
+
+        <div class="inputNavAut">
+            <i class="fas fa-search"></i>
+            <input type="text" class="rounded-pill ml-4" placeholder="Buscar">
+        </div>
+
+        <a class="mx-auto" href="/principal">
+            <img src="/img/logo.png" alt="Logo Affectus" width="60" width="60">
+        </a>
+        <div id="divisorNavExtra" class="mx-auto"></div>
+
+        <div class="btn-group">
+            <a type="button" class="rounded-circle btnMasNavAut" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <i class="fas fa-caret-down"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <span class="dropdown-header">Opciones disponibles</span>
+                <a class="dropdown-item" href="/principal">Principal</a>
+                <% if (usuario.rol == '2') {
+                    %><a class="dropdown-item" href="/administracion">Administración</a>
+                <a class="dropdown-item" href="/nueva-estrategia">Nuevo Recurso</a><%
+                } %>
+
+                <a class="dropdown-item" href="/index">Chat Grupal</a>
+                <div class="dropdown-divider"></div>
+                <span class="dropdown-header">Idioma</span>
+                <div class="row mx-0 pl-0 dropdown-item">
+                    <div class="col-md-6">
+                        <a href="">
+                            <img src="/img/españa.svg" alt="Español" width="70">
+                        </a>
+                        <span class="ml-1">Español</span>
+                    </div>                  
+                </div>
+                <div class="row mx-0 pl-0 dropdown-item">
+                    <div class="col-md-6">
+                        <a href="">
+                            <img src="/img/francia.svg" alt="Francés" width="70">
+                        </a>
+                        <span class="ml-1">Francés</span>
+                    </div>                  
+                </div>
+                <div class="row mx-0 pl-0 dropdown-item">
+                    <div class="col-md-6">
+                        <a href="">
+                            <img src="/img/inglaterra.svg" alt="Inglés" width="70">
+                        </a>
+                        <span class="ml-1">Inglés</span>
+                    </div>                  
+                </div>
+                <div class="row mx-0 pl-0 dropdown-item">
+                    <div class="col-md-6">
+                        <a href="">
+                            <img src="/img/pt.png" alt="Español" width="70">
+                        </a>
+                        <span class="ml-1">Portugués</span>
+                    </div>                  
+                </div>
+                <div class="row mx-0 pl-0 dropdown-item">
+                    <div class="col-md-6">
+                        <a href="">
+                            <img src="/img/italia.svg" alt="Italiano" width="70">
+                        </a>
+                        <span class="ml-1">Italiano</span>
+                    </div>                  
+                </div>
+                <div class="dropdown-divider"></div>
+                <a class="text-primary font-weight-bold dropdown-item" href="/cerrar-sesion">Cerrar Sesión</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

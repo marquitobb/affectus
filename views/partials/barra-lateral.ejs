@@ -22,7 +22,9 @@
                     <% } %>
                 </div>
                 <div class="user-info">
-                    <span class="user-name text-center"><%=nombre %></span>
+                    <a href="/perfil/<%=usuario.email %>" style="color: #b8bfce;">
+                        <span class="user-name text-center"><%=nombre %></span>
+                    </a>
                     <% if(usuario.rol == 0) { %>
                     <span class="user-role">Administrador</span>
                     <% }else { %>
@@ -87,7 +89,6 @@
                         <a>
                             <i class="fas fa-user"></i>
                             <span>Editar Perfil</span>
-                            <!--<span class="badge badge-pill badge-warning">New</span>-->
                         </a>
                         <div class="sidebar-submenu">
                             <ul>
@@ -97,7 +98,7 @@
                                 <li>
                                     <a href="/cambiar-password">Cambiar Password</a>
                                 </li>
-                                <li>
+                                <!--<li>
                                     <% if(usuario.imagen) { %>
                                     <a href="/imagen-perfil">Cambiar Imagen<span
                                             class="badge badge-pill badge-success">Si</span>
@@ -106,7 +107,7 @@
                                                 class="badge badge-pill badge-danger">No</span>
                                             <% } %>
                                         </a>
-                                </li>
+                                </li>-->
                                 <% if (usuario.rol == '1') {
                                 %><li>
                                     <a href="/agregar-sentimiento">Agregar Sentimiento</a>
@@ -120,6 +121,29 @@
                             <i class="fas fa-user"></i>
                             <span>Agenda</span>
                             <!--<span class="badge badge-pill badge-warning">New</span>-->
+
+                            <!--href="/cv-perfil"-->
+                            <i class="fas fa-file-pdf"></i>
+                            <% if (usuario.rol == '1') {
+                                %><span>Ver mis citas</span><%
+                            } else {
+                                %><span>Ver mi agenda</span><%
+                            } %>
+
+                            <% if(usuario.cv) { %>
+                            <span class="badge badge-pill badge-success">Si</span>
+                            <% } else { %>
+                            <span class="badge badge-pill badge-danger">No</span>
+                            <% } %>
+                        </a>
+                    </li>
+                    <% if (usuario.rol == '2') {
+                        %>
+                    <li class="sidebar-dropdown">
+                        <a>
+                            <i class="far fa-gem"></i>
+                            <span>Recursos</span>
+                            <span class="badge badge-pill badge-warning"><%=estrategias.length%></span>
                         </a>
                         <div class="sidebar-submenu">
                             <ul>
@@ -143,6 +167,8 @@
                             </ul>
                         </div>
                     </li>
+                    <%
+                    } %>
                     <li class="sidebar-dropdown">
                         <% if(usuario.rol === '2' || usuario.rol === '0') { %>
                             <a>

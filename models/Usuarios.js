@@ -9,6 +9,8 @@ const Usuarios = db.define('usuarios', {
         autoIncrement: true
     },
     nombre: Sequelize.STRING(60),
+    aPaterno: Sequelize.STRING(60),
+    aMaterno: Sequelize.STRING(60),
     imagen: Sequelize.STRING(60),
     secretToken: Sequelize.STRING(60),
     email:{
@@ -87,6 +89,30 @@ const Usuarios = db.define('usuarios', {
     },
     whatsapp: {
         type: Sequelize.STRING(10)
+    },
+    cualidades: {
+        type: Sequelize.STRING(500)
+    },
+    aboutme: {
+        type: Sequelize.STRING(500)
+    },
+    nacionalidad: {
+        type: Sequelize.STRING(30)
+    },
+    idiomaEspanol: {
+        type: Sequelize.BOOLEAN
+    },
+    idiomaIngles: {
+        type: Sequelize.BOOLEAN
+    },
+    idiomaPortugues: {
+        type: Sequelize.BOOLEAN
+    },
+    idiomaFrances: {
+        type: Sequelize.BOOLEAN
+    },
+    idiomaItaliano: {
+        type: Sequelize.BOOLEAN
     }
 }, {
     hooks: {

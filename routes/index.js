@@ -10,9 +10,11 @@ const socketsController = require('../controllers/socketsController');
 const sentimientosController = require('../controllers/sentimientosController');
 const principalController = require('../controllers/principalController');
 const horariosController = require('../controllers/horariosController');
+const perfilController = require('../controllers/perfilController');
+
 
 module.exports = function() {
-    router.get('/', authController.usuarioAutenticado, homeController.home);
+    router.get('/', homeController.home);
 
     //Abre el form de crear cuenta
     router.get('/crear-cuenta', usuariosController.formCrearCuenta);
@@ -94,6 +96,7 @@ module.exports = function() {
     //Cambiar el estado en el que se encuantra el usuario
     router.post('/estadoAffectus/:estado', authController.usuarioAutenticado, usuariosController.updateEstado);
 
+
     //Agrega horarios el psicologo
     router.get('/agregar-horario', authController.usuarioAutenticado, horariosController.formAgregarHorario);
     router.post('/agregar-horario', authController.usuarioAutenticado, horariosController.agregarHorarios);
@@ -110,6 +113,8 @@ module.exports = function() {
     //Eliminar citas
     router.delete('/eliminar-cita/:idcita', authController.usuarioAutenticado, horariosController.eliminarCita);
 
+    //Ruta para ir al perfil
+    router.get('/perfil/:correo', authController.usuarioAutenticado, perfilController.visualizarPerfil);
+    return router;
 
-    return router; 
 };
