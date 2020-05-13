@@ -54,9 +54,9 @@
 <!--
     <div class="card mb-4">
         <% if(estrategia.imagen) { %>
-        <img height="175" class="lazy" src="/uploads/estrategias/<%=estrategia.imagen %>">
+        <img class="lazy img-fluid" src="/uploads/estrategias/<%=estrategia.imagen %>">
         <% } else { %>
-        <img height="175" class="lazy" src="/img/leer.png">
+        <img height="175" class="lazy img-fluid" src="/img/leer.png">
         <% } %>
         <div class="card-body">
             <p class="card-text my-0"><small class="text-muted"><%=estrategia.categoria.nombre %></small></p>
@@ -71,6 +71,9 @@
         </div>
         <div class="card-footer d-flex">
             <small class="text-muted mr-auto"><a href="/index" class="m-4">Chat Grupal</a></small>
+            <% if(usuario.rol === '1') { %>
+                <small class="text-muted mx-auto"><a href="/agendar-cita/<%=estrategia.usuario.id%>">Agendar Cita</a></small>
+            <% } %>
             <small class="text-muted ml-auto"><a href="/chatIndividual/<%=estrategia.usuario.email%>" class="m-4">Chat
                     Individual</a></small>
         </div>

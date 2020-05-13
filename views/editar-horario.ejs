@@ -1,0 +1,711 @@
+<div class="container mt-4">
+    <h5 class="text-center mb-3">¿En qué horario puedes atender a los usuarios?</h5>
+    <% if(horario) { %>
+    <form action="/editar-horario" method="POST">
+        <div class="row">
+
+            <!--INICIO LUNES-->
+            <% if(horario.lunes === 'on') { %>
+                <div class="col-md-4 pr-0">
+                    <div class="form-group">
+                        <input type="checkbox" name="lunes" id="lunes" checked>
+                        <label for="lunes">Lunes</label>
+                    </div>
+                    <% if(horario.lunescompleto === 'on') { %>
+                        <div id="lunesTodo" class="text-center form-group">
+                            <input type="checkbox" name="lunescompleto" id="24lunes" checked>
+                            <label for="24lunes">Disponible las 24 horas</label>
+                        </div>
+                        <div id="horarioLunes" style="display: none;">
+                            <div class="d-flex mb-2 form-inline">
+                                <label class="ml-4">Hora de inicio</label>
+                                <label class="ml-auto mr-5">Hora de termino</label>
+                            </div>
+                            <div class="form-group mb-0 text-center">
+                                <div class="form-inline lunes0">
+                                    <input name="InicioLunes" class="mb-1" type="time">
+                                    <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
+                                    <input name="FinLunes" class="mb-1 mr-2" type="time">
+                                    <span id="btnEliminarLunes" style="display: none;" onclick="eliminarLunes(1);">
+                                    <i class="far fa-times-circle fa-2x"></i>
+                                    </span>                          
+                                </div>
+                                <div id="divHorariosLunes"></div>
+                            </div>
+                            <div class="text-center">
+                                <span onclick="agregarLunes();" id="addLunes" class="btn btn-link ">Agregar otro horario</span>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <div id="lunesTodo" class="text-center form-group">
+                            <input type="checkbox" name="lunescompleto" id="24lunes">
+                            <label for="24lunes">Disponible las 24 horas</label>
+                        </div>
+                        <div id="horarioLunes">
+                            <div class="d-flex mb-2 form-inline">
+                                <label class="ml-4">Hora de inicio</label>
+                                <label class="ml-auto mr-5">Hora de termino</label>
+                            </div>
+                            <div class="form-group mb-0 text-center ">
+                                <% if(horario.InicioLunes.length > 0) { %>
+                                    <% for (let i = 0; i < horario.InicioLunes.length; i++) { %>
+                                        <% const element = horario.InicioLunes[i] %>
+                                        <% const element2 = horario.FinLunes[i] %>
+                                            <div class="form-inline lunes<%=i%> lunesCon">
+                                                <input name="InicioLunes" class="mb-1" type="time" value="<%=element%>">
+                                                <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
+                                                <input name="FinLunes" class="mb-1 mr-2" type="time" value="<%=element2%>">
+                                                <span id="btnEliminarLunes" onclick="eliminarLunesEditar('<%=i%>');">
+                                                <i class="far fa-times-circle fa-2x"></i>
+                                                </span>                          
+                                            </div>
+                                    <% } %>
+                                    <div id="divHorariosLunes"></div>
+                                    <div class="text-center">
+                                        <span onclick="agregarLunesEditar();" id="addLunes" class="btn btn-link ">Agregar otro horario</span>
+                                    </div>
+                                <% } %>
+                            </div>
+                        </div>
+                    <% } %>                    
+                </div>
+            <% } else { %>
+                <div class="col-md-4 pr-0">
+                    <div class="form-group">
+                        <input type="checkbox" name="lunes" id="lunes">
+                        <label for="lunes">Lunes</label>
+                    </div>
+                    <div id="lunesTodo" class="text-center form-group" style="display: none;">
+                        <input type="checkbox" name="lunescompleto" id="24lunes">
+                        <label for="24lunes">Disponible las 24 horas</label>
+                    </div>
+                    <div id="horarioLunes" style="display: none;">
+                        <div class="d-flex mb-2 form-inline">
+                            <label class="ml-4">Hora de inicio</label>
+                            <label class="ml-auto mr-5">Hora de termino</label>
+                        </div>
+                        <div class="form-group mb-0 text-center">
+                            <div class="form-inline lunes0">
+                                <input name="InicioLunes" class="mb-1" type="time">
+                                <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
+                                <input name="FinLunes" class="mb-1 mr-2" type="time">
+                                <span id="btnEliminarLunes" style="display: none;" onclick="eliminarLunes(1);">
+                                <i class="far fa-times-circle fa-2x"></i>
+                                </span>                          
+                            </div>
+                            <div id="divHorariosLunes"></div>
+                        </div>
+                        <div class="text-center">
+                            <span onclick="agregarLunes();" id="addLunes" class="btn btn-link ">Agregar otro horario</span>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+            <!--FIN LUNES-->
+
+
+            <!--INICIO MARTES-->
+            <% if(horario.martes === 'on') { %>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="checkbox" name="martes" id="martes" checked>
+                        <label for="martes">Martes</label>
+                    </div>
+                    <% if(horario.martescompleto === 'on') { %>
+                        <div id="martesTodo" class="text-center form-group">
+                            <input type="checkbox" name="martescompleto" id="24martes" checked>
+                            <label for="24martes">Disponible las 24 horas</label>
+                        </div>
+                        <div id="horarioMartes" style="display: none;">
+                            <div class="d-flex mb-2 form-inline">
+                                <label class="ml-4">Hora de inicio</label>
+                                <label class="ml-auto mr-5">Hora de termino</label>
+                            </div>
+                            <div class="form-group mb-0 text-center">
+                                <div class="form-inline martes0">
+                                    <input name="InicioMartes" class="mb-1" type="time">
+                                    <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
+                                    <input name="FinMartes" class="mb-1 mr-2" type="time">
+                                    <span id="btnEliminarMartes" style="display: none;" onclick="eliminarMartes(1);">
+                                    <i class="far fa-times-circle fa-2x"></i>
+                                    </span>                          
+                                </div>
+                                <div id="divHorariosMartes"></div>
+                            </div>
+                            <div class="text-center">
+                                <span onclick="agregarMartes();" id="addMartes" class="btn btn-link ">Agregar otro horario</span>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <div id="martesTodo" class="text-center form-group">
+                            <input type="checkbox" name="martescompleto" id="24martes">
+                            <label for="24martes">Disponible las 24 horas</label>
+                        </div>
+                        <div id="horarioMartes">
+                            <div class="d-flex mb-2 form-inline">
+                                <label class="ml-4">Hora de inicio</label>
+                                <label class="ml-auto mr-5">Hora de termino</label>
+                            </div>
+                            <div class="form-group mb-0 text-center">
+                                <% if(horario.InicioMartes.length > 0) { %>
+                                    <% for (let i = 0; i < horario.InicioMartes.length; i++) { %>
+                                        <% const element = horario.InicioMartes[i] %>
+                                        <% const element2 = horario.FinMartes[i] %>
+                                            <div class="form-inline martes<%=i%> martesCon">
+                                                <input name="InicioMartes" class="mb-1" type="time" value="<%=element%>">
+                                                <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
+                                                <input name="FinMartes" class="mb-1 mr-2" type="time" value="<%=element2%>">
+                                                <span id="btnEliminarMartes" onclick="eliminarMartesEditar('<%=i%>');">
+                                                <i class="far fa-times-circle fa-2x"></i>
+                                                </span>                          
+                                            </div>
+                                            
+                                    <% } %>
+                                    <div id="divHorariosMartes"></div>
+                                    <div class="text-center">
+                                        <span onclick="agregarMartesEditar();" id="addMartes" class="btn btn-link ">Agregar otro horario</span>
+                                    </div>
+                                <% } %>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            <% } else { %>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="checkbox" name="martes" id="martes">
+                        <label for="martes">Martes</label>
+                    </div>
+                    <div id="martesTodo" class="text-center form-group" style="display: none;">
+                        <input type="checkbox" name="martescompleto" id="24martes">
+                        <label for="24martes">Disponible las 24 horas</label>
+                    </div>
+                    <div id="horarioMartes" style="display: none;">
+                        <div class="d-flex mb-2 form-inline">
+                            <label class="ml-4">Hora de inicio</label>
+                            <label class="ml-auto mr-5">Hora de termino</label>
+                        </div>
+                        <div class="form-group mb-0 text-center">
+                            <div class="form-inline martes0">
+                                <input name="InicioMartes" class="mb-1" type="time">
+                                <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
+                                <input name="FinMartes" class="mb-1 mr-2" type="time">
+                                <span id="btnEliminarMartes" style="display: none;" onclick="eliminarMartes(1);">
+                                <i class="far fa-times-circle fa-2x"></i>
+                                </span>                          
+                            </div>
+                            <div id="divHorariosMartes"></div>
+                        </div>
+                        <div class="text-center">
+                            <span onclick="agregarMartes();" id="addMartes" class="btn btn-link ">Agregar otro horario</span>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+            <!--FIN MARTES-->
+
+            <!--INICIO MIERCOLES-->
+            <% if(horario.miercoles === 'on') { %>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="checkbox" name="miercoles" id="miercoles" checked>
+                        <label for="miercoles">Miércoles</label>
+                    </div>
+                    <% if(horario.miercolescompleto === 'on') { %>
+                        <div id="miercolesTodo" class="text-center form-group">
+                            <input type="checkbox" name="miercolescompleto" id="24miercoles" checked>
+                            <label for="24miercoles">Disponible las 24 horas</label>
+                        </div>
+                        <div id="horarioMiercoles" style="display: none;">
+                            <div class="d-flex mb-2 form-inline">
+                                <label class="ml-4">Hora de inicio</label>
+                                <label class="ml-auto mr-5">Hora de termino</label>
+                            </div>
+                            <div class="form-group mb-0 text-center">
+                                <div class="form-inline miercoles0">
+                                    <input name="InicioMiercoles" class="mb-1" type="time">
+                                    <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
+                                    <input name="FinMiercoles" class="mb-1 mr-2" type="time">
+                                    <span id="btnEliminarMiercoles" style="display: none;" onclick="eliminarMiercoles(1);">
+                                    <i class="far fa-times-circle fa-2x"></i>
+                                    </span>                          
+                                </div>
+                                <div id="divHorariosMiercoles"></div>
+                            </div>
+                            <div class="text-center">
+                                <span onclick="agregarMiercoles();" id="addMiercoles" class="btn btn-link ">Agregar otro horario</span>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <div id="miercolesTodo" class="text-center form-group" >
+                            <input type="checkbox" name="miercolescompleto" id="24miercoles">
+                            <label for="24miercoles">Disponible las 24 horas</label>
+                        </div>
+                        <div id="horarioMiercoles">
+                            <div class="d-flex mb-2 form-inline">
+                                <label class="ml-4">Hora de inicio</label>
+                                <label class="ml-auto mr-5">Hora de termino</label>
+                            </div>
+                            <div class="form-group mb-0 text-center">
+                                <% if(horario.InicioMiercoles.length > 0) { %>
+                                    <% for (let i = 0; i < horario.InicioMiercoles.length; i++) { %>
+                                        <% const element = horario.InicioMiercoles[i] %>
+                                        <% const element2 = horario.FinMiercoles[i] %>
+                                            <div class="form-inline miercoles<%=i%> miercolesCon">
+                                                <input name="InicioMiercoles" class="mb-1" type="time" value="<%=element%>">
+                                                <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
+                                                <input name="FinMiercoles" class="mb-1 mr-2" type="time" value="<%=element2%>">
+                                                <span id="btnEliminarMiercoles" onclick="eliminarMiercolesEditar('<%=i%>');">
+                                                <i class="far fa-times-circle fa-2x"></i>
+                                                </span>                          
+                                            </div>
+                                    <% } %>
+                                    <div id="divHorariosMiercoles"></div>
+                                    <div class="text-center">
+                                        <span onclick="agregarMiercolesEditar();" id="addMiercoles" class="btn btn-link ">Agregar otro horario</span>
+                                    </div>
+                                <% } %>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            <% } else { %>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="checkbox" name="miercoles" id="miercoles">
+                        <label for="miercoles">Miércoles</label>
+                    </div>
+                    <div id="miercolesTodo" class="text-center form-group" style="display: none;">
+                        <input type="checkbox" name="miercolescompleto" id="24miercoles">
+                        <label for="24miercoles">Disponible las 24 horas</label>
+                    </div>
+                    <div id="horarioMiercoles" style="display: none;">
+                        <div class="d-flex mb-2 form-inline">
+                            <label class="ml-4">Hora de inicio</label>
+                            <label class="ml-auto mr-5">Hora de termino</label>
+                        </div>
+                        <div class="form-group mb-0 text-center">
+                            <div class="form-inline miercoles0">
+                                <input name="InicioMiercoles" class="mb-1" type="time">
+                                <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
+                                <input name="FinMiercoles" class="mb-1 mr-2" type="time">
+                                <span id="btnEliminarMiercoles" style="display: none;" onclick="eliminarMiercoles(1);">
+                                <i class="far fa-times-circle fa-2x"></i>
+                                </span>                          
+                            </div>
+                            <div id="divHorariosMiercoles"></div>
+                        </div>
+                        <div class="text-center">
+                            <span onclick="agregarMiercoles();" id="addMiercoles" class="btn btn-link ">Agregar otro horario</span>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+            <!--FIN MIERCOLES-->
+
+            <!--INICIO JUEVES-->
+            <% if(horario.jueves === 'on') { %>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="checkbox" name="jueves" id="jueves" checked>
+                        <label for="jueves">Jueves</label>
+                    </div>
+                    <% if(horario.juevescompleto === 'on') { %>
+                        <div id="juevesTodo" class="text-center form-group">
+                            <input type="checkbox" name="juevescompleto" id="24jueves" checked>
+                            <label for="24jueves">Disponible las 24 horas</label>
+                        </div>
+                        <div id="horarioJueves" style="display: none;">
+                            <div class="d-flex mb-2 form-inline">
+                                <label class="ml-4">Hora de inicio</label>
+                                <label class="ml-auto mr-5">Hora de termino</label>
+                            </div>
+                            <div class="form-group mb-0 text-center">
+                                <div class="form-inline jueves0">
+                                    <input name="InicioJueves" class="mb-1" type="time">
+                                    <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
+                                    <input name="FinJueves" class="mb-1 mr-2" type="time">
+                                    <span id="btnEliminarJueves" style="display: none;" onclick="eliminarJueves(1);">
+                                        <i class="far fa-times-circle fa-2x"></i>
+                                    </span>
+                                </div>
+                                <div id="divHorariosJueves"></div>
+                            </div>
+                            <div class="text-center">
+                                <span onclick="agregarJueves();" id="addJueves" class="btn btn-link ">Agregar otro horario</span>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <div id="juevesTodo" class="text-center form-group">
+                            <input type="checkbox" name="juevescompleto" id="24jueves">
+                            <label for="24jueves">Disponible las 24 horas</label>
+                        </div>
+                        <div id="horarioJueves">
+                            <div class="d-flex mb-2 form-inline">
+                                <label class="ml-4">Hora de inicio</label>
+                                <label class="ml-auto mr-5">Hora de termino</label>
+                            </div>
+                            <div class="form-group mb-0 text-center">
+                                <% if(horario.InicioJueves.length > 0) { %>
+                                    <% for (let i = 0; i < horario.InicioJueves.length; i++) { %>
+                                        <% const element = horario.InicioJueves[i] %>
+                                        <% const element2 = horario.FinJueves[i] %>
+                                            <div class="form-inline jueves<%=i%> juevesCon">
+                                                <input name="InicioJueves" class="mb-1" type="time" value="<%=element%>">
+                                                <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
+                                                <input name="FinJueves" class="mb-1 mr-2" type="time" value="<%=element2%>">
+                                                <span id="btnEliminarJueves" onclick="eliminarJuevesEditar('<%=i%>');">
+                                                    <i class="far fa-times-circle fa-2x"></i>
+                                                </span>
+                                            </div>
+                                    <% } %>
+                                    <div id="divHorariosJueves"></div>
+                                    <div class="text-center">
+                                        <span onclick="agregarJuevesEditar();" id="addJueves" class="btn btn-link ">Agregar otro horario</span>
+                                    </div>
+                                <% } %>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            <% } else { %>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="checkbox" name="jueves" id="jueves">
+                        <label for="jueves">Jueves</label>
+                    </div>
+                    <div id="juevesTodo" class="text-center form-group" style="display: none;">
+                        <input type="checkbox" name="juevescompleto" id="24jueves">
+                        <label for="24jueves">Disponible las 24 horas</label>
+                    </div>
+                    <div id="horarioJueves" style="display: none;">
+                        <div class="d-flex mb-2 form-inline">
+                            <label class="ml-4">Hora de inicio</label>
+                            <label class="ml-auto mr-5">Hora de termino</label>
+                        </div>
+                        <div class="form-group mb-0 text-center">
+                            <div class="form-inline jueves0">
+                                <input name="InicioJueves" class="mb-1" type="time">
+                                <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
+                                <input name="FinJueves" class="mb-1 mr-2" type="time">
+                                <span id="btnEliminarJueves" style="display: none;" onclick="eliminarJueves(1);">
+                                    <i class="far fa-times-circle fa-2x"></i>
+                                </span>
+                            </div>
+                            <div id="divHorariosJueves"></div>
+                        </div>
+                        <div class="text-center">
+                            <span onclick="agregarJueves();" id="addJueves" class="btn btn-link ">Agregar otro horario</span>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+            <!-- FIN JUEVES -->
+    
+            <!--INICIO VIERNES-->
+            <% if(horario.viernes === 'on') { %>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="checkbox" name="viernes" id="viernes" checked>
+                        <label for="viernes">Viernes</label>
+                    </div>
+                    <% if(horario.viernescompleto === 'on') { %>
+                        <div id="viernesTodo" class="text-center form-group">
+                            <input type="checkbox" name="viernescompleto" id="24viernes" checked>
+                            <label for="24viernes">Disponible las 24 horas</label>
+                        </div>
+                        <div id="horarioViernes" style="display: none;">
+                            <div class="d-flex mb-2 form-inline">
+                                <label class="ml-4">Hora de inicio</label>
+                                <label class="ml-auto mr-5">Hora de termino</label>
+                            </div>
+                            <div class="form-group mb-0 text-center">
+                                <div class="form-inline viernes0">
+                                    <input name="InicioViernes" class="mb-1" type="time">
+                                    <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
+                                    <input name="FinViernes" class="mb-1 mr-2" type="time">
+                                    <span id="btnEliminarViernes" style="display: none;" onclick="eliminarViernes(1);">
+                                        <i class="far fa-times-circle fa-2x"></i>
+                                    </span>
+                                </div>
+                                <div id="divHorariosViernes"></div>
+                            </div>
+                            <div class="text-center">
+                                <span onclick="agregarViernes();" id="addViernes" class="btn btn-link ">Agregar otro horario</span>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <div id="viernesTodo" class="text-center form-group">
+                            <input type="checkbox" name="viernescompleto" id="24viernes">
+                            <label for="24viernes">Disponible las 24 horas</label>
+                        </div>
+                        <div id="horarioViernes">
+                            <div class="d-flex mb-2 form-inline">
+                                <label class="ml-4">Hora de inicio</label>
+                                <label class="ml-auto mr-5">Hora de termino</label>
+                            </div>
+                            <div class="form-group mb-0 text-center">
+                                <% if(horario.InicioViernes.length > 0) { %>
+                                    <% for (let i = 0; i < horario.InicioViernes.length; i++) { %>
+                                        <% const element = horario.InicioViernes[i] %>
+                                        <% const element2 = horario.FinViernes[i] %>
+                                            <div class="form-inline viernes<%=i%> viernesCon">
+                                                <input name="InicioViernes" class="mb-1" type="time" value="<%=element%>">
+                                                <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
+                                                <input name="FinViernes" class="mb-1 mr-2" type="time" value="<%=element2%>">
+                                                <span id="btnEliminarViernes" onclick="eliminarViernesEditar('<%=i%>');">
+                                                    <i class="far fa-times-circle fa-2x"></i>
+                                                </span>
+                                            </div>
+                                    <% } %>
+                                    <div id="divHorariosViernes"></div>
+                                    <div class="text-center">
+                                        <span onclick="agregarViernesEditar();" id="addViernes" class="btn btn-link ">Agregar otro horario</span>
+                                    </div>
+                                <% } %>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            <% } else { %>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="checkbox" name="viernes" id="viernes">
+                        <label for="viernes">Viernes</label>
+                    </div>
+                    <div id="viernesTodo" class="text-center form-group" style="display: none;">
+                        <input type="checkbox" name="viernescompleto" id="24viernes">
+                        <label for="24viernes">Disponible las 24 horas</label>
+                    </div>
+                    <div id="horarioViernes" style="display: none;">
+                        <div class="d-flex mb-2 form-inline">
+                            <label class="ml-4">Hora de inicio</label>
+                            <label class="ml-auto mr-5">Hora de termino</label>
+                        </div>
+                        <div class="form-group mb-0 text-center">
+                            <div class="form-inline viernes0">
+                                <input name="InicioViernes" class="mb-1" type="time">
+                                <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
+                                <input name="FinViernes" class="mb-1 mr-2" type="time">
+                                <span id="btnEliminarViernes" style="display: none;" onclick="eliminarViernes(1);">
+                                    <i class="far fa-times-circle fa-2x"></i>
+                                </span>
+                            </div>
+                            <div id="divHorariosViernes"></div>
+                        </div>
+                        <div class="text-center">
+                            <span onclick="agregarViernes();" id="addViernes" class="btn btn-link ">Agregar otro horario</span>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+            <!-- FIN VIERNES -->
+
+            <!--INICIO SABADO-->
+            <% if(horario.sabado === 'on') { %>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="checkbox" name="sabado" id="sabado" checked>
+                        <label for="sabado">Sábado</label>
+                    </div>
+                    <% if(horario.sabadocompleto=== 'on') { %>
+                        <div id="sabadoTodo" class="text-center form-group">
+                            <input type="checkbox" name="sabadocompleto" id="24sabado" checked>
+                            <label for="24sabado">Disponible las 24 horas</label>
+                        </div>
+                        <div id="horarioSabado" style="display: none;">
+                            <div class="d-flex mb-2 form-inline">
+                                <label class="ml-4">Hora de inicio</label>
+                                <label class="ml-auto mr-5">Hora de termino</label>
+                            </div>
+                            <div class="form-group mb-0 text-center">
+                                <div class="form-inline sabado0">
+                                    <input name="InicioSabado" class="mb-1" type="time">
+                                    <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
+                                    <input name="FinSabado" class="mb-1 mr-2" type="time">
+                                    <span id="btnEliminarSabado" style="display: none;" onclick="eliminarSabado(1);">
+                                        <i class="far fa-times-circle fa-2x"></i>
+                                    </span>
+                                </div>
+                                <div id="divHorariosSabado"></div>
+                            </div>
+                            <div class="text-center">
+                                <span onclick="agregarSabado();" id="addSabado" class="btn btn-link ">Agregar otro horario</span>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <div id="sabadoTodo" class="text-center form-group">
+                            <input type="checkbox" name="sabadocompleto" id="24sabado">
+                            <label for="24sabado">Disponible las 24 horas</label>
+                        </div>
+                        <div id="horarioSabado">
+                            <div class="d-flex mb-2 form-inline">
+                                <label class="ml-4">Hora de inicio</label>
+                                <label class="ml-auto mr-5">Hora de termino</label>
+                            </div>
+                            <div class="form-group mb-0 text-center">
+                                <% if(horario.InicioSabado.length > 0) { %>
+                                    <% for (let i = 0; i < horario.InicioSabado.length; i++) { %>
+                                        <% const element = horario.InicioSabado[i] %>
+                                        <% const element2 = horario.FinSabado[i] %>
+                                            <div class="form-inline sabado<%=i%> sabadoCon">
+                                                <input name="InicioSabado" class="mb-1" type="time" value="<%=element%>">
+                                                <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
+                                                <input name="FinSabado" class="mb-1 mr-2" type="time" value="<%=element2%>">
+                                                <span id="btnEliminarSabado" onclick="eliminarSabadoEditar('<%=i%>');">
+                                                    <i class="far fa-times-circle fa-2x"></i>
+                                                </span>
+                                            </div>
+                                    <% } %>
+                                    <div id="divHorariosSabado"></div>
+                                    <div class="text-center">
+                                        <span onclick="agregarSabadoEditar();" id="addSabado" class="btn btn-link ">Agregar otro horario</span>
+                                    </div>
+                                <% } %>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            <% } else { %>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="checkbox" name="sabado" id="sabado">
+                        <label for="sabado">Sábado</label>
+                    </div>
+                    <div id="sabadoTodo" class="text-center form-group" style="display: none;">
+                        <input type="checkbox" name="sabadocompleto" id="24sabado">
+                        <label for="24sabado">Disponible las 24 horas</label>
+                    </div>
+                    <div id="horarioSabado" style="display: none;">
+                        <div class="d-flex mb-2 form-inline">
+                            <label class="ml-4">Hora de inicio</label>
+                            <label class="ml-auto mr-5">Hora de termino</label>
+                        </div>
+                        <div class="form-group mb-0 text-center">
+                            <div class="form-inline sabado0">
+                                <input name="InicioSabado" class="mb-1" type="time">
+                                <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
+                                <input name="FinSabado" class="mb-1 mr-2" type="time">
+                                <span id="btnEliminarSabado" style="display: none;" onclick="eliminarSabado(1);">
+                                    <i class="far fa-times-circle fa-2x"></i>
+                                </span>
+                            </div>
+                            <div id="divHorariosSabado"></div>
+                        </div>
+                        <div class="text-center">
+                            <span onclick="agregarSabado();" id="addSabado" class="btn btn-link ">Agregar otro horario</span>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+
+            <!--FIN SABADO-->
+
+            <!--INICIO DOMING-->
+            <% if(horario.domingo === 'on') { %>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="checkbox" name="domingo" id="domingo" checked>
+                        <label for="domingo">Domingo</label>
+                    </div>
+                    <% if(horario.domingocompleto === 'on') { %>
+                        <div id="domingoTodo" class="text-center form-group">
+                            <input type="checkbox" name="domingocompleto" id="24domingo" checked>
+                            <label for="24domingo">Disponible las 24 horas</label>
+                        </div>
+                        <div id="horarioDomingo" style="display: none;">
+                            <div class="d-flex mb-2 form-inline">
+                                <label class="ml-4">Hora de inicio</label>
+                                <label class="ml-auto mr-5">Hora de termino</label>
+                            </div>
+                            <div class="form-group mb-0 text-center">
+                                <div class="form-inline domingo0">
+                                    <input name="InicioDomingo" class="mb-1" type="time">
+                                    <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
+                                    <input name="FinDomingo" class="mb-1 mr-2" type="time">
+                                    <span id="btnEliminarDomingo" style="display: none;" onclick="eliminarDomingo(1);">
+                                        <i class="far fa-times-circle fa-2x"></i>
+                                    </span>
+                                </div>
+                                <div id="divHorariosDomingo"></div>
+                            </div>
+                            <div class="text-center">
+                                <span onclick="agregarDomingo();" id="addDomingo" class="btn btn-link ">Agregar otro horario</span>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <div id="domingoTodo" class="text-center form-group">
+                            <input type="checkbox" name="domingocompleto" id="24domingo">
+                            <label for="24domingo">Disponible las 24 horas</label>
+                        </div>
+                        <div id="horarioDomingo">
+                            <div class="d-flex mb-2 form-inline">
+                                <label class="ml-4">Hora de inicio</label>
+                                <label class="ml-auto mr-5">Hora de termino</label>
+                            </div>
+                            <div class="form-group mb-0 text-center">
+                                <% if(horario.InicioDomingo.length > 0) { %>
+                                    <% for (let i = 0; i < horario.InicioDomingo.length; i++) { %>
+                                        <% const element = horario.InicioDomingo[i] %>
+                                        <% const element2 = horario.FinDomingo[i] %>
+                                        <div class="form-inline domingo<%=i %> domingoCon">
+                                            <input name="InicioDomingo" class="mb-1" type="time" value="<%=element %>">
+                                            <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
+                                            <input name="FinDomingo" class="mb-1 mr-2" type="time" value="<%=element2 %>">
+                                            <span id="btnEliminarDomingo" onclick="eliminarDomingoEditar('<%=i %>');">
+                                                <i class="far fa-times-circle fa-2x"></i>
+                                            </span>
+                                        </div>
+                                        <% } %>
+                                        <div id="divHorariosDomingo"></div>
+                                        <div class="text-center">
+                                            <span onclick="agregarDomingoEditar();" id="addDomingo" class="btn btn-link ">Agregar otro horario</span>
+                                        </div>
+                                <% } %>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            <% } else { %>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="checkbox" name="domingo" id="domingo">
+                        <label for="domingo">Domingo</label>
+                    </div>
+                    <div id="domingoTodo" class="text-center form-group" style="display: none;">
+                        <input type="checkbox" name="domingocompleto" id="24domingo">
+                        <label for="24domingo">Disponible las 24 horas</label>
+                    </div>
+                    <div id="horarioDomingo" style="display: none;">
+                        <div class="d-flex mb-2 form-inline">
+                            <label class="ml-4">Hora de inicio</label>
+                            <label class="ml-auto mr-5">Hora de termino</label>
+                        </div>
+                        <div class="form-group mb-0 text-center">
+                            <div class="form-inline domingo0">
+                                <input name="InicioDomingo" class="mb-1" type="time">
+                                <hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);">
+                                <input name="FinDomingo" class="mb-1 mr-2" type="time">
+                                <span id="btnEliminarDomingo" style="display: none;" onclick="eliminarDomingo(1);">
+                                    <i class="far fa-times-circle fa-2x"></i>
+                                </span>
+                            </div>
+                            <div id="divHorariosDomingo"></div>
+                        </div>
+                        <div class="text-center">
+                            <span onclick="agregarDomingo();" id="addDomingo" class="btn btn-link ">Agregar otro horario</span>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+
+            <!-- FIN DOMINGO -->
+
+        </div>
+        <input type="submit" class="btn btn-primary float-right" value="Guardar">
+        </form>
+    <% } else { %>
+        <p>No tienes horarios registrados</p>
+    <% } %>
+    
+</div>
