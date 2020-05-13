@@ -1,6 +1,8 @@
 const Categorias = require('../models/Categorias');
 const Estrategias = require('../models/Estrategias');
 const Usuarios = require('../models/Usuarios');
+const Citas = require('../models/Citas');
+
 const multer = require('multer');
 const shortid = require('shortid');
 const fs = require('fs');
@@ -75,13 +77,16 @@ exports.formNuevaEstrategia = async (req, res) => {
         ]
     }));
     consultas.push(Categorias.findAll());
-    const [usuario, estrategias, categorias] = await Promise.all(consultas);
+    consultas.push(Citas.findAll({where: {usuarioprofesional: req.user.id}}));
+
+    const [usuario, estrategias, categorias, citas] = await Promise.all(consultas);
     res.render('nueva-estrategia', {
         nombrePagina: 'Nueva Estrategia',
         categorias,
         estrategias,
         nombre: usuario.nombre,
-        usuario
+        usuario,
+        citas
     });
 };
 

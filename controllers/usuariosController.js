@@ -3,6 +3,8 @@ const Saluds = require('../models/datosSalud');
 const Estrategias = require('../models/Estrategias');
 const Categorias = require('../models/Categorias');
 const Sentimientos = require('../models/Sentimientos');
+const Citas = require('../models/Citas');
+
 const randomstring = require('randomstring');
 require('dotenv').config({ path: 'variables.env' });
 const mailer = require('../misc/mailer');
@@ -277,12 +279,14 @@ exports.formEditarPerfil = async (req, res, next) => {
             }
         ]
     }));
-    const [estrategias] = await Promise.all(consultas);
+    consultas.push(Citas.findAll({where: {usuarioprofesional: req.user.id}}));
+    const [estrategias, citas] = await Promise.all(consultas);
     const usuario = await Usuarios.findByPk(req.user.id);
     res.render('editar-perfil', {
         nombrePagina: 'Editar Perfil',
         usuario,
-        estrategias
+        estrategias,
+        citas
     });
 };
 
@@ -372,14 +376,17 @@ exports.formCambiarPassword = async (req, res) => {
     consultas.push(Usuarios.findByPk(req.user.id));
     consultas.push(Estrategias.findAll({ where: { usuarioId: req.user.id } }));
     consultas.push(Categorias.findAll());
+    consultas.push(Citas.findAll({where: {usuarioprofesional: req.user.id}}));
 
-    const [usuario, estrategias, categorias] = await Promise.all(consultas);
+
+    const [usuario, estrategias, categorias, citas] = await Promise.all(consultas);
     res.render('cambiar-password', {
         nombrePagina: 'Cambiar password',
         nombre: usuario.nombre,
         estrategias,
-        categorias,
-        usuario
+        categorias, 
+        usuario,
+        citas
     });
 };
 

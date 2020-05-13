@@ -42,6 +42,11 @@
         <div class="mx-auto rounded chatPrincipal">
             <a href="/index" class="m-4 decoracionText">Chat Grupal</a>
         </div>
+        <% if(usuario.rol === '1') { %>
+            <div class="mx-auto rounded chatPrincipal">
+                <a href="/agendar-cita/<%=estrategia.usuario.id%>" class="m-4 decoracionText">Agendar Cita</a>
+            </div>
+        <% } %>
         <div class="mx-auto rounded chatPrincipal">
             <a href="/chatIndividual/<%=estrategia.usuario.email%>" class="m-4 decoracionText">Chat Individual</a>
         </div>

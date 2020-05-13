@@ -3,6 +3,8 @@ const Saluds = require('../models/datosSalud');
 const Estrategias = require('../models/Estrategias');
 const Categorias = require('../models/Categorias');
 const Sentimientos = require('../models/Sentimientos');
+const Citas = require('../models/Citas');
+
 require('dotenv').config({ path: 'variables.env' });
 const mailer = require('../misc/mailer');
 
@@ -39,8 +41,10 @@ exports.visualizarPerfil = async (req, res) => {
                 required: true
             }
         ]
-    }), { where: { usuarioId: userPerfil.Id } });    
-    const [usuario, estrategias, categorias, sentimientos] = await Promise.all(consultas);
+    }), { where: { usuarioId: userPerfil.Id } });
+    consultas.push(Citas.findAll({where: {usuarioprofesional: req.user.id}}));
+
+    const [usuario, estrategias, categorias, sentimientos, citas] = await Promise.all(consultas);
     res.render('perfil', {
         nombrePagina: 'Perfil',
         categorias,
@@ -48,6 +52,7 @@ exports.visualizarPerfil = async (req, res) => {
         nombre: usuario.nombre,
         usuario,
         userPerfil,
-        sentimientos
+        sentimientos,
+        citas
     });
 };

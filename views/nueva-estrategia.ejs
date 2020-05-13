@@ -1,4 +1,5 @@
-<div class="container">
+<div class="container mt-5">
+    <h2><%=nombrePagina %></h2>
     <form action="/nueva-estrategia" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="nombre">Nombre Ejercicio</label>
@@ -42,7 +43,7 @@
     </form>
 </div>
 <div style="height: 0px; width: 0px;">
-    <%- include('partials/barra-lateral.ejs', {nombre:usuario.nombre ,estrategias: estrategias}) %>
+    <%- include('partials/barra-lateral.ejs', {nombre:usuario.nombre ,estrategias: estrategias, citas}) %>
 </div>
 <a class="ir-arriba" javascript:void(0) title="Volver arriba">
     <span class="fa-stack">

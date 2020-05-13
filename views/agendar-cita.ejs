@@ -2,7 +2,7 @@
     <h2><%=nombrePagina %></h2>
     <h5 class="text-center mb-3">¿En qué horario puedes atender a los usuarios?</h5>
     <% if(horario) { %>
-    <form action="" method="POST">
+    <form>
         <div class="row">
 
             <input type="hidden" id="usuarioprofesional" value="<%=horario.usuarioId %>">
@@ -364,7 +364,6 @@
 
             <!-- FIN DOMINGO -->
         </div>
-        <input type="submit" class="btn btn-primary float-right" value="Agendar Cita">
         </form>
     <% } else { %>
         <p>No tienes horarios registrados</p>

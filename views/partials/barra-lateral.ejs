@@ -108,42 +108,20 @@
                                             <% } %>
                                         </a>
                                 </li>-->
-                                <% if (usuario.rol == '1') {
-                                %><li>
-                                    <a href="/agregar-sentimiento">Agregar Sentimiento</a>
-                                </li><%
-                            } %>
+                                <% if (usuario.rol == '1') { %>
+                                    <li>
+                                        <a href="/agregar-sentimiento">Agregar Sentimiento</a>
+                                    </li>
+                                <% } %>
                             </ul>
                         </div>
                     </li>
-                    <li class="sidebar-dropdown">
-                        <a>
-                            <i class="fas fa-user"></i>
-                            <span>Agenda</span>
-                            <!--<span class="badge badge-pill badge-warning">New</span>-->
-
-                            <!--href="/cv-perfil"-->
-                            <i class="fas fa-file-pdf"></i>
-                            <% if (usuario.rol == '1') {
-                                %><span>Ver mis citas</span><%
-                            } else {
-                                %><span>Ver mi agenda</span><%
-                            } %>
-
-                            <% if(usuario.cv) { %>
-                            <span class="badge badge-pill badge-success">Si</span>
-                            <% } else { %>
-                            <span class="badge badge-pill badge-danger">No</span>
-                            <% } %>
-                        </a>
-                    </li>
-                    <% if (usuario.rol == '2') {
-                        %>
+                    
                     <li class="sidebar-dropdown">
                         <a>
                             <i class="far fa-gem"></i>
-                            <span>Recursos</span>
-                            <span class="badge badge-pill badge-warning"><%=estrategias.length%></span>
+                            <span>Mi Agenda</span>
+                            <span class="badge badge-pill badge-warning"><%=citas.length%></span>
                         </a>
                         <div class="sidebar-submenu">
                             <ul>
@@ -167,8 +145,7 @@
                             </ul>
                         </div>
                     </li>
-                    <%
-                    } %>
+                   
                     <li class="sidebar-dropdown">
                         <% if(usuario.rol === '2' || usuario.rol === '0') { %>
                             <a>

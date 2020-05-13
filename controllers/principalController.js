@@ -10,7 +10,7 @@ exports.panelPrincipal = async (req, res) => {
         include: [
             {
                 model: Usuarios,
-                attributes: ['id', 'email', 'imagen', 'nombre', 'rol', aPaterno],
+                attributes: ['id', 'email', 'imagen', 'nombre', 'rol', 'aPaterno'],
                 required: true
             },
             {
