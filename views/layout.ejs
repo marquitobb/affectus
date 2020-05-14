@@ -20,7 +20,7 @@
 
 <body>
     <header>
-        <%if(locals.usuario.id) { %>
+        <% if(locals.usuario.id) { %>
         <%- include('partials/nav-autenticado.ejs') %>
         <% }else { %>
         <%- include('partials/nav-no-autenticado.ejs', {usuario: locals.usuario}) %>
