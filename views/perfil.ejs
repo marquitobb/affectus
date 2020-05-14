@@ -573,7 +573,11 @@
       <div class="col-md-6">
         <!--Inicio de Estadisticas-->
         <div class="py-3 efectoPerfil mt-3">
-          <h4 class="text-center font-weight-bold">Estadísticas</h4>
+          <div class="form-inline mx-2">
+            <h4 class="mx-auto font-weight-bold">Estadísticas</h4>
+            <a class="ml-auto mr-3" href="/mystatistics/<%=userPerfil.email %>">Ver Gráficas</a>
+          </div>
+
           <% if (userPerfil.rol == 1) {
           %>
 
@@ -597,19 +601,19 @@
             let porFeliz, porTriste, porEnojado, porPreocupado, porSorprendido;
             sentimientos.forEach(sentimiento => {
               switch (sentimiento.sentimiento) {
-                case 'feliz':
+                case 'Feliz':
                   feliz += 1
                   break;
-                case 'triste':
+                case 'Triste':
                   triste += 1
                   break;
-                case 'enojado':
+                case 'Enojado':
                   enojado += 1
                   break;
-                case 'preocupado':
+                case 'Preocupado':
                   preocupado += 1
                   break;
-                case 'sorprendido':
+                case 'Sorprendido':
                   sorprendido += 1
                   break;
               }

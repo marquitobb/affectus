@@ -326,7 +326,7 @@ exports.AgregarCita = async (req, res, next) => {
 
 exports.formVerCitas = async (req, res, next) => {
     const usuario = await Usuarios.findByPk(req.user.id, {
-        attributes: ['rol']
+        attributes: ['rol', 'id', 'nombre', 'estadoActual', 'email']
     });
     const citas = await Citas.findAll({
         where: { usuarioprofesional: req.user.id },
@@ -340,6 +340,7 @@ exports.formVerCitas = async (req, res, next) => {
     });
 
     const estrategias = await Estrategias.findAll({
+        where: { usuarioId: req.user.id },
         include: [
             {
                 model: Usuarios,

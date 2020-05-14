@@ -11,6 +11,7 @@ const sentimientosController = require('../controllers/sentimientosController');
 const principalController = require('../controllers/principalController');
 const horariosController = require('../controllers/horariosController');
 const perfilController = require('../controllers/perfilController');
+const estadisticasController = require('../controllers/estadisticasController');
 
 
 module.exports = function() {
@@ -115,6 +116,12 @@ module.exports = function() {
 
     //Ruta para ir al perfil
     router.get('/perfil/:correo', authController.usuarioAutenticado, perfilController.visualizarPerfil);
+
+    //Ruta para ir a la pantalla de estadísticas
+    router.get('/mystatistics/:correo', authController.usuarioAutenticado, estadisticasController.estadisticas);
+    router.get('/estadistica/:categoria/:id', authController.usuarioAutenticado, estadisticasController.estadisticaProfesional);
+    router.get('/categorias', authController.usuarioAutenticado, estadisticasController.obtencionCategorias);
+    router.get('/estadisticaSentimientos/:sentimiento/:id', authController.usuarioAutenticado, estadisticasController.obtencionSentimientos);
     return router;
 
 };

@@ -98,27 +98,27 @@ $("#show-sidebar").click(function () {
 //Asignación para guardar en la base de datos los sentimientos de la pagina principal
 const atributoSentFeliz = (e) => {
   e.preventDefault();
-  const url = `feliz`;
+  const url = `Feliz`;
   axiosSentimientos(url);
 };
 const atributoSentEnojado = (e) => {
   e.preventDefault();
-  const url = `enojado`;
+  const url = `Enojado`;
   axiosSentimientos(url);
 };
 const atributoSentPreocupado = (e) => {
   e.preventDefault();
-  const url = `preocupado`;
+  const url = `Preocupado`;
   axiosSentimientos(url);
 };
 const atributoSentSorprendido = (e) => {
   e.preventDefault();
-  const url = `sorprendido`;
+  const url = `Sorprendido`;
   axiosSentimientos(url);
 };
 const atributoSentTriste = (e) => {
   e.preventDefault();
-  const url = `triste`;
+  const url = `Triste`;
   axiosSentimientos(url);
 };
 
