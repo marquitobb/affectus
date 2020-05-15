@@ -3,6 +3,7 @@ const Estrategias = require('../models/Estrategias');
 const Categorias = require('../models/Categorias');
 const Citas = require('../models/Citas');
 const Sentimientos = require('../models/Sentimientos');
+const Salud = require('../models/datosSalud');
 
 //Método que llama a la pantalla de estadisticas
 exports.estadisticas = async (req, res) => {
@@ -99,6 +100,21 @@ exports.obtencionSentimientos =  async (req, res) => {
         });
         
         res.status(200).send(sentimiento);
+
+    } catch (error) {
+        res.status(403).send('Hubo un error');
+    }
+};
+
+//Método para obtener los datos de salud del usuario que se visualizará en la pantalla
+exports.obtencionSaludUser =  async (req, res) => {    
+    try {
+        const salud = await Salud.findAll({
+            where: {usuarioId: req.params.id},
+            attributes:['fecha', 'peso', 'azucar', 'temperatura', 'estatura', 'presion']
+        });
+        
+        res.status(200).send(salud);
 
     } catch (error) {
         res.status(403).send('Hubo un error');

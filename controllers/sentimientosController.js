@@ -2,6 +2,7 @@ const Usuarios = require('../models/Usuarios');
 const Categorias = require('../models/Categorias');
 const Estrategias = require('../models/Estrategias');
 const Sentimientos = require('../models/Sentimientos');
+const Citas = require('../models/Citas');
 
 exports.formAgregarSentimiento = async (req, res) => {
     const consultas = [];
@@ -21,10 +22,21 @@ exports.formAgregarSentimiento = async (req, res) => {
     }));
     const [estrategias] = await Promise.all(consultas);
     const usuario = await Usuarios.findByPk(req.user.id);
+    const citas = await Citas.findAll({
+        where: { usuarioprofesional: req.user.id },
+        include: [
+            {
+                model: Usuarios,
+                attributes: ['email', 'imagen', 'nombre', 'rol'],
+                required: true
+            }
+        ]
+    });
     res.render('agregar-sentimiento', {
         nombrePagina: "¿Cómo te sientes hoy?",
         usuario,
-        estrategias
+        estrategias,
+        citas
     });
 };
 

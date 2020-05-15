@@ -113,6 +113,10 @@ const Usuarios = db.define('usuarios', {
     },
     idiomaItaliano: {
         type: Sequelize.BOOLEAN
+    },
+    reportes: {
+        type: Sequelize.SMALLINT,
+        defaultValue: 0
     }
 }, {
     hooks: {
