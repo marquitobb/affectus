@@ -59,6 +59,32 @@ function irArriba() {
   $('.ir-abajo').click(function () { $('body,html').animate({ scrollTop: '1000px' }, 1000); });
 }
 
+$('#estadoActual').change(function () {
+  const url = `${location.origin}/estadoAffectus/` + $('#estadoActual').val();
+  axios
+      .post(url)
+      .then(function (respuesta) {
+          Swal.fire(
+              'Excelente!',
+              respuesta.data,
+              'success'
+          );
+          var elemento = document.getElementById('circuloEstado');
+          if ($('#estadoActual').val() == '0') {
+              elemento.style.color = '#5cb85c';
+          } else {
+              if ($('#estadoActual').val() == '1') {
+                  elemento.style.color = 'rgb(255, 238, 0)';
+              } else {
+                  elemento.style.color = 'rgb(255, 51, 0)';
+              }
+          }
+      })
+      .catch((error) => {
+          console.log(error);
+      });
+});
+
 $('#cerrarSentimientosPrincipal').click(function () {
   $('#sentimientosPrincipal').hide();
   //FALTA QUE NO APAREZCA SI YA INSERTÓ EL DÍA DE HOY
@@ -402,7 +428,9 @@ document.querySelectorAll('#opciones > .opcion').forEach((opcion) => {
   });
 });
 
+if(select){
 select.addEventListener('click', () => {
   select.classList.toggle('active');
   opciones.classList.toggle('active');
 });
+}

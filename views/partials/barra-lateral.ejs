@@ -13,11 +13,11 @@
             <div class="sidebar-header">
                 <div class="user-pic">
                     <% if(usuario.imagen) { %>
-                    <img class="img-responsive img-rounded" src="/uploads/usuarios/<%=usuario.imagen %>"
+                    <img loading="lazy" class="img-responsive img-rounded" src="/uploads/usuarios/<%=usuario.imagen %>"
                         alt="User picture">
                     <% }else { %>
-                    <img class="img-responsive img-rounded"
-                        src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+                    <img loading="lazy" class="img-responsive img-rounded"
+                    src="/img/perfilDefault.png"
                         alt="User picture">
                     <% } %>
                 </div>
@@ -195,7 +195,7 @@
                         </a>
                     </li>
                     <li class="sidebar-dropdown">
-                        <a href="#">
+                        <a href="/mapa/<%=usuario.email %>">
                             <i class="fa fa-globe"></i>
                             <span>Mapas</span>
                         </a>

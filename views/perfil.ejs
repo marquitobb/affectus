@@ -21,69 +21,58 @@
     <!--Encabezado-->
     <div class="perfilEncabezado efectoPerfil form-inline mt-3 d-flex py-3">
       <div class="ml-2 mx-auto" style="height: 132px; width: 132px;">
-        <% if (userPerfil.email == usuario.email) {
-          %>
+        <% if (userPerfil.email == usuario.email) { %>
         <a href="/imagen-perfil">
           <% if(userPerfil.imagen) { %>
-          <% if(userPerfil.estadoActual == '0') {
-            %><img class="rounded-circle borderConectado" src="/uploads/usuarios/<%=userPerfil.imagen %>"
-            alt="Foto de usuario" /><%
-          }  else {
-            if (userPerfil.estadoActual == '1') {
-              %><img class="rounded-circle borderAusente" src="/uploads/usuarios/<%=userPerfil.imagen %>"
-            alt="Foto de usuario" /><%
-            } else {
-              %><img class="rounded-circle borderNoDisponible" src="/uploads/usuarios/<%=userPerfil.imagen %>"
-            alt="Foto de usuario" /><%
-            }
-          } %>
+          <% if(userPerfil.estadoActual == '0') { %>
+          <img loading="lazy" class="rounded-circle borderConectado" src="/uploads/usuarios/<%=userPerfil.imagen %>"
+            alt="Foto de usuario" />
+          <% }  else { %>
+          <% if (userPerfil.estadoActual == '1') { %>
+          <img loading="lazy" class="rounded-circle borderAusente" src="/uploads/usuarios/<%=userPerfil.imagen %>"
+            alt="Foto de usuario" />
+          <% } else { %>
+          <img loading="lazy" class="rounded-circle borderNoDisponible" src="/uploads/usuarios/<%=userPerfil.imagen %>"
+            alt="Foto de usuario" />
+          <% } %>
+          <% } %>
           <% }else { %>
-          <% if(userPerfil.estadoActual == '0') {
-            %><img class="rounded-circle borderConectado"
-            src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
-            alt="Foto Usuario" /><%
-          }  else {
-            if (userPerfil.estadoActual == '1') {
-              %><img class="rounded-circle borderAusente"
-            src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
-            alt="Foto Usuario" /><%
-            } else {
-              %><img class="rounded-circle borderNoDisponible"
-            src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
-            alt="Foto Usuario" /><%
-            }
-          } %>
+          <% if(userPerfil.estadoActual == '0') {%>
+          <img loading="lazy" class="rounded-circle borderConectado" src="/img/perfilDefault.png" alt="Foto Usuario" />
+          <% }  else { %>
+          <% if (userPerfil.estadoActual == '1') { %>
+          <img loading="lazy" class="rounded-circle borderAusente" src="/img/perfilDefault.png" alt="Foto Usuario" />
+          <%} else {%>
+          <img loading="lazy" class="rounded-circle borderNoDisponible" src="/img/perfilDefault.png"
+            alt="Foto Usuario" />
+          <%} %>
+          <% } %>
           <% } %>
         </a>
-        <%
-        } else {
-          %>
+        <% } else { %>
         <% if(userPerfil.imagen) { %>
-        <% if(userPerfil.estadoActual == '0') {
-            %><img class="rounded-circle borderConectado" src="/uploads/usuarios/<%=userPerfil.imagen %>"
-          alt="Foto de usuario" /><%
-          }  else {
+        <% if(userPerfil.estadoActual == '0') { %>
+        <img loading="lazy" class="rounded-circle borderConectado" src="/uploads/usuarios/<%=userPerfil.imagen %>"
+          alt="Foto de usuario" />
+        <%}  else {
             if (userPerfil.estadoActual == '1') {
-              %><img class="rounded-circle borderAusente" src="/uploads/usuarios/<%=userPerfil.imagen %>"
-          alt="Foto de usuario" /><%
+              %><img loading="lazy" class="rounded-circle borderAusente"
+          src="/uploads/usuarios/<%=userPerfil.imagen %>" alt="Foto de usuario" /><%
             } else {
-              %><img class="rounded-circle borderNoDisponible" src="/uploads/usuarios/<%=userPerfil.imagen %>"
-          alt="Foto de usuario" /><%
+              %><img loading="lazy" class="rounded-circle borderNoDisponible"
+          src="/uploads/usuarios/<%=userPerfil.imagen %>" alt="Foto de usuario" /><%
             }
           } %>
         <% }else { %>
         <% if(userPerfil.estadoActual == '0') {
-            %><img class="rounded-circle borderConectado"
-          src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+            %><img loading="lazy" class="rounded-circle borderConectado" src="/img/perfilDefault.png"
           alt="Foto Usuario" /><%
           }  else {
             if (userPerfil.estadoActual == '1') {
-              %><img class="rounded-circle borderAusente"
-          src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+              %><img loading="lazy" class="rounded-circle borderAusente" src="/img/perfilDefault.png"
           alt="Foto Usuario" /><%
             } else {
-              %><img class="rounded-circle borderNoDisponible"
-          src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+              %><img loading="lazy" class="rounded-circle borderNoDisponible" src="/img/perfilDefault.png"
           alt="Foto Usuario" /><%
             }
           } %>
@@ -108,16 +97,20 @@
         <h4 class="text-center">Profesional</h4>
         <% if (userPerfil.email == usuario.email) {
             %><a href="/nueva-estrategia" class="btn btn-success mr-2">Agregar Recurso</a>
-        <a href="/editar-perfil" class="btn btn-info">Editar Perfil</a><%
-          }
-         if (userPerfil.estadoActual == '0') {
-          %>
-        <hr><button class="btn btn-primary">Contactar</button><%
-        } else {
-          %>
-        <hr><button class="btn btn-primary" disabled>Contactar</button><%
-        } %>
-        <button class="btn btn-danger ml-2">Reportar</button>
+        <a href="/editar-perfil" class="btn btn-info">Editar Perfil</a>
+        <%} %>
+         <%if (userPerfil.estadoActual == '0') {%>
+          <% if (userPerfil.email != usuario.email) { %>
+            <hr><button class="btn btn-primary">Contactar</button>
+          <% } %>        
+        <%} else {%>
+          <% if (userPerfil.email != usuario.email) { %>
+            <hr><button class="btn btn-primary" disabled>Contactar</button>
+          <% } %> 
+        <%} %>
+        <% if (userPerfil.email != usuario.email) { %>
+          <button class="btn btn-danger ml-2">Reportar</button>
+          <% } %>         
         <% } %>
         <% } %>
       </div>
@@ -316,18 +309,18 @@
               <div class="d-flex mt-3">
                 <% if (userPerfil.genero == 1) {
               %><div class="ml-2 my-auto">
-                  <img src="/img/male-solid.svg" alt="Imagen hombre" height="30" width="30">
+                  <img loading="lazy" src="/img/male-solid.svg" alt="Imagen hombre" height="30" width="30">
                 </div>
                 <h6 class="ml-4 pt-1">Hombre</h6><%
             } else {
               if (userPerfil.genero == 2) {
                 %><div class="ml-2 my-auto">
-                  <img src="/img/female-solid.svg" alt="Imagen hombre" height="30" width="30">
+                  <img loading="lazy" src="/img/female-solid.svg" alt="Imagen hombre" height="30" width="30">
                 </div>
                 <h6 class="ml-4 pt-1">Mujer</h6><%
               } else {
                 %><div class="ml-2 my-auto">
-                  <img src="/img/venus-mars-solid.svg" alt="Imagen hombre" height="30" width="30">
+                  <img loading="lazy" src="/img/venus-mars-solid.svg" alt="Imagen hombre" height="30" width="30">
                 </div>
                 <h6 class="ml-4 pt-1">Género sin especificar</h6><%
               }
@@ -337,7 +330,7 @@
 
               <div class="d-flex mt-3">
                 <div class="ml-2 my-auto">
-                  <img src="/img/briefcase-solid.svg" alt="Imagen hombre" height="30" width="30">
+                  <img loading="lazy" src="/img/briefcase-solid.svg" alt="Imagen hombre" height="30" width="30">
                 </div>
                 <% if (userPerfil.ocupacion == '' || !userPerfil.ocupacion){
                     %><h6 class="ml-4 pt-1">Ocupación no disponible</h6><%
@@ -348,7 +341,7 @@
 
               <div class="d-flex mt-3">
                 <div class="ml-2 my-auto">
-                  <img src="/img/map-marker-alt-solid.svg" alt="Imagen hombre" height="30" width="30">
+                  <img loading="lazy" src="/img/map-marker-alt-solid.svg" alt="Imagen hombre" height="30" width="30">
                 </div>
                 <% if (userPerfil.nacionalidad == '' || !userPerfil.nacionalidad){
                     %><h6 class="ml-4 pt-1">Nacionalidad no disponible</h6><%
@@ -361,7 +354,7 @@
                 %>
               <div class="d-flex mt-3">
                 <div class="ml-2 my-auto">
-                  <img src="/img/familiar.svg" alt="Imagen hombre" height="30" width="30">
+                  <img loading="lazy" src="/img/familiar.svg" alt="Imagen hombre" height="30" width="30">
                 </div>
                 <% if (userPerfil.familiarEnfermedad == '' || !userPerfil.familiarEnfermedad){
                     %><h6 class="ml-4 pt-1">Sin enfermedades hereditarias</h6><%
@@ -372,7 +365,7 @@
 
               <div class="d-flex mt-3">
                 <div class="ml-2 my-auto">
-                  <img src="/img/enfermedadPersonal.svg" alt="Imagen hombre" height="30" width="30">
+                  <img loading="lazy" src="/img/enfermedadPersonal.svg" alt="Imagen hombre" height="30" width="30">
                 </div>
                 <% if (userPerfil.enfermedadPersonal == '' || !userPerfil.enfermedadPersonal){
                     %><h6 class="ml-4 pt-1">Sin enfermedades personales</h6><%
@@ -383,7 +376,7 @@
 
               <div class="d-flex mt-3">
                 <div class="ml-2 my-auto">
-                  <img src="/img/vivienda.svg" alt="Imagen hombre" height="30" width="30">
+                  <img loading="lazy" src="/img/vivienda.svg" alt="Imagen hombre" height="30" width="30">
                 </div>
                 <% if (userPerfil.vivienda == '' || !userPerfil.vivienda){
                     %><h6 class="ml-4 pt-1">Sin datos de vivienda</h6><%
@@ -398,7 +391,7 @@
 
               <div class="d-flex mt-3">
                 <div class="ml-2 my-auto">
-                  <img src="/img/alimentacion.svg" alt="Imagen hombre" height="30" width="30">
+                  <img loading="lazy" src="/img/alimentacion.svg" alt="Imagen hombre" height="30" width="30">
                 </div>
                 <% if (userPerfil.alimentacion == '' || !userPerfil.alimentacion){
                     %><h6 class="ml-4 pt-1">Sin datos de alimentación</h6><%
@@ -423,14 +416,14 @@
             <div class="col-md-6">
               <div class="d-flex mt-3">
                 <div class="ml-2 my-auto">
-                  <img src="/img/calendar-alt-regular.svg" alt="Imagen hombre" height="30" width="30">
+                  <img loading="lazy" src="/img/calendar-alt-regular.svg" alt="Imagen hombre" height="30" width="30">
                 </div>
                 <h6 class="ml-4 pt-1"><%=userPerfil.fechanacimiento%></h6>
               </div>
 
               <div class="d-flex mt-3">
                 <div class="ml-2 my-auto">
-                  <img src="/img/lenguaje.svg" alt="Lenguaje" height="30" width="30">
+                  <img loading="lazy" src="/img/lenguaje.svg" alt="Lenguaje" height="30" width="30">
                 </div>
                 <%
                 let idiomas = '';
@@ -466,7 +459,7 @@
 
               <div class="d-flex mt-3">
                 <div class="ml-2 my-auto">
-                  <img src="/img/phone.svg" alt="Teléfono" height="30" width="30">
+                  <img loading="lazy" src="/img/phone.svg" alt="Teléfono" height="30" width="30">
                 </div>
                 <% if (userPerfil.telefono == '' || !userPerfil.telefono){
                     %><h6 class="ml-4 pt-1">Teléfono no disponible</h6><%
@@ -477,7 +470,7 @@
 
               <div class="d-flex mt-3">
                 <div class="ml-2 my-auto">
-                  <img src="/img/whatsapp-brands.svg" alt="WhatsApp" height="30" width="30">
+                  <img loading="lazy" src="/img/whatsapp-brands.svg" alt="WhatsApp" height="30" width="30">
                 </div>
                 <% if (userPerfil.whatsapp == '' || !userPerfil.whatsapp){
                     %><h6 class="ml-4 pt-1">WhatsApp no disponible</h6><%
@@ -490,7 +483,7 @@
                 %>
               <div class="d-flex mt-3">
                 <div class="ml-2 my-auto">
-                  <img src="/img/discapacidad.svg" alt="Discapacidad height=" 30" width="30">
+                  <img loading="lazy" src="/img/discapacidad.svg" alt="Discapacidad height=" 30" width="30">
                 </div>
                 <% if (!userPerfil.discapacidad){
                     %><h6 class="ml-4 pt-1">Discapacidad no disponible</h6><%
@@ -505,7 +498,7 @@
 
               <div class="d-flex mt-3">
                 <div class="ml-2 my-auto">
-                  <img src="/img/viviendo.svg" alt="Viviendo" height="30" width="30">
+                  <img loading="lazy" src="/img/viviendo.svg" alt="Viviendo" height="30" width="30">
                 </div>
                 <% if (userPerfil.viviendo == '' || !userPerfil.viviendo){
                     %><h6 class="ml-4 pt-1">Sin datos de con quién vive</h6><%
@@ -520,7 +513,7 @@
 
               <div class="d-flex mt-3">
                 <div class="ml-2 my-auto">
-                  <img src="/img/mascota.svg" alt="Mascotas" height="30" width="30">
+                  <img loading="lazy" src="/img/mascota.svg" alt="Mascotas" height="30" width="30">
                 </div>
                 <% if (userPerfil.mascota == '' || !userPerfil.mascota){
                     %><h6 class="ml-4 pt-1">Sin datos de mascota</h6><%
@@ -583,7 +576,7 @@
 
           <div class="row mt-2">
             <div class="col-md-2 text-center">
-              <img src="/img/sentimientos.svg" alt="Sentimientos" height="30" width="30">
+              <img loading="lazy" src="/img/sentimientos.svg" alt="Sentimientos" height="30" width="30">
             </div>
             <div class="col-md-3 text-center">
               <h6 class="mx-auto my-auto">Total de sentimientos</h6>
@@ -627,7 +620,7 @@
               %>
           <div class="row mt-2">
             <div class="col-md-2 text-center">
-              <img src="/img/feliz.png" alt="Feliz" height="30" width="30">
+              <img loading="lazy" src="/img/feliz.png" alt="Feliz" height="30" width="30">
             </div>
             <div class="col-md-3 text-center">
               <h6>Feliz</h6>
@@ -642,7 +635,7 @@
 
           <div class="row">
             <div class="col-md-2 text-center">
-              <img src="/img/triste.png" alt="Triste" height="30" width="30">
+              <img loading="lazy" src="/img/triste.png" alt="Triste" height="30" width="30">
             </div>
             <div class="col-md-3 text-center">
               <h6>Triste</h6>
@@ -657,7 +650,7 @@
 
           <div class="row">
             <div class="col-md-2 text-center">
-              <img src="/img/enojada.png" alt="Triste" height="30" width="30">
+              <img loading="lazy" src="/img/enojada.png" alt="Triste" height="30" width="30">
             </div>
             <div class="col-md-3 text-center">
               <h6>Enojado</h6>
@@ -672,7 +665,7 @@
 
           <div class="row">
             <div class="col-md-2 text-center">
-              <img src="/img/preocupada.png" alt="Triste" height="30" width="30">
+              <img loading="lazy" src="/img/preocupada.png" alt="Triste" height="30" width="30">
             </div>
             <div class="col-md-3 text-center">
               <h6>Preocupado</h6>
@@ -687,7 +680,7 @@
 
           <div class="row">
             <div class="col-md-2 text-center">
-              <img src="/img/sorprendida.png" alt="Triste" height="30" width="30">
+              <img loading="lazy" src="/img/sorprendida.png" alt="Triste" height="30" width="30">
             </div>
             <div class="col-md-3 text-center">
               <h6>Sorprendido</h6>

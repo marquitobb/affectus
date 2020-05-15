@@ -12,6 +12,7 @@ const principalController = require('../controllers/principalController');
 const horariosController = require('../controllers/horariosController');
 const perfilController = require('../controllers/perfilController');
 const estadisticasController = require('../controllers/estadisticasController');
+const mapController = require('../controllers/mapController');
 
 
 module.exports = function() {
@@ -122,6 +123,9 @@ module.exports = function() {
     router.get('/estadistica/:categoria/:id', authController.usuarioAutenticado, estadisticasController.estadisticaProfesional);
     router.get('/categorias', authController.usuarioAutenticado, estadisticasController.obtencionCategorias);
     router.get('/estadisticaSentimientos/:sentimiento/:id', authController.usuarioAutenticado, estadisticasController.obtencionSentimientos);
-    return router;
+    
+    //Rutas para pantalla de mapa
+    router.get('/mapa/:correo', authController.usuarioAutenticado, mapController.visualizacionMapa);
 
+    return router;
 };

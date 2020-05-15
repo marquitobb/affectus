@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+</head>
+<body>
+    <a class="ir-arriba" javascript:void(0) title="Volver arriba">
+        <span class="fa-stack">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-arrow-up fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+    <div style="height: 0px; width: 0px;">
+        <%- include('partials/barra-lateral.ejs', {nombre:usuario.nombre,estrategias: estrategias, citas}) %>
+    </div>
+
+    <div class="container">
+        <h1><%= nombrePagina %> </h1>
+        <hr>
+        <div id="regions_div" style="width: auto;"></div>
+    </div>    
+
+    <!--Google Chearts-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="/js/mapas.js"></script>
+</body>
+</html>
