@@ -73,6 +73,17 @@
     <%
     } %>
 
+    <h6 class="text-center">Búsqueda por categoría</h6>
+    <div class="bg-light rounded-pill py-2 px-2 mb-3 d-flex espacioCategorias">
+        <% categorias.forEach(categorias => { %>
+        <a href="" class="rounded-pill lineaCategoria ml-auto bg-light py-3 px-3 my-auto">
+            <span class="font-weight-bold"><%=categorias.nombre%></span>
+        </a>
+        <% }); %>
+    </div>
+
+    <hr>
+
     <div class="row">
         <% estrategias.forEach(estrategia => { %>
         <div class="col-md-6 mb-3">

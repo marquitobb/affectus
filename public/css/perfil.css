@@ -55,6 +55,25 @@ body {
     text-decoration: none;
 }
 
+a.lineaCategoria {
+    text-decoration: none;
+}
+
+a.lineaCategoria span {
+    color: black;
+}
+
+a.lineaCategoria:hover {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.24);
+}
+
+.espacioCategorias {
+    overflow-y: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
 .chatPrincipal:hover {
     background-color: rgba(0, 0, 0, 0.3);
 }
