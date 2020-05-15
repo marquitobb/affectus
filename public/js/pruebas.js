@@ -202,6 +202,11 @@ var xDomingo = 0, conDomingo = 0, xDomingoEdit = 2;
 var divslunes = document.getElementsByClassName("lunesCon").length;
 if (divslunes === 1) {
     $('#btnEliminarLunes').hide();
+    $('#addLunes').hide();
+}
+
+if (divslunes = totalHorarios) {
+    $('#addLunes').hide();
 }
 
 var divsmartes = document.getElementsByClassName("martesCon").length;
@@ -209,9 +214,17 @@ if (divsmartes === 1) {
     $('#btnEliminarMartes').hide();
 }
 
+if (divsmartes === totalHorarios) {
+    $('#addMartes').hide();
+}
+
 var divsmiercoles = document.getElementsByClassName("miercolesCon").length;
 if (divsmiercoles === 1) {
     $('#btnEliminarMiercoles').hide();
+}
+
+if (divsmiercoles === totalHorarios) {
+    $('#addMiercoles').hide();
 }
 
 var divsjueves = document.getElementsByClassName("juevesCon").length;
@@ -219,9 +232,17 @@ if (divsjueves === 1) {
     $('#btnEliminarJueves').hide();
 }
 
+if (divsjueves === totalHorarios) {
+    $('#addJueves').hide();
+}
+
 var divsviernes = document.getElementsByClassName("viernesCon").length;
 if (divsviernes === 1) {
     $('#btnEliminarViernes').hide();
+}
+
+if (divsviernes === totalHorarios) {
+    $('#addViernes').hide();
 }
 
 var divssabado = document.getElementsByClassName("sabadoCon").length;
@@ -229,9 +250,17 @@ if (divssabado === 1) {
     $('#btnEliminarSabado').hide();
 }
 
+if (divssabado === totalHorarios) {
+    $('#addSabado').hide();
+}
+
 var divsdomingo = document.getElementsByClassName("domingoCon").length;
 if (divsdomingo === 1) {
     $('#btnEliminarDomingo').hide();
+}
+
+if (divsdomingo === totalHorarios) {
+    $('#addDomingo').hide();
 }
 
 //Agregar horario lunes
@@ -251,6 +280,10 @@ function agregarLunes() {
 function agregarLunesEditar() {
     var divs = document.getElementsByClassName("lunesCon");
     var numDivs = divs.length + 1;
+    if (numDivs === totalHorarios) {
+        $('#addLunes').hide();
+    }
+    console.log(numDivs)
     if (xLunes < totalHorarios) {
         xLunes++;
         conLunes++;
@@ -309,6 +342,9 @@ function agregarMartes() {
 function agregarMartesEditar() {
     var divs = document.getElementsByClassName("martesCon");
     var numDivs = divs.length + 1;
+    if (numDivs === totalHorarios) {
+        $('#addMartes').hide();
+    }
     if (xMartes < totalHorarios) {
         xMartes++;
         conMartes++;
@@ -363,6 +399,9 @@ function agregarMiercoles() {
 function agregarMiercolesEditar() {
     var divs = document.getElementsByClassName("miercolesCon");
     var numDivs = divs.length + 1;
+    if (numDivs === totalHorarios) {
+        $('#addMiercoles').hide();
+    }
     if (xMiercoles < totalHorarios) {
         xMiercoles++;
         conMiercoles++;
@@ -413,6 +452,9 @@ function agregarJueves() {
 function agregarJuevesEditar() {
     var divs = document.getElementsByClassName("juevesCon");
     var numDivs = divs.length + 1;
+    if (numDivs === totalHorarios) {
+        $('#addJueves').hide();
+    }
     if (xJueves < totalHorarios) {
         xJueves++; conJueves++; $('#btnEliminarJueves').show(); if
             (xJueves == totalHorarios) { $('#addJueves').hide(); } $('#divHorariosJueves').append('<div class="form-inline jueves' + numDivs + ' juevesCon"><input class="mb-2" type="time" name="InicioJueves"><hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);"><input class="mb-2 mr-2" type="time" name="FinJueves"><span id="btnEliminarJueves" onclick="eliminarJuevesEditar(' + numDivs + ');"><i class="far fa-times-circle fa-2x"></i></span></div>');
@@ -460,6 +502,9 @@ function agregarViernes() {
 function agregarViernesEditar() {
     var divs = document.getElementsByClassName("viernesCon");
     var numDivs = divs.length + 1;
+    if (numDivs === totalHorarios) {
+        $('#addViernes').hide();
+    }
     if (xViernes < totalHorarios) {
         xViernes++; conViernes++; $('#btnEliminarViernes').show(); if
             (xViernes == totalHorarios) { $('#addViernes').hide(); } $('#divHorariosViernes').append('<div class= "form-inline viernes' + numDivs + ' viernesCon" ><input class="mb-2" type="time" name="InicioViernes"><hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);"><input class="mb-2 mr-2" type="time" name="FinViernes"><span id="btnEliminarViernes" onclick="eliminarViernesEditar(' + numDivs + ');"><i class="far fa-times-circle fa-2x"></i></span></div>');
@@ -505,6 +550,9 @@ function agregarSabado() {
 function agregarSabadoEditar() {
     var divs = document.getElementsByClassName("sabadoCon");
     var numDivs = divs.length + 1;
+    if (numDivs === totalHorarios) {
+        $('#addSabado').hide();
+    }
     if (xSabado < totalHorarios) {
         xSabado++; conSabado++; $('#btnEliminarSabado').show(); if
             (xSabado == totalHorarios) { $('#addSabado').hide(); } $('#divHorariosSabado').append('<div class="form-inline sabado' + numDivs + ' sabadoCon"><input class="mb-2" type="time" name="InicioSabado"><hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);"><input class="mb-2 mr-2" type="time" name="FinSabado"><span id="btnEliminarSabado" onclick="eliminarSabadoEditar(' + numDivs + ');"><i class="far fa-times-circle fa-2x"></i></span></div>');
@@ -551,6 +599,9 @@ function agregarDomingo() {
 function agregarDomingoEditar() {
     var divs = document.getElementsByClassName("domingoCon");
     var numDivs = divs.length + 1;
+    if (numDivs === totalHorarios) {
+        $('#addDomingo').hide();
+    }
     if (xDomingo < totalHorarios) {
         xDomingo++; conDomingo++; $('#btnEliminarDomingo').show(); if
             (xDomingo == totalHorarios) { $('#addDomingo').hide(); } $('#divHorariosDomingo').append('<div class="form-inline domingo' + numDivs + ' domingoCon"><input class="mb-2" type="time" name="InicioDomingo"><hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);"><input class="mb-2 mr-2" type="time" name="FinDomingo"><span id="btnEliminarDomingo" onclick="eliminarDomingoEditar(' + numDivs + ');"><i class="far fa-times-circle fa-2x"></i></span></div>');
