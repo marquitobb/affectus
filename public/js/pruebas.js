@@ -205,8 +205,10 @@ if (divslunes === 1) {
     $('#addLunes').hide();
 }
 
-if (divslunes = totalHorarios) {
+if (divslunes === totalHorarios) {
     $('#addLunes').hide();
+}else {
+    $('#addLunes').show();
 }
 
 var divsmartes = document.getElementsByClassName("martesCon").length;
@@ -216,6 +218,8 @@ if (divsmartes === 1) {
 
 if (divsmartes === totalHorarios) {
     $('#addMartes').hide();
+}else{
+    $('#addMartes').show();
 }
 
 var divsmiercoles = document.getElementsByClassName("miercolesCon").length;
@@ -225,6 +229,8 @@ if (divsmiercoles === 1) {
 
 if (divsmiercoles === totalHorarios) {
     $('#addMiercoles').hide();
+}else{
+    $('#addMiercoles').show();
 }
 
 var divsjueves = document.getElementsByClassName("juevesCon").length;
@@ -234,6 +240,8 @@ if (divsjueves === 1) {
 
 if (divsjueves === totalHorarios) {
     $('#addJueves').hide();
+}else{
+    $('#addJueves').show();
 }
 
 var divsviernes = document.getElementsByClassName("viernesCon").length;
@@ -243,6 +251,9 @@ if (divsviernes === 1) {
 
 if (divsviernes === totalHorarios) {
     $('#addViernes').hide();
+}else{
+    $('#addViernes').show();
+
 }
 
 var divssabado = document.getElementsByClassName("sabadoCon").length;
@@ -252,6 +263,9 @@ if (divssabado === 1) {
 
 if (divssabado === totalHorarios) {
     $('#addSabado').hide();
+}else{
+    $('#addSabado').show();
+
 }
 
 var divsdomingo = document.getElementsByClassName("domingoCon").length;
@@ -261,6 +275,9 @@ if (divsdomingo === 1) {
 
 if (divsdomingo === totalHorarios) {
     $('#addDomingo').hide();
+}else{
+    $('#addDomingo').show();
+
 }
 
 //Agregar horario lunes
