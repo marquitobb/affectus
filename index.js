@@ -22,6 +22,7 @@ const db = require('./config/db');
     require('./models/datosSalud');
     require('./models/Horarios');
     require('./models/Citas');
+    require('./models/Reportes');
 
     db.sync().then(() => console.log('DB CONECTADA')).catch((error) => console.log(error));
 
