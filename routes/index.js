@@ -12,6 +12,7 @@ const principalController = require('../controllers/principalController');
 const horariosController = require('../controllers/horariosController');
 const perfilController = require('../controllers/perfilController');
 const estadisticasController = require('../controllers/estadisticasController');
+const mapController = require('../controllers/mapController');
 
 
 module.exports = function() {
@@ -68,6 +69,8 @@ module.exports = function() {
 
     //Página principal de visualización de usuario
     router.get('/principal', authController.usuarioAutenticado, principalController.panelPrincipal);
+    //Página principal de visualización por categoría
+    router.get('/principal/:idCategoria', authController.usuarioAutenticado, principalController.principalCategorias);
 
     //Nueva Estrategia Estrategias
     router.get('/nueva-estrategia', authController.usuarioAutenticado, estrategiasController.formNuevaEstrategia);
@@ -97,10 +100,10 @@ module.exports = function() {
     //Cambiar el estado en el que se encuantra el usuario
     router.post('/estadoAffectus/:estado', authController.usuarioAutenticado, usuariosController.updateEstado);
 
-
     //Agrega horarios el psicologo
     router.get('/agregar-horario', authController.usuarioAutenticado, horariosController.formAgregarHorario);
     router.post('/agregar-horario', authController.usuarioAutenticado, horariosController.agregarHorarios);
+    
     //Edita horarios el psicologo
     router.get('/editar-horario', authController.usuarioAutenticado, horariosController.formEditarHorario);
     router.post('/editar-horario', authController.usuarioAutenticado, horariosController.EditarHorario);
@@ -109,6 +112,7 @@ module.exports = function() {
     router.get('/agendar-cita/:id', authController.usuarioAutenticado, horariosController.formAgregarCita);
     router.post('/agendar-cita/:id', authController.usuarioAutenticado, horariosController.AgregarCita);
 
+    //Carga de la vista para visualizar citas por parte del psicólogo
     router.get('/ver-citas/:id', authController.usuarioAutenticado, horariosController.formVerCitas);
 
     //Eliminar citas
@@ -122,6 +126,13 @@ module.exports = function() {
     router.get('/estadistica/:categoria/:id', authController.usuarioAutenticado, estadisticasController.estadisticaProfesional);
     router.get('/categorias', authController.usuarioAutenticado, estadisticasController.obtencionCategorias);
     router.get('/estadisticaSentimientos/:sentimiento/:id', authController.usuarioAutenticado, estadisticasController.obtencionSentimientos);
-    return router;
+    router.get('/salud/:id', authController.usuarioAutenticado, estadisticasController.obtencionSaludUser);
 
+    //Rutas para pantalla de mapa
+    router.get('/mapa/:correo', authController.usuarioAutenticado, mapController.visualizacionMapa);
+
+    //Ruta para generar el reporte del usuario
+    router.post('/reporte/:email', authController.usuarioAutenticado, perfilController.reportarPerfilProfesional);
+
+    return router;
 };
