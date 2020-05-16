@@ -143,7 +143,7 @@ exports.verificarCorreo = async (req, res, next) => {
 
 //crea la cuentad el usaurio
 exports.crearCuenta = async (req, res, next) => {
-    const usuario = req.body;    
+    const usuario = req.body;
 
     let rol;
     if (req.body.rol == 'on') {
@@ -279,7 +279,7 @@ exports.formEditarPerfil = async (req, res, next) => {
             }
         ]
     }));
-    consultas.push(Citas.findAll({where: {usuarioprofesional: req.user.id}}));
+    consultas.push(Citas.findAll({ where: { usuarioprofesional: req.user.id } }));
     const [estrategias, citas] = await Promise.all(consultas);
     const usuario = await Usuarios.findByPk(req.user.id);
     res.render('editar-perfil', {
@@ -312,7 +312,7 @@ exports.EditarPerfil = async (req, res, next) => {
 
     const { nombre, descripcion, email, genero, fechanacimiento, ocupacion, direccion, discapacidad, telefono, whatsapp, cualidades, aMaterno, aPaterno, aboutme, nacionalidad } = req.body;
 
-    if (req.body.espanol == 'on') {        
+    if (req.body.espanol == 'on') {
         usuario.idiomaEspanol = true;
     } else {
         usuario.idiomaEspanol = false;
@@ -357,7 +357,7 @@ exports.EditarPerfil = async (req, res, next) => {
     usuario.aMaterno = aMaterno;
     usuario.aPaterno = aPaterno;
     usuario.aboutme = aboutme;
-    usuario.nacionalidad = nacionalidad;    
+    usuario.nacionalidad = nacionalidad;
 
     //guardar en db
     try {
@@ -376,7 +376,7 @@ exports.formCambiarPassword = async (req, res) => {
     consultas.push(Usuarios.findByPk(req.user.id));
     consultas.push(Estrategias.findAll({ where: { usuarioId: req.user.id } }));
     consultas.push(Categorias.findAll());
-    consultas.push(Citas.findAll({where: {usuarioprofesional: req.user.id}}));
+    consultas.push(Citas.findAll({ where: { usuarioprofesional: req.user.id } }));
 
 
     const [usuario, estrategias, categorias, citas] = await Promise.all(consultas);
@@ -384,7 +384,7 @@ exports.formCambiarPassword = async (req, res) => {
         nombrePagina: 'Cambiar password',
         nombre: usuario.nombre,
         estrategias,
-        categorias, 
+        categorias,
         usuario,
         citas
     });
@@ -439,7 +439,7 @@ exports.formAgregarImagenPerfil = async (req, res) => {
         ]
     }));
     consultas.push(Categorias.findAll());
-    consultas.push(Citas.findAll({where: {usuarioprofesional: req.user.id}}));
+    consultas.push(Citas.findAll({ where: { usuarioprofesional: req.user.id } }));
     const [usuario, estrategias, categorias, citas] = await Promise.all(consultas);
 
     res.render('imagen-perfil', {
@@ -595,7 +595,7 @@ exports.saveDatos = async (req, res, next) => {
     req.sanitizeBody('temperatura');
     req.sanitizeBody('estatura');
     req.sanitizeBody('presion');
-    
+
     const datos = req.body;
     datos.usuarioId = req.user.id;
 
@@ -650,6 +650,32 @@ exports.updateEstado = async (req, res, next) => {
     try {
         await usuario.save();
         res.status(200).send('Estado actualizado correctamente');
+
+    } catch (error) {
+        res.status(403).send('Hubo un error');
+    }
+};
+
+exports.busquedaEstrategias = async (req, res) => {
+    const estrategia = await Estrategias.findAll({
+        attributes: ['nombre', 'categoriaId']
+    });
+
+    try {
+        res.status(200).send(estrategia);
+
+    } catch (error) {
+        res.status(403).send('Hubo un error');
+    }
+};
+
+exports.busquedaUsuarios = async (req, res) => {
+    const usuario = await Usuarios.findAll({
+        attributes: ['nombre', 'aPaterno', 'email']
+    });
+
+    try {
+        res.status(200).send(usuario);
 
     } catch (error) {
         res.status(403).send('Hubo un error');

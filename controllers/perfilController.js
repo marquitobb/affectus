@@ -25,7 +25,7 @@ exports.visualizarPerfil = async (req, res) => {
         include: [
             {
                 model: Usuarios,
-                attributes: ['email', 'imagen', 'nombre', 'aPaterno'],
+                attributes: ['email', 'imagen', 'nombre', 'aPaterno', 'descripcion', 'fechanacimiento', 'email'],
                 required: true
             },
             {

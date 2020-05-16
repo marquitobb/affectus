@@ -205,8 +205,10 @@ if (divslunes === 1) {
     $('#addLunes').hide();
 }
 
-if (divslunes = totalHorarios) {
+if (divslunes === totalHorarios) {
     $('#addLunes').hide();
+}else {
+    $('#addLunes').show();
 }
 
 var divsmartes = document.getElementsByClassName("martesCon").length;
@@ -216,6 +218,8 @@ if (divsmartes === 1) {
 
 if (divsmartes === totalHorarios) {
     $('#addMartes').hide();
+}else{
+    $('#addMartes').show();
 }
 
 var divsmiercoles = document.getElementsByClassName("miercolesCon").length;
@@ -225,6 +229,8 @@ if (divsmiercoles === 1) {
 
 if (divsmiercoles === totalHorarios) {
     $('#addMiercoles').hide();
+}else{
+    $('#addMiercoles').show();
 }
 
 var divsjueves = document.getElementsByClassName("juevesCon").length;
@@ -234,6 +240,8 @@ if (divsjueves === 1) {
 
 if (divsjueves === totalHorarios) {
     $('#addJueves').hide();
+}else{
+    $('#addJueves').show();
 }
 
 var divsviernes = document.getElementsByClassName("viernesCon").length;
@@ -243,6 +251,9 @@ if (divsviernes === 1) {
 
 if (divsviernes === totalHorarios) {
     $('#addViernes').hide();
+}else{
+    $('#addViernes').show();
+
 }
 
 var divssabado = document.getElementsByClassName("sabadoCon").length;
@@ -252,6 +263,9 @@ if (divssabado === 1) {
 
 if (divssabado === totalHorarios) {
     $('#addSabado').hide();
+}else{
+    $('#addSabado').show();
+
 }
 
 var divsdomingo = document.getElementsByClassName("domingoCon").length;
@@ -261,10 +275,24 @@ if (divsdomingo === 1) {
 
 if (divsdomingo === totalHorarios) {
     $('#addDomingo').hide();
+}else{
+    $('#addDomingo').show();
+
 }
+
+
+// //AGREGAR HORARIOS
+// var contadorDivsLunes = document.getElementsByClassName("contadorLunes").length;
+// console.log(contadorDivsLunes);
 
 //Agregar horario lunes
 function agregarLunes() {
+    var contadorDivsLunes = document.getElementsByClassName("contadorLunes").length + 1;
+    console.log(contadorDivsLunes);
+
+    if (contadorDivsLunes === totalHorarios) {
+        $('#addLunes').hide();
+    }
 
     if (xLunes < totalHorarios) {
         xLunes++;
@@ -273,7 +301,7 @@ function agregarLunes() {
         if (xLunes == totalHorarios) {
             $('#addLunes').hide();
         }
-        $('#divHorariosLunes').append('<div class="form-inline lunes' + conLunes + '"><input class="mb-2" type="time" name="InicioLunes"><hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);"><input class="mb-2 mr-2" type="time" name="FinLunes"><span id="btnEliminarLunes" onclick="eliminarLunes(' + conLunes + ');"><i class="far fa-times-circle fa-2x"></i></span></div>');
+        $('#divHorariosLunes').append('<div class="form-inline lunes' + conLunes + ' contadorLunes"><input class="mb-2" type="time" name="InicioLunes"><hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);"><input class="mb-2 mr-2" type="time" name="FinLunes"><span id="btnEliminarLunes" onclick="eliminarLunes(' + conLunes + ');"><i class="far fa-times-circle fa-2x"></i></span></div>');
     }
 }
 
@@ -327,6 +355,14 @@ function eliminarLunesEditar(numero) {
 
 //Agregar horario martes
 function agregarMartes() {
+
+    var contadorDivsMartes = document.getElementsByClassName("contadorMartes").length + 1;
+    console.log(contadorDivsMartes);
+
+    if (contadorDivsMartes === totalHorarios) {
+        $('#addMartes').hide();
+    }
+
     if (xMartes < totalHorarios) {
         xMartes++;
         conMartes++;
@@ -334,7 +370,7 @@ function agregarMartes() {
         if (xMartes == totalHorarios) {
             $('#addMartes').hide();
         }
-        $('#divHorariosMartes').append('<div class="form-inline martes' + conMartes + '"><input class="mb-2" type="time" name="InicioMartes"><hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);"><input class="mb-2 mr-2" type="time" name="FinMartes"><span id="btnEliminarMartes" onclick="eliminarMartes(' + conMartes + ');"><i class="far fa-times-circle fa-2x"></i></span></div>');
+        $('#divHorariosMartes').append('<div class="form-inline martes' + conMartes + ' contadorMartes"><input class="mb-2" type="time" name="InicioMartes"><hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);"><input class="mb-2 mr-2" type="time" name="FinMartes"><span id="btnEliminarMartes" onclick="eliminarMartes(' + conMartes + ');"><i class="far fa-times-circle fa-2x"></i></span></div>');
     }
 }
 
@@ -384,6 +420,14 @@ function eliminarMartesEditar(numero) {
 
 //Agregar horario miercoles
 function agregarMiercoles() {
+
+    var contadorMiercoles = document.getElementsByClassName("contadorMiercoles").length + 1;
+    console.log(contadorMiercoles);
+
+    if (contadorMiercoles === totalHorarios) {
+        $('#addMiercoles').hide();
+    }
+
     if (xMiercoles < totalHorarios) {
         xMiercoles++;
         conMiercoles++;
@@ -391,7 +435,7 @@ function agregarMiercoles() {
         if (xMiercoles == totalHorarios) {
             $('#addMiercoles').hide();
         }
-        $('#divHorariosMiercoles').append('<div class="form-inline miercoles' + conMiercoles + '"><input class="mb-2" type="time" name="InicioMiercoles"><hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);"><input class="mb-2 mr-2" type="time" name="FinMiercoles"><span id="btnEliminarMiercoles" onclick="eliminarMiercoles(' + conMiercoles + ');"><i class="far fa-times-circle fa-2x"></i></span></div>');
+        $('#divHorariosMiercoles').append('<div class="form-inline miercoles' + conMiercoles + ' contadorMiercoles"><input class="mb-2" type="time" name="InicioMiercoles"><hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);"><input class="mb-2 mr-2" type="time" name="FinMiercoles"><span id="btnEliminarMiercoles" onclick="eliminarMiercoles(' + conMiercoles + ');"><i class="far fa-times-circle fa-2x"></i></span></div>');
     }
 }
 
@@ -442,9 +486,17 @@ function eliminarMiercolesEditar(numero) {
 
 //Agregar horario jueves
 function agregarJueves() {
+
+    var contadorJueves = document.getElementsByClassName("contadorJueves").length + 1;
+    console.log(contadorJueves);
+
+    if (contadorJueves === totalHorarios) {
+        $('#addJueves').hide();
+    }
+
     if (xJueves < totalHorarios) {
         xJueves++; conJueves++; $('#btnEliminarJueves').show(); if
-            (xJueves == totalHorarios) { $('#addJueves').hide(); } $('#divHorariosJueves').append('<div class="form-inline jueves' + conJueves + '"><input class="mb-2" type="time" name="InicioJueves"><hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);"><input class="mb-2 mr-2" type="time" name="FinJueves"><span id="btnEliminarJueves" onclick="eliminarJueves(' + conJueves + ');"><i class="far fa-times-circle fa-2x"></i></span></div>');
+            (xJueves == totalHorarios) { $('#addJueves').hide(); } $('#divHorariosJueves').append('<div class="form-inline jueves' + conJueves + ' contadorJueves"><input class="mb-2" type="time" name="InicioJueves"><hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);"><input class="mb-2 mr-2" type="time" name="FinJueves"><span id="btnEliminarJueves" onclick="eliminarJueves(' + conJueves + ');"><i class="far fa-times-circle fa-2x"></i></span></div>');
     }
 }
 
@@ -492,9 +544,17 @@ function eliminarJuevesEditar(numero) {
 //Agregar horario viernes
 function agregarViernes() {
 
+
+    var contadorViernes = document.getElementsByClassName("contadorViernes").length + 1;
+    console.log(contadorViernes);
+
+    if (contadorViernes === totalHorarios) {
+        $('#addViernes').hide();
+    }
+
     if (xViernes < totalHorarios) {
         xViernes++; conViernes++; $('#btnEliminarViernes').show(); if
-            (xViernes == totalHorarios) { $('#addViernes').hide(); } $('#divHorariosViernes').append('<div class= "form-inline viernes' + conViernes + '" ><input class="mb-2" type="time" name="InicioViernes"><hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);"><input class="mb-2 mr-2" type="time" name="FinViernes"><span id="btnEliminarViernes" onclick="eliminarViernes(' + conViernes + ');"><i class="far fa-times-circle fa-2x"></i></span></div>');
+            (xViernes == totalHorarios) { $('#addViernes').hide(); } $('#divHorariosViernes').append('<div class= "form-inline viernes' + conViernes + ' contadorViernes" ><input class="mb-2" type="time" name="InicioViernes"><hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);"><input class="mb-2 mr-2" type="time" name="FinViernes"><span id="btnEliminarViernes" onclick="eliminarViernes(' + conViernes + ');"><i class="far fa-times-circle fa-2x"></i></span></div>');
     }
 }
 
@@ -540,9 +600,17 @@ function eliminarViernesEditar(numero) {
 
 //Agregar horario sabado
 function agregarSabado() {
+
+    var contadorSabado = document.getElementsByClassName("contadorSabado").length + 1;
+    console.log(contadorSabado);
+
+    if (contadorSabado === totalHorarios) {
+        $('#addSabado').hide();
+    }
+
     if (xSabado < totalHorarios) {
         xSabado++; conSabado++; $('#btnEliminarSabado').show(); if
-            (xSabado == totalHorarios) { $('#addSabado').hide(); } $('#divHorariosSabado').append('<div class="form-inline sabado' + conSabado + '"><input class="mb-2" type="time" name="InicioSabado"><hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);"><input class="mb-2 mr-2" type="time" name="FinSabado"><span id="btnEliminarSabado" onclick="eliminarSabado(' + conSabado + ');"><i class="far fa-times-circle fa-2x"></i></span></div>');
+            (xSabado == totalHorarios) { $('#addSabado').hide(); } $('#divHorariosSabado').append('<div class="form-inline sabado' + conSabado + ' contadorSabado"><input class="mb-2" type="time" name="InicioSabado"><hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);"><input class="mb-2 mr-2" type="time" name="FinSabado"><span id="btnEliminarSabado" onclick="eliminarSabado(' + conSabado + ');"><i class="far fa-times-circle fa-2x"></i></span></div>');
     }
 }
 
@@ -589,9 +657,17 @@ function eliminarSabadoEditar(numero) {
 
 //Agregar horario domingo
 function agregarDomingo() {
+
+    var contadorDomingo = document.getElementsByClassName("contadorDomingo").length + 1;
+    console.log(contadorDomingo);
+
+    if (contadorDomingo === totalHorarios) {
+        $('#addDomingo').hide();
+    }
+
     if (xDomingo < totalHorarios) {
         xDomingo++; conDomingo++; $('#btnEliminarDomingo').show(); if
-            (xDomingo == totalHorarios) { $('#addDomingo').hide(); } $('#divHorariosDomingo').append('<div class="form-inline domingo' + conDomingo + '"><input class="mb-2" type="time" name="InicioDomingo"><hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);"><input class="mb-2 mr-2" type="time" name="FinDomingo"><span id="btnEliminarDomingo" onclick="eliminarDomingo(' + conDomingo + ');"><i class="far fa-times-circle fa-2x"></i></span></div>');
+            (xDomingo == totalHorarios) { $('#addDomingo').hide(); } $('#divHorariosDomingo').append('<div class="form-inline domingo' + conDomingo + ' contadorDomingo"><input class="mb-2" type="time" name="InicioDomingo"><hr style="height: 1px; width: 5%; background-color: rgb(110, 109, 109);"><input class="mb-2 mr-2" type="time" name="FinDomingo"><span id="btnEliminarDomingo" onclick="eliminarDomingo(' + conDomingo + ');"><i class="far fa-times-circle fa-2x"></i></span></div>');
     }
 }
 

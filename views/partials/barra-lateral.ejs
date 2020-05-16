@@ -16,8 +16,7 @@
                     <img loading="lazy" class="img-responsive img-rounded" src="/uploads/usuarios/<%=usuario.imagen %>"
                         alt="User picture">
                     <% }else { %>
-                    <img loading="lazy" class="img-responsive img-rounded"
-                    src="/img/perfilDefault.png"
+                    <img loading="lazy" class="img-responsive img-rounded" src="/img/perfilDefault.png"
                         alt="User picture">
                     <% } %>
                 </div>
@@ -69,8 +68,32 @@
             <!-- sidebar-header  -->
             <div class="sidebar-search">
                 <div>
+                    <div class="form-check mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="estrategiasRadio"
+                                value="option1" checked>
+                            <label class="form-check-label" for="estrategiasRadio" style="color: #b8bfce;">
+                                Estrategias
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="usuarioRadio"
+                                value="option2">
+                            <label class="form-check-label" for="usuarioRadio" style="color: #b8bfce;">
+                                Usuarios
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="categoriaRadio"
+                                value="option2">
+                            <label class="form-check-label" for="categoriaRadio" style="color: #b8bfce;">
+                                Categorias
+                            </label>
+                        </div>
+                    </div>
+
                     <div class="input-group">
-                        <input type="text" class="form-control search-menu" placeholder="Search...">
+                        <input type="text" class="form-control search-menu" placeholder="Search..." id="busquedaBarraLateral">
                         <div class="input-group-append">
                             <span class="input-group-text">
                                 <i class="fa fa-search" aria-hidden="true"></i>
@@ -109,14 +132,14 @@
                                         </a>
                                 </li>-->
                                 <% if (usuario.rol == '1') { %>
-                                    <li>
-                                        <a href="/agregar-sentimiento">Agregar Sentimiento</a>
-                                    </li>
+                                <li>
+                                    <a href="/agregar-sentimiento">Agregar Sentimiento</a>
+                                </li>
                                 <% } %>
                             </ul>
                         </div>
                     </li>
-                    
+
                     <li class="sidebar-dropdown">
                         <a>
                             <i class="far fa-gem"></i>
@@ -126,67 +149,67 @@
                         <div class="sidebar-submenu">
                             <ul>
                                 <% if(usuario.rol === '1') { %>
-                                    <li>
-                                        <a href="/ver-citas/<%=usuario.id %>">Mis Citas</a>
-                                    </li>
+                                <li>
+                                    <a href="/ver-citas/<%=usuario.id %>">Mis Citas</a>
+                                </li>
                                 <% } else { %>
-                                    <li>
-                                        <a href="/agregar-horario">Agregar Horarios</a>
-                                    </li>
-                                    <li>
-                                        <a href="/editar-horario">Editar Horarios</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ver-citas/<%=usuario.id %>">Ver Citas Programadas
-                                            <span class="badge badge-pill badge-warning"><%=citas.length%></span>
-                                        </a>
-                                    </li>
+                                <li>
+                                    <a href="/agregar-horario">Agregar Horarios</a>
+                                </li>
+                                <li>
+                                    <a href="/editar-horario">Editar Horarios</a>
+                                </li>
+                                <li>
+                                    <a href="/ver-citas/<%=usuario.id %>">Ver Citas Programadas
+                                        <span class="badge badge-pill badge-warning"><%=citas.length%></span>
+                                    </a>
+                                </li>
                                 <% } %>
                             </ul>
                         </div>
                     </li>
-                   
+
                     <li class="sidebar-dropdown">
                         <% if(usuario.rol === '2' || usuario.rol === '0') { %>
-                            <a>
-                                <i class="far fa-gem"></i>
-                                <span>Recursos</span>
-                                <span class="badge badge-pill badge-warning"><%=estrategias.length%></span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="/nueva-estrategia">Nuevo recurso</a>
-                                    </li>
-                                    <li>
-                                        <a href="/administracion">
-                                            <span class="badge badge-pill badge-warning"><%=estrategias.length%></span>
-                                            Ver mis recursos
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                        <a>
+                            <i class="far fa-gem"></i>
+                            <span>Recursos</span>
+                            <span class="badge badge-pill badge-warning"><%=estrategias.length%></span>
+                        </a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li>
+                                    <a href="/nueva-estrategia">Nuevo recurso</a>
+                                </li>
+                                <li>
+                                    <a href="/administracion">
+                                        <span class="badge badge-pill badge-warning"><%=estrategias.length%></span>
+                                        Ver mis recursos
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                         <% } else { %>
-                            <a>
-                                <i class="far fa-gem"></i>
-                                <span>Recursos</span>
-                                <!-- <span class="badge badge-pill badge-warning"><%=estrategias.length%></span> -->
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <!-- <li>
+                        <a>
+                            <i class="far fa-gem"></i>
+                            <span>Recursos</span>
+                            <!-- <span class="badge badge-pill badge-warning"><%=estrategias.length%></span> -->
+                        </a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <!-- <li>
                                         <a href="/nueva-estrategia">Nuevo recurso</a>
                                     </li> -->
-                                    <li>
-                                        <a href="/">
-                                            <!-- <span class="badge badge-pill badge-warning"><%=estrategias.length%></span> -->
-                                            Ver todos recursos
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                                <li>
+                                    <a href="/">
+                                        <!-- <span class="badge badge-pill badge-warning"><%=estrategias.length%></span> -->
+                                        Ver todos recursos
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                         <% } %>
-                        
+
                     </li>
                     <li class="sidebar-dropdown">
                         <a href="/mystatistics/<%=usuario.email %>">
