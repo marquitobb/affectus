@@ -51,6 +51,197 @@ $(document).ready(function () { //Hacia arriba
   irArriba();
 });
 
+function obtenerCategoria() {
+  const url = `${location.origin}/categorias`;
+  axios
+    .get(url)
+    .then(function (respuesta) {
+      return respuesta;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+function obtenerUsuarios() {
+  const url = `${location.origin}/usuarios`;
+  axios
+    .get(url)
+    .then(function (respuesta) {
+      return respuesta;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+function obtenerEstrategias() {
+  const url = `${location.origin}/estrategias`;
+  axios
+    .get(url)
+    .then(function (respuesta) {
+      console.log(respuesta)
+      return respuesta.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+$('#busquedaBarraLateral').keyup(function() {
+  if( $('#estrategiasRadio').is(':checked') ){
+    var options = {
+      url: "/estrategias",
+  
+      getValue: function(estrategia) {
+        return estrategia.nombre + '- Estrategia';
+      },
+  
+      template: {
+        type: "links",
+        fields: {
+            link: function(estrategia) {
+              return '/principal/'+ estrategia.categoriaId;
+            }          
+        }
+      },
+  
+      list: {
+        match: {
+          enabled: true
+        },
+        maxNumberOfElements: 20,
+  
+        showAnimation: {
+          type: "slide",
+          time: 300
+        },
+        hideAnimation: {
+          type: "slide",
+          time: 300
+        }
+      }
+    };
+  } else {
+    if( $('#usuarioRadio').is(':checked') ){
+      var options = {
+        url: "/usuarios",
+    
+        getValue: function(usuario) {
+          return usuario.nombre + ' '+usuario.aPaterno+' - Usuario';
+        },
+    
+        template: {
+          type: "links",
+          fields: {
+              link: function(usuario) {
+                return '/perfil/'+ usuario.email;
+              }          
+          }
+        },
+    
+        list: {
+          match: {
+            enabled: true
+          },
+          maxNumberOfElements: 20,
+    
+          showAnimation: {
+            type: "slide",
+            time: 300
+          },
+          hideAnimation: {
+            type: "slide",
+            time: 300
+          }
+        }
+      };
+    } else {
+      if( $('#categoriaRadio').is(':checked') ){
+        var options = {
+          url: "/categorias",
+      
+          getValue: function(estrategia) {
+            return estrategia.nombre + '- Categoría';
+          },
+      
+          template: {
+            type: "links",
+            fields: {
+                link: function(estrategia) {
+                  return '/principal/'+ estrategia.id;
+                }          
+            }
+          },
+      
+          list: {
+            match: {
+              enabled: true
+            },
+            maxNumberOfElements: 20,
+      
+            showAnimation: {
+              type: "slide",
+              time: 300
+            },
+            hideAnimation: {
+              type: "slide",
+              time: 300
+            }
+          }
+        };
+      } 
+    }
+  }
+  $("#busquedaBarraLateral").easyAutocomplete(options);
+});
+
+$('#BuscarGeneralNav').keyup(function () {
+  /*var categoria = obtenerCategoria();
+  var usuarios = obtenerUsuarios();
+  estrategia = obtenerEstrategias();
+
+  //console.log(categoria)
+  //console.log(usuarios)
+  console.log(estrategia)
+*/
+  var options = {
+    url: "/estrategias",
+
+    getValue: function(estrategia) {
+      return estrategia.nombre + '- Estrategia';
+    },
+
+    template: {
+      type: "links",
+      fields: {
+          link: function(estrategia) {
+            return '/principal/'+ estrategia.categoriaId;
+          }          
+      }
+    },
+
+    list: {
+      match: {
+        enabled: true
+      },
+      maxNumberOfElements: 20,
+
+      showAnimation: {
+        type: "slide",
+        time: 300
+      },
+      hideAnimation: {
+        type: "slide",
+        time: 300
+      }
+    }
+  };
+
+  $("#BuscarGeneralNav").easyAutocomplete(options);
+});
+
+
 function irArriba() {
   $('.ir-arriba').click(function () { $('body,html').animate({ scrollTop: '0px' }, 1000); });
   $(window).scroll(function () {
@@ -59,30 +250,32 @@ function irArriba() {
   $('.ir-abajo').click(function () { $('body,html').animate({ scrollTop: '1000px' }, 1000); });
 }
 
+
+
 $('#estadoActual').change(function () {
   const url = `${location.origin}/estadoAffectus/` + $('#estadoActual').val();
   axios
-      .post(url)
-      .then(function (respuesta) {
-          Swal.fire(
-              'Excelente!',
-              respuesta.data,
-              'success'
-          );
-          var elemento = document.getElementById('circuloEstado');
-          if ($('#estadoActual').val() == '0') {
-              elemento.style.color = '#5cb85c';
-          } else {
-              if ($('#estadoActual').val() == '1') {
-                  elemento.style.color = 'rgb(255, 238, 0)';
-              } else {
-                  elemento.style.color = 'rgb(255, 51, 0)';
-              }
-          }
-      })
-      .catch((error) => {
-          console.log(error);
-      });
+    .post(url)
+    .then(function (respuesta) {
+      Swal.fire(
+        'Excelente!',
+        respuesta.data,
+        'success'
+      );
+      var elemento = document.getElementById('circuloEstado');
+      if ($('#estadoActual').val() == '0') {
+        elemento.style.color = '#5cb85c';
+      } else {
+        if ($('#estadoActual').val() == '1') {
+          elemento.style.color = 'rgb(255, 238, 0)';
+        } else {
+          elemento.style.color = 'rgb(255, 51, 0)';
+        }
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
 $('#cerrarSentimientosPrincipal').click(function () {
@@ -428,9 +621,9 @@ document.querySelectorAll('#opciones > .opcion').forEach((opcion) => {
   });
 });
 
-if(select){
-select.addEventListener('click', () => {
-  select.classList.toggle('active');
-  opciones.classList.toggle('active');
-});
+if (select) {
+  select.addEventListener('click', () => {
+    select.classList.toggle('active');
+    opciones.classList.toggle('active');
+  });
 }

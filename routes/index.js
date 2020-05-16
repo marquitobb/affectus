@@ -134,5 +134,9 @@ module.exports = function() {
     //Ruta para generar el reporte del usuario
     router.post('/reporte/:email', authController.usuarioAutenticado, perfilController.reportarPerfilProfesional);
 
+    //Ruta para obtener los datos de busqueda 
+    router.get('/estrategias', authController.usuarioAutenticado, usuariosController.busquedaEstrategias);
+    router.get('/usuarios', authController.usuarioAutenticado, usuariosController.busquedaUsuarios);
+
     return router;
 };

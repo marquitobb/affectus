@@ -1,51 +1,105 @@
 <div class="efectoPerfil">
-    <div class="ml-3 my-0 py-0">
-        <a href="/perfil/<%=estrategia.usuario.email %>" class="ml-5 rounded-pill">
-            <div class="form-inline pr-3">
+    <div class="ml-3 my-0 py-0 datosPublicacion">
+        <a href="/perfil/<%=estrategia.usuario.email %>" class="rounded-pill">
+            <div class="form-inline pr-3 ml-0 my-3">
                 <div style="height: 45px; width: 45px;">
                     <% if(estrategia.usuario.imagen) { %>
-                    <img loading="lazy" class="rounded-circle" src="/uploads/usuarios/<%=estrategia.usuario.imagen %>" alt="Foto de usuario" />
+                    <img loading="lazy" class="rounded-circle" src="/uploads/usuarios/<%=estrategia.usuario.imagen %>"
+                        alt="Foto de usuario" />
                     <% }else { %>
-                    <img loading="lazy" class="rounded-circle"
-                    src="/img/perfilDefault.png"
-                        alt="Foto Usuario" />
+                    <img loading="lazy" class="rounded-circle" src="/img/perfilDefault.png" alt="Foto Usuario" />
                     <% } %>
                 </div>
                 <div class="ml-2">
-                    <label class="font-weight-bold decoracionText"><%=estrategia.usuario.nombre %> <%=estrategia.usuario.aPaterno %></label>
+                    <label class="font-weight-bold decoracionText"><%=estrategia.usuario.nombre %>
+                        <%=estrategia.usuario.aPaterno %></label>
                     <label class="font-weight-bold decoracionText"><%=estrategia.fecha_creacion %></label>
-                </div>                
+                </div>
             </div>
-        </a>        
+
+            <div class="extremoSobreCard">
+                <div class="efectoPerfil sobrecard container d-flex mt-1">
+                    <div class="mx-auto mt-2">
+                        <a class="p-0 m-0 text-center" href="/perfil/<%=estrategia.usuario.email %>">
+                            <div class="d-flex">
+                                <% if(estrategia.usuario.imagen) { %>
+                                <img loading="lazy" class="rounded-circle mx-auto"
+                                    src="/uploads/usuarios/<%=estrategia.usuario.imagen %>" alt="Foto de usuario" width="70"
+                                    height="70" />
+                                <% }else { %>
+                                <img loading="lazy" class="rounded-circle mx-auto" src="/img/perfilDefault.png"
+                                    alt="Foto Usuario" width="70" height="70" />
+                                <% } %>
+                            </div>
+                            <div class="text-center mt-2">
+                                <label
+                                    class="font-weight-bold mx-auto decoracionText textSobre mb-0"><%=estrategia.usuario.nombre %>
+                                    <%=estrategia.usuario.aPaterno %></label>
+                            </div>
+                            <div class="text-center mt-0">
+                                <% if (estrategia.usuario.rol == 1) { %>
+                                <label class="font-weight-bold decoracionText textSobre mx-auto">Usuario</label>
+                                <%} else { %>
+                                <% if (estrategia.usuario.rol == 2) { %>
+                                <label class="decoracionText textSobre mx-auto">Profesional</label>
+                                <% } %>
+                                <% } %>
+                            </div>
+                        </a>
+                        <div class="text-center">
+                            <span class="font-italic"><%= estrategia.usuario.descripcion %></span>
+                        </div>
+                        <div class="text-left form-inline mt-1">
+                            <div class="mr-2 my-auto">
+                                <img loading="lazy" src="/img/calendar-alt-regular.svg" alt="Nacimiento" height="15" width="15">
+                            </div>
+                            <span class="fontSpanCard"><%= estrategia.usuario.fechanacimiento %></span>
+                        </div>
+                        <div class="text-left form-inline mt-1">
+                            <div class="mr-2 my-auto">
+                                <img loading="lazy" src="/img/correo.svg" alt="Nacimiento" height="15" width="15">
+                            </div>
+                            <span class="fontSpanCard"><%= estrategia.usuario.email %></span>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-primary my-2">Contactar</button>
+                        </div>                
+                    </div>
+                </div>
+            </div>  
+
+        </a> 
     </div>
 
     <div class="d-flex mt-2">
         <h5 class="font-weight-bold ml-3"><%=estrategia.nombre %></h5>
         <p class="ml-auto my-0 mr-3"><small class="text-muted"><%=estrategia.categoria.nombre %></small></p>
     </div>
-    
+
     <p class="text-justify font-italic textoCard"><%=estrategia.descripcion %></p>
 
     <div class="px-1">
         <% if(estrategia.imagen) { %>
-            <img loading="lazy" style="width: 100%; height: 220px;" class="rounded" loading="lazy" src="/uploads/estrategias/<%=estrategia.imagen %>">
-            <% } else { %>
-            <img loading="lazy" style="width: 100%; height: 220px;" height="175" class="rounded" loading="lazy" src="/img/leer.png">
-            <% } %>
+        <img loading="lazy" style="width: 100%; height: 220px;" class="rounded" loading="lazy"
+            src="/uploads/estrategias/<%=estrategia.imagen %>">
+        <% } else { %>
+        <img loading="lazy" style="width: 100%; height: 220px;" height="175" class="rounded" loading="lazy"
+            src="/img/leer.png">
+        <% } %>
     </div>
 
     <div class="mt-2 mx-3 mb-0">
         <hr>
     </div>
-    
-    <div class="d-flex mx-3 mb-2">        
+
+    <div class="d-flex mx-3 mb-2">
         <div class="mx-auto rounded chatPrincipal">
             <a href="/index" class="m-4 decoracionText">Chat Grupal</a>
         </div>
         <% if(usuario.rol === '1') { %>
-            <div class="mx-auto rounded chatPrincipal">
-                <a href="/agendar-cita/<%=estrategia.usuario.id%>" class="m-4 decoracionText">Agendar Cita</a>
-            </div>
+        <div class="mx-auto rounded chatPrincipal">
+            <a href="/agendar-cita/<%=estrategia.usuario.id%>" class="m-4 decoracionText">Agendar Cita</a>
+        </div>
         <% } %>
         <div class="mx-auto rounded chatPrincipal">
             <a href="/chatIndividual/<%=estrategia.usuario.email%>" class="m-4 decoracionText">Chat Individual</a>

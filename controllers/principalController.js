@@ -10,7 +10,7 @@ exports.panelPrincipal = async (req, res) => {
         include: [
             {
                 model: Usuarios,
-                attributes: ['id', 'email', 'imagen', 'nombre', 'rol', 'aPaterno'],
+                attributes: ['id', 'email', 'imagen', 'nombre', 'rol', 'aPaterno', 'descripcion', 'fechanacimiento', 'email'],
                 required: true
             },
             {
@@ -41,7 +41,7 @@ exports.principalCategorias = async (req, res, next) => {
 
     if (!cat) {
         req.flash('error', 'Algo salió mal, inténtelo de nuevo');
-        res.redirect('/principal')    
+        res.redirect('/principal');
         return next();
     }
 
@@ -52,7 +52,7 @@ exports.principalCategorias = async (req, res, next) => {
         include: [
             {
                 model: Usuarios,
-                attributes: ['id', 'email', 'imagen', 'nombre', 'rol', 'aPaterno'],
+                attributes: ['id', 'email', 'imagen', 'nombre', 'rol', 'aPaterno', 'descripcion', 'fechanacimiento', 'email'],
                 required: true
             },
             {
