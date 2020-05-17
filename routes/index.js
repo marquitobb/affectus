@@ -69,6 +69,7 @@ module.exports = function() {
 
     //Página principal de visualización de usuario
     router.get('/principal', authController.usuarioAutenticado, principalController.panelPrincipal);
+    
     //Página principal de visualización por categoría
     router.get('/principal/:idCategoria', authController.usuarioAutenticado, principalController.principalCategorias);
 
@@ -138,9 +139,17 @@ module.exports = function() {
     router.get('/estrategias', authController.usuarioAutenticado, usuariosController.busquedaEstrategias);
     router.get('/usuarios', authController.usuarioAutenticado, usuariosController.busquedaUsuarios);
 
-
+    //Ver estrategia completa con recursos
     router.get('/estrategia/:idEstrategia', authController.usuarioAutenticado, estrategiasController.mostrarEstrategiaCompleta);
 
+    //ver todos los recursos
+    router.get('/recursos', estrategiasController.mostrarTodasEstrategias);
+    //Página principal de visualización por categoría
+    router.get('/recursos/:idCategoria', estrategiasController.busquedaCategoriasRecursos);
+
+
+    //Página principal de visualización por categoría
+    // router.get('/principal/:idCategoria', authController.usuarioAutenticado, principalController.principalCategorias);
 
 
     return router;

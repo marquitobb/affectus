@@ -291,3 +291,60 @@ exports.mostrarEstrategiaCompleta = async(req, res, next) => {
         estrategia
     })
 }
+
+exports.mostrarTodasEstrategias = async(req, res) => {
+    const estrategias = await Estrategias.findAll({
+        include: [
+            {
+                model: Usuarios,
+                attributes: ['id', 'email', 'imagen', 'nombre', 'rol'],
+                required: true
+            },
+            {
+                model: Categorias,
+                attributes: ['nombre'],
+                required: true
+            }
+        ]
+    });
+    const categorias = await Categorias.findAll();
+    res.render('recursos',{
+        nombrePagina: 'Todos los recursos',
+        estrategias,
+        categorias
+    });
+}
+
+exports.busquedaCategoriasRecursos = async (req, res, next) => {
+    const cat = await Categorias.findByPk(req.params.idCategoria);
+
+    if (!cat) {
+        req.flash('error', 'Algo salió mal, inténtelo de nuevo');
+        res.redirect('/principal');
+        return next();
+    }
+
+    const consultas = [];
+    consultas.push(Estrategias.findAll({
+        where: { categoriaId: req.params.idCategoria },
+        include: [
+            {
+                model: Usuarios
+            },
+            {
+                model: Categorias,
+                attributes: ['nombre'],
+                required: true
+            }
+        ]
+    }));
+    consultas.push(Categorias.findAll());
+
+    const [estrategias, categorias] = await Promise.all(consultas);
+
+    res.render('recursos', {
+        nombrePagina: 'Recursos',
+        estrategias,
+        categorias,
+    });
+};

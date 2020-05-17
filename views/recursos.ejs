@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/perfil.css">
+</head>
+
+<body>
+
+</body>
+
+</html>
+<div class="container">
+    <h6 class="text-center">Búsqueda por categoría</h6>
+    <div class="bg-light rounded-pill py-2 px-2 mb-3 d-flex espacioCategorias">
+        <a href="/recursos" class="rounded-pill lineaCategoria ml-3 bg-light py-3 px-3 my-auto">
+            <span class="font-weight-bold">TODAS</span>
+        </a>
+        <% categorias.forEach(categorias => { %>
+            <a href="/recursos/<%=categorias.id%>" class="rounded-pill lineaCategoria ml-3 bg-light py-3 px-3 my-auto">
+                <span class="font-weight-bold"><%=categorias.nombre%></span>
+            </a>
+        <% }); %>
+    </div>
+
+    <hr>
+
+    <% if (estrategias.length > 0) { %>
+    <div class="row">
+        <% estrategias.forEach(estrategia => { %>
+        <div class="col-md-6 mb-3">
+            <%- include('partials/card-recurso.ejs', {estrategia: estrategia}) %>
+        </div>
+        <% }) %>
+    </div>
+    <% } else { %>
+    <div>
+        <h3 class="text-center">Aún no hay publicaciones</h3>
+    </div>
+    <% } %>
+</div>
+
+<a class="ir-arriba" javascript:void(0) title="Volver arriba">
+    <span class="fa-stack">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-arrow-up fa-stack-1x fa-inverse"></i>
+    </span>
+</a>
