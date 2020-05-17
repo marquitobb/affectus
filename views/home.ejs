@@ -24,20 +24,20 @@
     </div>
 
     <div class="buscador-inicio" id="buscadorAyudaPais">
-        <div class="contenedor">
-            <h2>Busca ayuda en tu pais</h2>
-            <form action="">
-                <select name="categoria">
-                    <option value="" disabled selected>-- Selecciona Categoría --</option>
-                    <option value="programacion">Psicologia</option>
-                    <option value="diseno">Coaching</option>
-                    <option value="libros">Motivacion</option>
-                </select>
-                <input type="text" name="nombre" placeholder="Nombre Grupo">
-                <input type="text" name="pais" placeholder="País">
-                <input type="submit" value="Buscar" class="btn btn-rosa">
-            </form>
+        <h2>Busca Recursos Por Categoria</h2>
+        <div class="container mt-4">
+            <div class="bg-light rounded-pill py-2 px-2 mb-3 d-flex espacioCategorias">
+                <a href="/recursos" class="rounded-pill lineaCategoria ml-3 bg-light py-3 px-3 my-auto">
+                    <span class="font-weight-bold">TODAS</span>
+                </a>
+                <% categorias.forEach(categorias => { %>
+                    <a href="/recursos/<%=categorias.id%>" class="rounded-pill lineaCategoria ml-3 bg-light py-3 px-3 my-auto">
+                        <span class="font-weight-bold"><%=categorias.nombre%></span>
+                    </a>
+                <% }); %>
+            </div>
         </div>
+        
     </div>
 
     <div class="contenedor my-4" id="estrategiasSalud">
