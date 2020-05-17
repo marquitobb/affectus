@@ -138,5 +138,10 @@ module.exports = function() {
     router.get('/estrategias', authController.usuarioAutenticado, usuariosController.busquedaEstrategias);
     router.get('/usuarios', authController.usuarioAutenticado, usuariosController.busquedaUsuarios);
 
+
+    router.get('/estrategia/:idEstrategia', authController.usuarioAutenticado, estrategiasController.mostrarEstrategiaCompleta);
+
+
+
     return router;
 };

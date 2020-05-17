@@ -1,0 +1,46 @@
+<div class="container mt-4">
+    <h2><%=nombrePagina %></h2>
+    <legend class="text-center">Descripción del recurso: <%= estrategia.descripcion %></legend>
+    <div class="row row-cols-4 mt-4">
+        <% for (let i = 0; i < estrategia.archivos.length; i++) { %>
+            <% const element = estrategia.archivos[i] %>
+            <% if(element.includes('.pdf')) { %>
+            <div class="col mt-4">
+                    <div class="">
+                        <i class="tamano far fa-file-pdf">
+                        </i>
+                    </div>
+            </div>
+            <% } else if(element.includes('.mpeg')) { %>
+                <div class="col mt-4">
+                    <div class="">
+                        <a href="/uploads/estrategias/<%=element%>" download>
+                            <i class="tamano fas fa-music"></i>
+                        </a>
+                    </div>
+                </div>
+            <% } else if(element.includes('.mp4')) { %>
+                <div class="col mt-4">
+                    <div class="">
+                        <a href="/uploads/estrategias/<%=element%>" download>
+                            <i class="tamano far fa-file-video"></i>
+                        </a>
+                    </div>
+                </div>
+            <% } else { %>
+                <div class="col mt-4">
+                        <div class="">
+                            <a href="/uploads/estrategias/<%=element%>" download>
+                                <img src="/uploads/estrategias/<%=element%>" class="rounded" width="100">
+                            </a>
+                        </div>
+                </div>
+            <% } %>
+
+            <% } %>
+        <!-- <div class="col">Column</div>
+        <div class="col">Column</div>
+        <div class="col">Column</div>
+        <div class="col">Column</div> -->
+    </div>
+</div>

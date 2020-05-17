@@ -9,7 +9,7 @@ const fs = require('fs');
 
 
 const configuracionMulter = {
-    limits: { fileSize: 1000000},
+    limits: { fileSize: 11000000},
     storage: fileStorage = multer.diskStorage({
         destination: (req, file, next) => {
             next(null, __dirname+'/../public/uploads/estrategias');
@@ -20,7 +20,7 @@ const configuracionMulter = {
         }
     }),
     fileFilter(req, file, next){
-        if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'application/pdf') {
+        if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'application/pdf' || 'audio/aac' || 'video/mpeg') {
             //Format Valid
             next(null, true);
         }else{
@@ -274,3 +274,20 @@ exports.eliminarEstrategia = async (req, res, next) => {
     });
     res.status(200).send('Estrategia Eliminado Correctamente');
 };
+
+exports.mostrarEstrategiaCompleta = async(req, res, next) => {
+    const estrategia = await Estrategias.findOne({
+        where: {id: req.params.idEstrategia},
+        include: [
+            {
+                model: Usuarios,
+            }
+        ]
+    });
+
+    
+    res.render('estrategia', {
+        nombrePagina: `Recurso: ${estrategia.nombre}`,
+        estrategia
+    })
+}
