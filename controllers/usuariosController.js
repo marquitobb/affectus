@@ -342,22 +342,46 @@ exports.EditarPerfil = async (req, res, next) => {
         usuario.idiomaFrances = false;
     }
 
+    if (whatsapp.match('[0-9]{10}')) {
+        usuario.whatsapp = whatsapp;
+    }
+
     //Asignar valores
-    usuario.nombre = nombre;
+    if (nombre.match('^[A-ZÑÁÉÍÓÚa-zñáéíóú]+[.]*([ ]*[A-ZÑÁÉÍÓÚa-zñáéíóú]*)*')) {
+        usuario.nombre = nombre;
+    }
+    
     usuario.descripcion = descripcion;
     usuario.email = email;
     usuario.genero = genero;
     usuario.fechanacimiento = fechanacimiento;
-    usuario.ocupacion = ocupacion;
+
+    if (ocupacion.match('^[A-ZÑÁÉÍÓÚa-zñáéíóú]+([ ]*[A-ZÑÁÉÍÓÚa-zñáéíóú]*)*')) {
+        usuario.ocupacion = ocupacion;
+    } 
+
     usuario.direccion = direccion;
     usuario.discapacidad = discapacidad;
-    usuario.telefono = telefono;
-    usuario.whatsapp = whatsapp;
+
+    if (telefono.match('[0-9]{10}')) {
+        usuario.telefono = telefono;
+    }
+    
     usuario.cualidades = cualidades;
-    usuario.aMaterno = aMaterno;
-    usuario.aPaterno = aPaterno;
+
+    if (aMaterno.match('^[A-ZÑÁÉÍÓÚa-zñáéíóú]+([ ]*[A-ZÑÁÉÍÓÚa-zñáéíóú]*)*')) {
+        usuario.aMaterno = aMaterno;    
+    }
+
+    if (aPaterno.match('^[A-ZÑÁÉÍÓÚa-zñáéíóú]+([ ]*[A-ZÑÁÉÍÓÚa-zñáéíóú]*)*')) {
+        usuario.aPaterno = aPaterno;
+    }    
+    
     usuario.aboutme = aboutme;
-    usuario.nacionalidad = nacionalidad;
+
+    if (nacionalidad.match('^[A-ZÑÁÉÍÓÚa-zñáéíóú]+([ ]*[A-ZÑÁÉÍÓÚa-zñáéíóú]*)*')) {
+        usuario.nacionalidad = nacionalidad;
+    } 
 
     //guardar en db
     try {
@@ -402,7 +426,14 @@ exports.CambiarPassword = async (req, res, next) => {
 
     //verificar que el pasworrd actual sea correcto
     if (!usuario.validarPassword(req.body.anterior)) {
-        req.flash('error', 'El password actual es incorrecto');
+        req.flash('error', 'La contraseña actual es incorrecta');
+        res.redirect('/cambiar-password');
+        return next();
+    }
+
+    //verificamos que la contraseña nueva esté escrita bien en los dos campos solicitados
+    if (req.body.nuevo_password != req.body.nuevo_password_confirm) {
+        req.flash('error', 'La nueva contraseña no coincide en los campos solicitados');
         res.redirect('/cambiar-password');
         return next();
     }
