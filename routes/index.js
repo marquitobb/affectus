@@ -13,6 +13,7 @@ const horariosController = require('../controllers/horariosController');
 const perfilController = require('../controllers/perfilController');
 const estadisticasController = require('../controllers/estadisticasController');
 const mapController = require('../controllers/mapController');
+const csvController = require('../controllers/csvController')
 
 
 module.exports = function() {
@@ -75,6 +76,9 @@ module.exports = function() {
     //Nueva Estrategia Estrategias
     router.get('/nueva-estrategia', authController.usuarioAutenticado, estrategiasController.formNuevaEstrategia);
     router.post('/nueva-estrategia', authController.usuarioAutenticado, estrategiasController.subirImagen, estrategiasController.nuevaEstrategia);
+
+    //nuevo csv 
+    router.get('/nuevo-csv', authController.usuarioAutenticado, csvController.subircsv)
 
     //Editar estrategia
     router.get('/editar-estrategia/:idEstrategia', authController.usuarioAutenticado, estrategiasController.formEditarEstrategia);

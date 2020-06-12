@@ -97,7 +97,10 @@
         <h4 class="text-center">Profesional</h4>
         <% if (userPerfil.email == usuario.email) {
             %><a href="/nueva-estrategia" class="btn btn-success mr-2">Agregar Recurso</a>
-        <a href="/editar-perfil" class="btn btn-info">Editar Perfil</a>
+            <!--aqui esta el boton para mineria de datos-->
+            <a href="/nuevo-csv" class="btn btn-primary mr-2">subir CSV</a>
+            <a href="/editar-perfil" class="btn btn-info">Editar Perfil</a>
+
         <%} %>
          <%if (userPerfil.estadoActual == '0') {%>
           <% if (userPerfil.email != usuario.email) { %>
