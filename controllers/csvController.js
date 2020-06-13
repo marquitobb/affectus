@@ -12,19 +12,19 @@ exports.openform = (req, res, next) => {
 //parte de la funcion del storage
 let storage = multer.diskStorage({
     destination:(req,file, cb)=>{
-        console.log(req.body);            
-        cb(null, "./public/upload")
+        const pais = req.body.pais         
+        cb(null, `./public/upload/${pais}`)
     },filename:(req,file, cb)=>{
         console.log("filee-->",file);
-        cb(null, file.originalname )
-
+        cb(null, file.originalname )        
         //cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
     }
 })
 
 const uploadFile = multer({storage}).single('file')
 
-exports.uploadcsv = (req, res, next) => {    
+exports.uploadcsv = (req, res, next) => { 
+        
     uploadFile(req, res, (err)=> {
         if (err instanceof multer.MulterError) {
             // A Multer error occurred when uploading.

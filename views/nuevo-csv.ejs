@@ -20,22 +20,26 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
+                    <label for="categoriaId">Subir pais de origen del archivo</label>
+                    <select id="pais" class="form-control" name="pais" required>
+                        <option value="" selected disabled>--Elige tu pais--</option>                        
+                        <option value="colima">Colima</option>                      
+                        <option value="eua">Estados Unidos</option>                      
+                        <option value="france">Francia</option>                      
+                        <option value="italia">Italia</option>                      
+                        <option value="mexico">Mexico</option>                      
+                        <option value="panama">Panama</option>                      
+                        <option value="spain">España</option>                      
+                    </select>
+                </div>
+            </div>               
+            <div class="col-md-6">
+                <div class="form-group">
                     <label for="file">Imagen representativa del recurso</label>
                     <input type="file" multiple class="form-control" id="file" name="file">
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="pais">País de origen</label>
-                    <input type="text" class="form-control" id="pais" name="pais" placeholder="País">
-                </div>
-            </div>                
-        </div>
-        
-        <div class="form-group">
-            <label for="descripcion">Descripción</label>
-            <textarea class="form-control" name="descripcion" placeholder="Ingrese descripcion"></textarea>
-        </div>
+        </div>        
 
         <div class="form-group">
             <input type="submit" class="btn btn-primary float-right" value="Guardar"></input>
