@@ -1,4 +1,44 @@
 <div class="container mt-5">
     <h2><%=nombrePagina %></h2>
-    <p>holii</p>
+    <form action="/nuevo-csv" method="POST" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="nombre">Nombre del recurso</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre">
+                </div>
+            </div>            
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="Fecha Creacion">Fecha de creación</label>
+                    <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion">
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="file">Imagen representativa del recurso</label>
+                    <input type="file" multiple class="form-control" id="file" name="file">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="pais">País de origen</label>
+                    <input type="text" class="form-control" id="pais" name="pais" placeholder="País">
+                </div>
+            </div>                
+        </div>
+        
+        <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea class="form-control" name="descripcion" placeholder="Ingrese descripcion"></textarea>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary float-right" value="Guardar"></input>
+        </div>
+    </form>
 </div>
