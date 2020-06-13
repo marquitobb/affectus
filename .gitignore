@@ -4,6 +4,13 @@ config/mailer.js
 public/uploads/cv/*
 public/uploads/estrategias/*
 public/uploads/usuarios/*
+public/upload/colima/*
+public/upload/eua/*
+public/upload/france/*
+public/upload/italia/*
+public/upload/mexico/*
+public/upload/panama/*
+public/upload/spain/*
 .jshintrc
 .vscode
 Affectus.txt
