@@ -13,7 +13,8 @@ const horariosController = require('../controllers/horariosController');
 const perfilController = require('../controllers/perfilController');
 const estadisticasController = require('../controllers/estadisticasController');
 const mapController = require('../controllers/mapController');
-const csvController = require('../controllers/csvController')
+const csvController = require('../controllers/csvController');
+const paisesController = require('../controllers/paisesController');
 
 
 module.exports = function() {
@@ -78,7 +79,11 @@ module.exports = function() {
     router.post('/nueva-estrategia', authController.usuarioAutenticado, estrategiasController.subirImagen, estrategiasController.nuevaEstrategia);
 
     //nuevo csv 
-    router.get('/nuevo-csv', authController.usuarioAutenticado, csvController.subircsv)
+    router.get('/nuevo-csv', authController.usuarioAutenticado, csvController.openform)
+    router.post('/nuevo-csv', authController.usuarioAutenticado, csvController.uploadcsv)
+
+    //paginas de paises
+    router.get('/paises/:pais', authController.usuarioAutenticado, paisesController.openpais);
 
     //Editar estrategia
     router.get('/editar-estrategia/:idEstrategia', authController.usuarioAutenticado, estrategiasController.formEditarEstrategia);
